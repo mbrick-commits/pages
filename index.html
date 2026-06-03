@@ -432,6 +432,10 @@ function buildHero(theme, n1, n2) {
   const names = `<div class="names-wrap" style="margin-top:20px;"><span class="name name-1" style="font-size:56px;">${n1}</span><span class="amp" style="font-size:52px;">&</span><span class="name name-2" style="font-size:56px;">${n2}</span></div>`;
 
   if (theme === 'sidibou') return `
+    if (theme === 'sidibou') return `
+    <svg style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);height:88%;width:auto;opacity:0.07;color:var(--primary);" viewBox="0 0 400 600" fill="none" preserveAspectRatio="xMidYMid meet"><path d="M50 600 V250 Q50 50 200 50 Q350 50 350 250 V600 Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M100 600 V280 Q100 120 200 120 Q300 120 300 280 V600 Z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+    <div style="position:absolute;width:160px;height:160px;border-radius:50%;background:var(--acc);left:-40px;top:40px;opacity:0.15;"></div>
+    <div style="position:absolute;width:220px;height:220px;border-radius:50%;background:var(--acc);right:-60px;bottom:40px;opacity:0.15;"></div>
     <div style="position:relative;z-index:1;text-align:center;max-width:600px;">${bism}
     <div style="height:.5px;width:80px;background:var(--acc);margin:20px auto;opacity:.5;"></div>
     <p style="font-size:10px;letter-spacing:.5em;text-transform:uppercase;opacity:.7;font-family:'Cormorant Garamond',serif;opacity:0;animation:fadeUp .9s ease 2.2s forwards;">Tunis · 2026</p>
