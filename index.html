@@ -437,29 +437,42 @@ function buildHero(theme, n1, n2) {
   const bism = `<p class="bismillah">&#x0628;&#x0650;&#x0633;&#x0652;&#x0645;&#x0650; &#x0627;&#x0644;&#x0644;&#x0651;&#x0647;&#x0650; &#x0627;&#x0644;&#x0631;&#x0651;&#x062D;&#x0652;&#x0645;&#x064E;&#x0670;&#x0646;&#x0650; &#x0627;&#x0644;&#x0631;&#x0651;&#x062D;&#x0650;&#x064A;&#x0645;&#x0650;</p>`;
   const names = `<div class="names-wrap" style="margin-top:20px;"><span class="name name-1" style="font-size:56px;">${n1}</span><span class="amp" style="font-size:52px;">&</span><span class="name name-2" style="font-size:56px;">${n2}</span></div>`;
 
- if (theme === 'sidibou') return `
+if (theme === 'sidibou') return `
     <svg style="position:absolute;inset:0;margin:auto;height:88%;width:auto;opacity:0.07;color:var(--primary);" viewBox="0 0 400 600" fill="none" preserveAspectRatio="xMidYMid meet"><path d="M50 600 V250 Q50 50 200 50 Q350 50 350 250 V600 Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M100 600 V280 Q100 120 200 120 Q300 120 300 280 V600 Z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
     <div style="position:absolute;width:160px;height:160px;border-radius:50%;background:var(--acc);left:-40px;top:40px;opacity:0.15;"></div>
     <div style="position:absolute;width:220px;height:220px;border-radius:50%;background:var(--acc);right:-60px;bottom:40px;opacity:0.15;"></div>
-    <div style="position:relative;z-index:1;text-align:center;max-width:600px;">${bism}
-    <div style="height:.5px;width:80px;background:var(--acc);margin:20px auto;opacity:.5;"></div>
-    <p style="font-size:10px;letter-spacing:.5em;text-transform:uppercase;opacity:.7;font-family:'Cormorant Garamond',serif;opacity:0;animation:fadeUp .9s ease 2.2s forwards;">Tunis · 2026</p>
-    <div style="height:.5px;width:80px;background:var(--acc);margin:20px auto;opacity:.5;"></div>
-    <p style="font-size:clamp(16px,2.5vw,22px);font-style:italic;margin-bottom:32px;opacity:0;animation:fadeUp .9s ease 2.4s forwards;">Nous avons l'honneur de vous inviter au mariage de</p>
-    ${names}
-    <div style="height:.5px;width:100px;background:var(--acc);margin:28px auto;opacity:.5;"></div>
-    <p class="arabic" style="color:var(--primary);">ياسمين ومهدي</p></div>`;
+    <div style="position:relative;z-index:1;text-align:center;max-width:600px;">
+      <p class="bismillah">&#x0628;&#x0650;&#x0633;&#x0652;&#x0645;&#x0650; &#x0627;&#x0644;&#x0644;&#x0651;&#x0647;&#x0650; &#x0627;&#x0644;&#x0631;&#x0651;&#x062D;&#x0652;&#x0645;&#x064E;&#x0670;&#x0646;&#x0650; &#x0627;&#x0644;&#x0631;&#x0651;&#x062D;&#x0650;&#x064A;&#x0645;&#x0650;</p>
+      <div style="height:.5px;width:80px;background:var(--acc);margin:20px auto;opacity:.5;"></div>
+      <p style="font-size:10px;letter-spacing:.5em;text-transform:uppercase;opacity:.7;font-family:'Cormorant Garamond',serif;opacity:0;animation:fadeUp .9s ease 2.2s forwards;">Tunis · 2026</p>
+      <div style="height:.5px;width:80px;background:var(--acc);margin:20px auto;opacity:.5;"></div>
+      <p style="font-size:clamp(16px,2.5vw,22px);font-style:italic;margin-bottom:32px;opacity:0;animation:fadeUp .9s ease 2.4s forwards;">Nous avons l'honneur de vous inviter au mariage de</p>
+      <div class="names-wrap" style="margin-top:20px;">
+        <span class="name name-1" style="font-size:56px;">${n1}</span>
+        <span class="amp" style="font-size:52px;">&</span>
+        <span class="name name-2" style="font-size:56px;">${n2}</span>
+      </div>
+      <div style="height:.5px;width:100px;background:var(--acc);margin:28px auto;opacity:.5;"></div>
+      <p class="arabic" style="color:var(--primary);">ياسمين ومهدي</p>
+    </div>`;
 
 if (theme === 'zellige') return `
     <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,transparent,transparent 28px,rgba(107,26,40,0.04) 28px,rgba(107,26,40,0.04) 29px);pointer-events:none;"></div>
-    <div class="zr-frame"><div class="zr-corner zr-tl"></div><div class="zr-corner zr-tr"></div><div class="zr-corner zr-bl"></div><div class="zr-corner zr-br"></div>
-    ${bism}
-    <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin:20px 0;opacity:0;animation:fadeIn 1s ease 2.2s forwards;"><div style="height:.5px;width:64px;background:var(--acc);"></div><span style="color:var(--acc);font-size:18px;">❋</span><div style="height:.5px;width:64px;background:var(--acc);"></div></div>
-    <p style="font-size:10px;letter-spacing:.42em;text-transform:uppercase;color:var(--primary);opacity:0;animation:fadeUp .9s ease 2.3s forwards;">Nous avons l'immense joie de vous convier</p>
-    <p style="font-size:16px;font-style:italic;color:var(--primary);margin-top:20px;opacity:0;animation:fadeUp .9s ease 2.4s forwards;">au mariage de nos enfants</p>
-    ${names}
-    <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin:20px 0;opacity:0;animation:fadeIn 1s ease 3.0s forwards;"><div style="height:.5px;width:64px;background:var(--acc);"></div><span style="color:var(--acc);font-size:18px;">❋</span><div style="height:.5px;width:64px;background:var(--acc);"></div></div>
-    <p class="arabic" style="color:var(--primary);">سلمى و كريم</p></div>`;
+    <div class="zr-frame">
+      <div class="zr-corner zr-tl"></div><div class="zr-corner zr-tr"></div>
+      <div class="zr-corner zr-bl"></div><div class="zr-corner zr-br"></div>
+      <p class="bismillah">&#x0628;&#x0650;&#x0633;&#x0652;&#x0645;&#x0650; &#x0627;&#x0644;&#x0644;&#x0651;&#x0647;&#x0650; &#x0627;&#x0644;&#x0631;&#x0651;&#x062D;&#x0652;&#x0645;&#x064E;&#x0670;&#x0646;&#x0650; &#x0627;&#x0644;&#x0631;&#x0651;&#x062D;&#x0650;&#x064A;&#x0645;&#x0650;</p>
+      <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin:20px 0;opacity:0;animation:fadeIn 1s ease 2.2s forwards;"><div style="height:.5px;width:64px;background:var(--acc);"></div><span style="color:var(--acc);font-size:18px;">❋</span><div style="height:.5px;width:64px;background:var(--acc);"></div></div>
+      <p style="font-size:10px;letter-spacing:.42em;text-transform:uppercase;color:var(--primary);opacity:0;animation:fadeUp .9s ease 2.3s forwards;">Nous avons l'immense joie de vous convier</p>
+      <p style="font-size:16px;font-style:italic;color:var(--primary);margin-top:20px;opacity:0;animation:fadeUp .9s ease 2.4s forwards;">au mariage de nos enfants</p>
+      <div class="names-wrap" style="margin-top:20px;">
+        <span class="name name-1" style="font-size:56px;">${n1}</span>
+        <span class="amp" style="font-size:52px;">&</span>
+        <span class="name name-2" style="font-size:56px;">${n2}</span>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin:20px 0;opacity:0;animation:fadeIn 1s ease 3.0s forwards;"><div style="height:.5px;width:64px;background:var(--acc);"></div><span style="color:var(--acc);font-size:18px;">❋</span><div style="height:.5px;width:64px;background:var(--acc);"></div></div>
+      <p class="arabic" style="color:var(--primary);">سلمى و كريم</p>
+    </div>`;
 
   if (theme === 'olivier') return `
     <svg style="position:absolute;left:0;top:50%;transform:translateY(-50%);height:80%;width:auto;color:var(--acc);opacity:0.45;" viewBox="0 0 200 600" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M100 0 Q60 100 100 200 Q140 300 100 400 Q60 500 100 600"/><ellipse cx="64" cy="55" rx="18" ry="7" fill="currentColor" transform="rotate(-30 64 55)"/><ellipse cx="136" cy="105" rx="18" ry="7" fill="currentColor" transform="rotate(30 136 105)"/><ellipse cx="64" cy="155" rx="18" ry="7" fill="currentColor" transform="rotate(-30 64 155)"/><ellipse cx="136" cy="205" rx="18" ry="7" fill="currentColor" transform="rotate(30 136 205)"/><ellipse cx="64" cy="255" rx="18" ry="7" fill="currentColor" transform="rotate(-30 64 255)"/><ellipse cx="136" cy="305" rx="18" ry="7" fill="currentColor" transform="rotate(30 136 305)"/></svg>
