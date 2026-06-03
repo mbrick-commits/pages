@@ -458,20 +458,22 @@ if (theme === 'sidibou') return `
 
 if (theme === 'zellige') return `
     <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,transparent,transparent 28px,rgba(107,26,40,0.04) 28px,rgba(107,26,40,0.04) 29px);pointer-events:none;"></div>
-    <div class="zr-frame">
-      <div class="zr-corner zr-tl"></div><div class="zr-corner zr-tr"></div>
-      <div class="zr-corner zr-bl"></div><div class="zr-corner zr-br"></div>
-      <p class="bismillah">&#x0628;&#x0650;&#x0633;&#x0652;&#x0645;&#x0650; &#x0627;&#x0644;&#x0644;&#x0651;&#x0647;&#x0650; &#x0627;&#x0644;&#x0631;&#x0651;&#x062D;&#x0652;&#x0645;&#x064E;&#x0670;&#x0646;&#x0650; &#x0627;&#x0644;&#x0631;&#x0651;&#x062D;&#x0650;&#x064A;&#x0645;&#x0650;</p>
-      <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin:20px 0;opacity:0;animation:fadeIn 1s ease 2.2s forwards;"><div style="height:.5px;width:64px;background:var(--acc);"></div><span style="color:var(--acc);font-size:18px;">❋</span><div style="height:.5px;width:64px;background:var(--acc);"></div></div>
-      <p style="font-size:10px;letter-spacing:.42em;text-transform:uppercase;color:var(--primary);opacity:0;animation:fadeUp .9s ease 2.3s forwards;">Nous avons l'immense joie de vous convier</p>
-      <p style="font-size:16px;font-style:italic;color:var(--primary);margin-top:20px;opacity:0;animation:fadeUp .9s ease 2.4s forwards;">au mariage de nos enfants</p>
-      <div class="names-wrap" style="margin-top:20px;">
-        <span class="name name-1" style="font-size:56px;">${n1}</span>
-        <span class="amp" style="font-size:52px;">&</span>
-        <span class="name name-2" style="font-size:56px;">${n2}</span>
+    <div style="position:relative;z-index:1;width:100%;max-width:580px;border:2px solid #c8a050;background:rgba(249,243,234,0.96);padding:52px 44px;text-align:center;box-shadow:0 20px 60px rgba(42,14,20,0.12);">
+      <div style="position:absolute;width:22px;height:22px;top:-3px;left:-3px;border-top:2px solid #2a0e14;border-left:2px solid #2a0e14;"></div>
+      <div style="position:absolute;width:22px;height:22px;top:-3px;right:-3px;border-top:2px solid #2a0e14;border-right:2px solid #2a0e14;"></div>
+      <div style="position:absolute;width:22px;height:22px;bottom:-3px;left:-3px;border-bottom:2px solid #2a0e14;border-left:2px solid #2a0e14;"></div>
+      <div style="position:absolute;width:22px;height:22px;bottom:-3px;right:-3px;border-bottom:2px solid #2a0e14;border-right:2px solid #2a0e14;"></div>
+      <p style="font-family:'Aref Ruqaa',serif;font-size:clamp(22px,4vw,34px);direction:rtl;color:#6b1a28;opacity:0;animation:fadeIn 1.2s ease 2s forwards;margin-bottom:20px;text-align:center;">&#x0628;&#x0650;&#x0633;&#x0652;&#x0645;&#x0650; &#x0627;&#x0644;&#x0644;&#x0651;&#x0647;&#x0650; &#x0627;&#x0644;&#x0631;&#x0651;&#x062D;&#x0652;&#x0645;&#x064E;&#x0670;&#x0646;&#x0650; &#x0627;&#x0644;&#x0631;&#x0651;&#x062D;&#x0650;&#x064A;&#x0645;&#x0650;</p>
+      <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin:20px 0;opacity:0;animation:fadeIn 1s ease 2.2s forwards;"><div style="height:.5px;width:64px;background:#c8a050;"></div><span style="color:#c8a050;font-size:18px;">❋</span><div style="height:.5px;width:64px;background:#c8a050;"></div></div>
+      <p style="font-size:10px;letter-spacing:.42em;text-transform:uppercase;color:#6b1a28;opacity:0;animation:fadeUp .9s ease 2.3s forwards;">Nous avons l'immense joie de vous convier</p>
+      <p style="font-size:16px;font-style:italic;color:#6b1a28;margin-top:20px;opacity:0;animation:fadeUp .9s ease 2.4s forwards;">au mariage de nos enfants</p>
+      <div style="display:flex;flex-direction:column;align-items:center;margin-top:20px;">
+        <span style="font-family:'Playfair Display',serif;font-weight:300;font-size:56px;color:#6b1a28;line-height:1.05;opacity:0;animation:fadeRight 1s ease 2.6s forwards;">${n1}</span>
+        <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:52px;color:#c8a050;margin:8px 0;display:block;opacity:0;animation:fadeIn .8s ease 2.9s forwards;">&</span>
+        <span style="font-family:'Playfair Display',serif;font-weight:300;font-size:56px;color:#6b1a28;line-height:1.05;opacity:0;animation:fadeLeft 1s ease 2.6s forwards;">${n2}</span>
       </div>
-      <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin:20px 0;opacity:0;animation:fadeIn 1s ease 3.0s forwards;"><div style="height:.5px;width:64px;background:var(--acc);"></div><span style="color:var(--acc);font-size:18px;">❋</span><div style="height:.5px;width:64px;background:var(--acc);"></div></div>
-      <p class="arabic" style="color:var(--primary);">سلمى و كريم</p>
+      <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin:20px 0;opacity:0;animation:fadeIn 1s ease 3.0s forwards;"><div style="height:.5px;width:64px;background:#c8a050;"></div><span style="color:#c8a050;font-size:18px;">❋</span><div style="height:.5px;width:64px;background:#c8a050;"></div></div>
+      <p style="font-family:'Scheherazade New',serif;font-size:clamp(20px,3.5vw,28px);direction:rtl;color:#6b1a28;opacity:0;animation:fadeIn .8s ease 3.2s forwards;text-align:center;">سلمى و كريم</p>
     </div>`;
 
   if (theme === 'olivier') return `
