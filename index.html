@@ -333,7 +333,7 @@ body{background:var(--bg);min-height:100vh;overflow-x:hidden;font-family:'Cormor
       </div>
       <div class="tl-list" id="p-timeline">
         <div class="tl-item"><div class="tl-time">17h00</div><div><p class="tl-title">Cérémonie</p><p class="tl-place">Lieu de la cérémonie</p></div></div>
-        <div class="tl-item"><div class="tl-time">19h00</div><div><p class="tl-title">Cocktail</p><p class="tl-place">Accueil des invités</p></div></div>
+        <div class="tl-item"><div class="tl-time">19h00</div><div><p class="tl-title">Lecture de la Fatiha</p><p class="tl-place">Signature du contrat de mariage</p></div></div>
         <div class="tl-item"><div class="tl-time">21h00</div><div><p class="tl-title">Dîner</p><p class="tl-place">Salle de réception</p></div></div>
         <div class="tl-item"><div class="tl-time">23h00</div><div><p class="tl-title">Soirée</p><p class="tl-place">Musique et danse</p></div></div>
       </div>
@@ -432,9 +432,6 @@ function buildHero(theme, n1, n2) {
   const names = `<div class="names-wrap" style="margin-top:20px;"><span class="name name-1" style="font-size:56px;">${n1}</span><span class="amp" style="font-size:52px;">&</span><span class="name name-2" style="font-size:56px;">${n2}</span></div>`;
 
   if (theme === 'sidibou') return `
-    <svg style="position:absolute;inset:0;margin:auto;height:88%;width:auto;opacity:0.07;color:var(--primary);" viewBox="0 0 400 600" fill="none" preserveAspectRatio="xMidYMid meet"><path d="M50 600 V250 Q50 50 200 50 Q350 50 350 250 V600 Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M100 600 V280 Q100 120 200 120 Q300 120 300 280 V600 Z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
-    <div style="position:absolute;width:160px;height:160px;border-radius:50%;background:var(--acc);left:-40px;top:40px;opacity:0.15;"></div>
-    <div style="position:absolute;width:220px;height:220px;border-radius:50%;background:var(--acc);right:-60px;bottom:40px;opacity:0.15;"></div>
     <div style="position:relative;z-index:1;text-align:center;max-width:600px;">${bism}
     <div style="height:.5px;width:80px;background:var(--acc);margin:20px auto;opacity:.5;"></div>
     <p style="font-size:10px;letter-spacing:.5em;text-transform:uppercase;opacity:.7;font-family:'Cormorant Garamond',serif;opacity:0;animation:fadeUp .9s ease 2.2s forwards;">Tunis · 2026</p>
@@ -445,15 +442,13 @@ function buildHero(theme, n1, n2) {
     <p class="arabic" style="color:var(--primary);">ياسمين ومهدي</p></div>`;
 
   if (theme === 'zellige') return `
-    <div class="zr-frame"><div class="zr-corner zr-tl"></div><div class="zr-corner zr-tr"></div><div class="zr-corner zr-bl"></div><div class="zr-corner zr-br"></div>
-    ${bism}
+    <div style="position:relative;z-index:1;text-align:center;max-width:580px;">${bism}
     <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin:20px 0;opacity:0;animation:fadeIn .8s ease 2.2s forwards;"><div style="height:.5px;width:64px;background:var(--acc);"></div><span style="color:var(--acc);">❋</span><div style="height:.5px;width:64px;background:var(--acc);"></div></div>
     <p style="font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--primary);opacity:0;animation:fadeUp .9s ease 2.3s forwards;">Nous avons l'immense joie de vous convier</p>
     <p style="font-size:16px;font-style:italic;margin-top:24px;color:var(--primary);opacity:0;animation:fadeUp .9s ease 2.4s forwards;">au mariage de nos enfants</p>
     ${names}
     <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin:20px 0;opacity:0;animation:fadeIn .8s ease 3.0s forwards;"><div style="height:.5px;width:64px;background:var(--acc);"></div><span style="color:var(--acc);">❋</span><div style="height:.5px;width:64px;background:var(--acc);"></div></div>
-    <p class="arabic" style="color:var(--primary);">سلمى و كريم</p></div>
-    <div style="height:40px;background:repeating-linear-gradient(45deg,var(--acc),var(--acc) 2px,var(--primary) 2px,var(--primary) 14px);opacity:0.5;position:absolute;bottom:0;left:0;right:0;"></div>`;
+    <p class="arabic" style="color:var(--primary);">سلمى و كريم</p></div>`;
 
   if (theme === 'olivier') return `
     <svg style="position:absolute;left:0;top:50%;transform:translateY(-50%);height:80%;width:auto;color:var(--acc);opacity:0.45;" viewBox="0 0 200 600" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M100 0 Q60 100 100 200 Q140 300 100 400 Q60 500 100 600"/><ellipse cx="64" cy="55" rx="18" ry="7" fill="currentColor" transform="rotate(-30 64 55)"/><ellipse cx="136" cy="105" rx="18" ry="7" fill="currentColor" transform="rotate(30 136 105)"/><ellipse cx="64" cy="155" rx="18" ry="7" fill="currentColor" transform="rotate(-30 64 155)"/><ellipse cx="136" cy="205" rx="18" ry="7" fill="currentColor" transform="rotate(30 136 205)"/><ellipse cx="64" cy="255" rx="18" ry="7" fill="currentColor" transform="rotate(-30 64 255)"/><ellipse cx="136" cy="305" rx="18" ry="7" fill="currentColor" transform="rotate(30 136 305)"/></svg>
@@ -506,7 +501,7 @@ function buildHero(theme, n1, n2) {
     <p style="font-size:10px;letter-spacing:.4em;text-transform:uppercase;opacity:.6;margin-top:24px;font-family:'Cormorant Garamond',serif;opacity:0;animation:fadeIn .8s ease 3.2s forwards;">Carthage · Août 2026</p></div>`;
 
   if (theme === 'kairouan') return `
-style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);height:88%;width:auto;opacity:0.07;color:var(--primary);opacity:.06;" viewBox="0 0 400 600" fill="none" preserveAspectRatio="xMidYMid meet"><path d="M40 600 V240 Q40 40 200 40 Q360 40 360 240 V600Z" stroke="currentColor" stroke-width="2" fill="none"/><path d="M75 600 V250 Q75 80 200 80 Q325 80 325 250 V600Z" stroke="currentColor" stroke-width="1" fill="none"/><circle cx="200" cy="160" r="40" stroke="currentColor" stroke-width="1.2" fill="none"/><circle cx="200" cy="160" r="20" stroke="currentColor" stroke-width="0.7" fill="none"/></svg>
+    <svg style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);height:90%;width:auto;color:var(--primary);opacity:.06;" viewBox="0 0 400 600" fill="none" preserveAspectRatio="xMidYMid meet"><path d="M40 600 V240 Q40 40 200 40 Q360 40 360 240 V600Z" stroke="currentColor" stroke-width="2" fill="none"/><path d="M75 600 V250 Q75 80 200 80 Q325 80 325 250 V600Z" stroke="currentColor" stroke-width="1" fill="none"/><circle cx="200" cy="160" r="40" stroke="currentColor" stroke-width="1.2" fill="none"/><circle cx="200" cy="160" r="20" stroke="currentColor" stroke-width="0.7" fill="none"/></svg>
     <div style="position:relative;z-index:1;text-align:center;max-width:520px;padding:40px 32px;">${bism}
     <svg style="display:block;margin:20px auto;width:176px;color:var(--acc);opacity:0;animation:fadeIn 1s ease 2.2s forwards;" viewBox="0 0 200 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M0 12 H70"/><path d="M130 12 H200"/><circle cx="100" cy="12" r="6"/><circle cx="100" cy="12" r="2" fill="currentColor"/><path d="M76 12 q12 -10 24 0 q12 10 24 0"/></svg>
     <p style="font-size:10px;letter-spacing:.5em;text-transform:uppercase;color:var(--primary);opacity:0;animation:fadeUp .9s ease 2.3s forwards;">Avec la bénédiction d'Allah</p>
@@ -529,7 +524,7 @@ style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);height:
 
   if (theme === 'medina') return `
     <div style="position:absolute;inset:0;background:radial-gradient(circle at 20% 30%,rgba(90,48,16,.07) 0,transparent 40%),radial-gradient(circle at 80% 70%,rgba(160,120,64,.08) 0,transparent 50%);pointer-events:none;"></div>
-    <svg style="position:absolute;inset:0;margin:auto;height:90%;width:auto;color:var(--primary);opacity:.07;" viewBox="0 0 400 600" fill="none" preserveAspectRatio="xMidYMid meet"><path d="M55 165 Q55 65 115 52 Q144 20 200 20 Q256 20 285 52 Q345 65 345 165 L345 560 L55 560Z" stroke="currentColor" stroke-width="2" fill="none"/><path d="M72 165 Q72 80 120 68 Q146 36 200 36 Q254 36 280 68 Q328 80 328 165 L328 545 L72 545Z" stroke="currentColor" stroke-width="0.8" fill="none" stroke-dasharray="4 5"/><circle cx="200" cy="185" r="60" stroke="currentColor" stroke-width="1.2" fill="none"/><circle cx="200" cy="185" r="35" stroke="currentColor" stroke-width="0.8" fill="none"/></svg>
+    <svg style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);height:90%;width:auto;color:var(--primary);opacity:.07;" viewBox="0 0 400 600" fill="none" preserveAspectRatio="xMidYMid meet"><path d="M55 165 Q55 65 115 52 Q144 20 200 20 Q256 20 285 52 Q345 65 345 165 L345 560 L55 560Z" stroke="currentColor" stroke-width="2" fill="none"/><path d="M72 165 Q72 80 120 68 Q146 36 200 36 Q254 36 280 68 Q328 80 328 165 L328 545 L72 545Z" stroke="currentColor" stroke-width="0.8" fill="none" stroke-dasharray="4 5"/><circle cx="200" cy="185" r="60" stroke="currentColor" stroke-width="1.2" fill="none"/><circle cx="200" cy="185" r="35" stroke="currentColor" stroke-width="0.8" fill="none"/></svg>
     <div style="position:relative;z-index:1;text-align:center;max-width:540px;padding:40px 32px;">${bism}
     <svg style="display:block;margin:20px auto;width:200px;color:var(--acc);opacity:0;animation:fadeIn 1s ease 2.2s forwards;" viewBox="0 0 220 40" fill="none" stroke="currentColor" stroke-width="0.9"><path d="M0 20 H80"/><path d="M140 20 H220"/><path d="M110 6 L122 20 L110 34 L98 20 Z"/><path d="M110 12 L116 20 L110 28 L104 20 Z" fill="currentColor"/><circle cx="86" cy="20" r="2" fill="currentColor"/><circle cx="134" cy="20" r="2" fill="currentColor"/></svg>
     <p style="font-size:10px;letter-spacing:.5em;text-transform:uppercase;color:var(--primary);opacity:0;animation:fadeUp .9s ease 2.3s forwards;">Dans la médina, sous les arcades anciennes</p>
