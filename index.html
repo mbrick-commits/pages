@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invitation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --cream: #faf6f0; --gold: #c4a882; --burgundy: #6b2d3e;
+  --dark: #2a1a14; --muted: #9a7e6e; --blush: #e8d4c0; --rose: #c4907a;
+}
+body.theme-olive       { --cream:#f4f1e8; --gold:#8a8c5a; --burgundy:#4a5228; --dark:#2c2e1a; --muted:#6b6e3c; --blush:#d4d5a0; --rose:#8a8c5a; }
+body.theme-midnight    { --cream:#0d1117; --gold:#c4a882; --burgundy:#c4a882; --dark:#e8ecf4; --muted:#8896b3; --blush:#1a2332; --rose:#8896b3; }
+body.theme-dusty-rose  { --cream:#fdf6f3; --gold:#d4a0b0; --burgundy:#8a4a5a; --dark:#3a1a22; --muted:#b07a8a; --blush:#f0d8e0; --rose:#b07a8a; }
+body.theme-terracotta  { --cream:#f7f0e6; --gold:#c4703a; --burgundy:#8a4020; --dark:#2a1a0e; --muted:#a07060; --blush:#f0d8c0; --rose:#a07060; }
+body.theme-sidibou     { --cream:#eef4fa; --gold:#7aa8cc; --burgundy:#1e4a7a; --dark:#0d2440; --muted:#5a7d9e; --blush:#c4ddef; --rose:#7aa8cc; }
+body.theme-zellige     { --cream:#f9f3ea; --gold:#c8a050; --burgundy:#6b1a28; --dark:#2a0e14; --muted:#9a6040; --blush:#ead8b8; --rose:#c8a050; }
+body.theme-olivier     { --cream:#f5f7f0; --gold:#8a9e60; --burgundy:#3a5228; --dark:#1e2e14; --muted:#6a7e50; --blush:#d4ddb8; --rose:#b0c080; }
+body.theme-djerba      { --cream:#f0f8fa; --gold:#3a9aaa; --burgundy:#1a5a6a; --dark:#0e2e38; --muted:#4a7a88; --blush:#b8dde4; --rose:#5ab0be; }
+body.theme-tozeur      { --cream:#faf4e8; --gold:#c87840; --burgundy:#7a3818; --dark:#2e1808; --muted:#9a6848; --blush:#ead8b8; --rose:#d89060; }
+body.theme-carthage    { --cream:#f8f4fc; --gold:#9060c0; --burgundy:#4a1870; --dark:#200a38; --muted:#7050a0; --blush:#dcc8f0; --rose:#9060c0; }
+body.theme-kairouan    { --cream:#f0f8f0; --gold:#c0a030; --burgundy:#1a5a30; --dark:#0a2818; --muted:#3a7a48; --blush:#b8ddc0; --rose:#60a870; }
+body.theme-hammamet    { --cream:#f0f6fc; --gold:#4070b0; --burgundy:#1a4888; --dark:#0a2048; --muted:#4878a8; --blush:#b8cce8; --rose:#6090c8; }
+body.theme-medina      { --cream:#f8f0e0; --gold:#a07840; --burgundy:#5a3010; --dark:#281408; --muted:#806040; --blush:#e0cca0; --rose:#c09060; }
+
+body { background: var(--cream); min-height: 100vh; overflow-x: hidden; font-family: 'Cormorant Garamond', Georgia, serif; }
+
+/* ── ENVELOPE ── */
+.env-screen { position:fixed; inset:0; z-index:99999; background:var(--cream); transition:opacity 0.55s ease; }
+.env-screen.gone { opacity:0; pointer-events:none; }
+.env-body { position:absolute; bottom:0; left:0; right:0; height:65%; background:var(--dark); z-index:1; transition:transform 2.2s cubic-bezier(0.76,0,0.24,1); transform-origin:bottom center; }
+.env-body.open { transform:translateY(100%); }
+.env-fold-left  { position:absolute; top:0; left:0; width:50%; height:100%; clip-path:polygon(0 0,100% 0,0 100%); background:var(--cream); }
+.env-fold-right { position:absolute; top:0; right:0; width:50%; height:100%; clip-path:polygon(100% 0,0 0,100% 100%); background:var(--cream); }
+.env-flap { position:absolute; top:0; left:0; right:0; height:55%; z-index:2; transform-origin:top center; transition:transform 2s cubic-bezier(0.76,0,0.24,1); }
+.env-flap.open { transform:rotateX(180deg); }
+.env-flap-shape { width:100%; height:100%; background:var(--blush); clip-path:polygon(0 0,100% 0,50% 100%); }
+.env-flap-deco { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:1; }
+.env-flap-corner { position:absolute; top:6px; width:clamp(50px,8vw,80px); height:clamp(50px,8vw,80px); pointer-events:none; z-index:2; }
+.env-flap-corner--left  { left:8px; }
+.env-flap-corner--right { right:8px; }
+.env-seal-wrap { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:10; cursor:pointer; transition:transform 0.3s ease,opacity 0.8s ease; display:flex; flex-direction:column; align-items:center; }
+.env-seal-wrap:hover { transform:translate(-50%,-50%) scale(1.06); }
+.env-seal-wrap.fade { opacity:0; pointer-events:none; }
+.env-seal-img { width:clamp(100px,18vw,160px); height:clamp(100px,18vw,160px); object-fit:contain; filter:drop-shadow(0 4px 16px rgba(0,0,0,0.2)); }
+.env-hint-wrap { display:flex; align-items:center; gap:14px; margin-top:22px; width:260px; }
+.env-hint-line { flex:1; height:0.5px; background:var(--gold); opacity:0.6; }
+.env-hint { font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); font-family:'Cormorant Garamond',serif; animation:envPulse 2s ease infinite; white-space:nowrap; }
+@keyframes envPulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+@media (max-width:600px) {
+  .env-body { inset:0; width:100%; height:100%; transform-origin:left center; transition:transform 3s cubic-bezier(.76,0,.24,1); }
+  .env-body.open { transform:translateX(100%); }
+  .env-fold-left  { clip-path:polygon(0 0,100% 50%,0 100%); }
+  .env-fold-right { clip-path:polygon(100% 0,0 50%,100% 100%); }
+  .env-flap { top:0; left:0; width:50%; height:100%; transform-origin:left center; }
+  .env-flap.open { transform:translateX(-100%); }
+  .env-flap-shape { clip-path:polygon(0 0,100% 50%,0 100%); }
+  .env-flap-deco,.env-flap-corner { display:none; }
+  .env-hint-wrap { width:220px; }
+}
+
+/* ── CURTAINS ── */
+.curtain-wrap { position:fixed; inset:0; z-index:99999; pointer-events:none; }
+.curtain { position:absolute; top:0; bottom:0; width:50.5%; background:var(--dark); transition:transform 1.6s cubic-bezier(0.76,0,0.24,1); overflow:hidden; }
+.curtain-left  { left:0; }
+.curtain-right { right:0; }
+.curtain-left.open  { transform:translateX(-100%); }
+.curtain-right.open { transform:translateX(100%); }
+.curtain::before { content:''; position:absolute; inset:0; background-image:repeating-linear-gradient(90deg,transparent,transparent 18px,rgba(255,255,255,0.02) 18px,rgba(255,255,255,0.02) 19px); }
+.curtain-left::after  { content:''; position:absolute; right:0; top:0; bottom:0; width:1px; background:linear-gradient(to bottom,transparent,var(--gold),transparent); opacity:0.6; }
+.curtain-right::after { content:''; position:absolute; left:0; top:0; bottom:0; width:1px; background:linear-gradient(to bottom,transparent,var(--gold),transparent); opacity:0.6; }
+
+/* ── CONFETTI ── */
+.confetti-wrap { position:fixed; inset:0; pointer-events:none; z-index:5; overflow:hidden; }
+.conf-item { position:absolute; top:-30px; opacity:0; animation:confFall linear infinite; }
+@keyframes confFall { 0%{transform:translateY(0) rotate(0deg);opacity:0} 10%{opacity:0.7} 90%{opacity:0.4} 100%{transform:translateY(105vh) rotate(480deg);opacity:0} }
+
+/* ── PAGE ── */
+.page { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding:80px 40px; }
+.floral-top { width:280px; margin-bottom:32px; opacity:0; animation:fadeIn 1.2s ease 2.0s forwards; }
+.eyebrow { font-size:10px; letter-spacing:0.32em; text-transform:uppercase; color:var(--muted); font-family:'Cormorant Garamond',serif; font-weight:300; opacity:0; animation:fadeUp 0.9s ease 2.2s forwards; margin-bottom:20px; text-align:center; }
+.names-wrap { display:flex; flex-direction:column; align-items:center; margin-bottom:6px; }
+.name { font-family:'Playfair Display',serif; font-size:58px; font-weight:400; color:var(--dark); line-height:1.1; opacity:0; text-align:center; }
+.name-1 { animation:fadeRight 1s ease 2.4s forwards; }
+.name-2 { animation:fadeLeft  1s ease 2.4s forwards; }
+.amp { font-family:'Playfair Display',serif; font-style:italic; font-size:52px; color:var(--gold); opacity:0; animation:fadeIn 0.8s ease 2.7s forwards; line-height:1.1; text-align:center; }
+.rule { display:flex; align-items:center; gap:12px; margin:28px 0; opacity:0; animation:fadeIn 1s ease 2.9s forwards; }
+.rule-line    { height:0.5px; width:80px; background:var(--gold); opacity:0.6; }
+.rule-diamond { width:5px; height:5px; background:var(--gold); transform:rotate(45deg); opacity:0.8; }
+.date  { font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:var(--burgundy); font-family:'Cormorant Garamond',serif; opacity:0; animation:fadeUp 0.8s ease 3.1s forwards; margin-bottom:14px; text-align:center; }
+.venue { font-family:'Playfair Display',serif; font-style:italic; font-size:24px; color:var(--muted); opacity:0; animation:fadeUp 0.8s ease 3.3s forwards; margin-bottom:6px; text-align:center; }
+.time  { font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:var(--rose); font-family:'Cormorant Garamond',serif; opacity:0; animation:fadeUp 0.8s ease 3.5s forwards; margin-bottom:40px; text-align:center; }
+.countdown { display:flex; align-items:flex-start; opacity:0; animation:fadeUp 0.8s ease 3.7s forwards; margin-bottom:44px; }
+.cd-item { display:flex; flex-direction:column; align-items:center; padding:0 20px; }
+.cd-item + .cd-item { border-left:0.5px solid var(--blush); }
+.cd-num   { font-family:'Playfair Display',serif; font-size:36px; color:var(--dark); line-height:1; margin-bottom:4px; }
+.cd-label { font-size:9px; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); font-family:'Cormorant Garamond',serif; }
+.section-divider { width:100%; max-width:500px; display:flex; align-items:center; gap:16px; margin:48px 0 40px; opacity:0; animation:fadeIn 1s ease 4.0s forwards; }
+.section-divider-line  { flex:1; height:0.5px; background:var(--gold); opacity:0.4; }
+.section-divider-label { font-size:9px; letter-spacing:0.28em; text-transform:uppercase; color:var(--muted); font-family:'Cormorant Garamond',serif; white-space:nowrap; }
+.timeline { width:100%; max-width:480px; display:flex; flex-direction:column; opacity:0; animation:fadeUp 0.8s ease 4.2s forwards; margin-bottom:16px; position:relative; }
+.timeline::before { content:''; position:absolute; top:24px; left:31px; width:0.5px; bottom:24px; background:var(--blush); z-index:0; }
+.timeline-item { display:flex; align-items:flex-start; gap:20px; padding:16px 0; position:relative; }
+.timeline-left { display:flex; flex-direction:column; align-items:center; gap:6px; min-width:62px; flex-shrink:0; }
+.timeline-time  { font-size:10px; letter-spacing:0.1em; color:var(--burgundy); font-family:'Cormorant Garamond',serif; white-space:nowrap; }
+.timeline-dot   { width:10px; height:10px; border-radius:50%; background:var(--cream); border:1px solid var(--gold); flex-shrink:0; position:relative; z-index:1; }
+.timeline-dot.active { background:var(--gold); }
+.timeline-right { padding-top:2px; }
+.timeline-title { font-family:'Playfair Display',serif; font-size:16px; color:var(--dark); margin-bottom:2px; }
+.timeline-desc  { font-size:12px; color:var(--muted); font-family:'Cormorant Garamond',serif; font-style:italic; }
+.couple-story { width:100%; max-width:460px; text-align:center; opacity:0; animation:fadeUp 0.8s ease 4.4s forwards; margin-bottom:16px; }
+.couple-story-text { font-family:'Playfair Display',serif; font-style:italic; font-size:17px; color:var(--muted); line-height:1.8; }
+.polaroids { width:100%; max-width:500px; position:relative; height:320px; opacity:0; animation:fadeIn 1s ease 4.6s forwards; margin-bottom:40px; }
+.polaroid { position:absolute; background:white; padding:10px 10px 32px; box-shadow:0 4px 20px rgba(0,0,0,0.10); }
+.polaroid:nth-child(1) { width:160px; height:200px; left:20px; top:30px; transform:rotate(-4deg); animation:polaroidIn 0.6s ease 4.8s both; }
+.polaroid:nth-child(2) { width:180px; height:220px; left:50%; top:10px; transform:translateX(-50%) rotate(1.5deg); animation:polaroidIn 0.6s ease 5.0s both; z-index:2; }
+.polaroid:nth-child(3) { width:155px; height:195px; right:20px; top:40px; transform:rotate(5deg); animation:polaroidIn 0.6s ease 5.2s both; }
+@keyframes polaroidIn { from{opacity:0;transform:translateY(20px)} to{opacity:1} }
+.polaroid-placeholder { width:100%; height:calc(100% - 32px); background:var(--blush); display:flex; align-items:center; justify-content:center; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:11px; color:var(--muted); opacity:0.6; }
+.polaroid-caption { text-align:center; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:11px; color:var(--muted); margin-top:6px; }
+@media (max-width:600px) {
+  .polaroids { height:auto; display:flex; flex-direction:column; align-items:center; gap:32px; padding:20px 0; }
+  .polaroid:nth-child(1) { position:relative!important; left:auto!important; top:auto!important; width:200px!important; height:240px!important; transform:rotate(-4deg)!important; }
+  .polaroid:nth-child(2) { position:relative!important; left:auto!important; top:auto!important; transform:rotate(1.5deg)!important; width:200px!important; height:240px!important; }
+  .polaroid:nth-child(3) { position:relative!important; right:auto!important; top:auto!important; width:200px!important; height:240px!important; transform:rotate(5deg)!important; }
+}
+.location-wrap { display:flex; flex-direction:column; align-items:center; text-align:center; margin:40px 0; opacity:0; animation:fadeUp 0.8s ease 5.4s forwards; }
+.location-label   { font-size:9px; letter-spacing:0.28em; text-transform:uppercase; color:var(--muted); font-family:'Cormorant Garamond',serif; margin-bottom:10px; }
+.location-name    { font-family:'Playfair Display',serif; font-size:26px; color:var(--dark); margin-bottom:6px; }
+.location-address { font-size:13px; color:var(--muted); font-family:'Cormorant Garamond',serif; margin-bottom:20px; font-style:italic; }
+.floral-bottom { width:200px; margin-bottom:36px; opacity:0; animation:fadeIn 1s ease 5.6s forwards; }
+.btns { display:flex; gap:16px; flex-wrap:wrap; justify-content:center; opacity:0; animation:fadeUp 0.8s ease 5.6s forwards; }
+.btn-outline { border:0.5px solid var(--burgundy); color:var(--burgundy); background:transparent; padding:12px 32px; font-size:10px; letter-spacing:0.22em; text-transform:uppercase; font-family:'Cormorant Garamond',serif; border-radius:30px; cursor:pointer; text-decoration:none; display:inline-block; transition:background 0.3s,color 0.3s; }
+.btn-outline:hover { background:var(--burgundy); color:var(--cream); }
+.btn-fill { border:0.5px solid var(--burgundy); color:var(--cream); background:var(--burgundy); padding:12px 32px; font-size:10px; letter-spacing:0.22em; text-transform:uppercase; font-family:'Cormorant Garamond',serif; border-radius:30px; cursor:pointer; text-decoration:none; display:inline-block; transition:opacity 0.3s; }
+.btn-fill:hover { opacity:0.85; }
+.replay { position:fixed; bottom:20px; right:20px; background:var(--burgundy); color:var(--cream); border:none; border-radius:30px; padding:9px 18px; font-size:11px; letter-spacing:0.1em; font-family:'Cormorant Garamond',serif; cursor:pointer; z-index:200; opacity:0; animation:fadeIn 0.5s ease 6s forwards; }
+@keyframes fadeUp    { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeIn    { from{opacity:0} to{opacity:1} }
+@keyframes fadeRight { from{opacity:0;transform:translateX(-28px)} to{opacity:1;transform:translateX(0)} }
+@keyframes fadeLeft  { from{opacity:0;transform:translateX(28px)}  to{opacity:1;transform:translateX(0)} }
+</style>
+</head>
+<body>
+
+<!-- ENVELOPE (shown/hidden by JS) -->
+<div class="env-screen" id="envScreen" style="display:none;">
+  <div class="env-body" id="envBody">
+    <div class="env-fold-left"></div>
+    <div class="env-fold-right"></div>
+  </div>
+  <div class="env-flap" id="envFlap">
+    <div class="env-flap-shape"></div>
+    <svg class="env-flap-deco" viewBox="0 0 100 55" preserveAspectRatio="none" fill="none">
+      <path d="M1 1 L50 54 L99 1" stroke="var(--gold)" stroke-width="0.3" opacity="0.5"/>
+    </svg>
+    <svg class="env-flap-corner env-flap-corner--left" viewBox="0 0 60 60" fill="none">
+      <path d="M4 4 Q18 10 14 28" stroke="var(--gold)" stroke-width="0.7" fill="none" opacity="0.7"/>
+      <path d="M4 4 Q22 8 26 22" stroke="var(--gold)" stroke-width="0.6" fill="none" opacity="0.5"/>
+      <ellipse cx="16" cy="28" rx="7" ry="4" fill="var(--blush)" stroke="var(--gold)" stroke-width="0.5" transform="rotate(-40 16 28)" opacity="0.8"/>
+      <ellipse cx="26" cy="22" rx="6" ry="3.5" fill="var(--blush)" stroke="var(--gold)" stroke-width="0.5" transform="rotate(-10 26 22)" opacity="0.7"/>
+      <ellipse cx="10" cy="16" rx="5" ry="3" fill="var(--cream)" stroke="var(--gold)" stroke-width="0.5" transform="rotate(-55 10 16)" opacity="0.6"/>
+      <circle cx="20" cy="34" r="2" fill="var(--rose)" opacity="0.5"/>
+      <circle cx="30" cy="18" r="1.5" fill="var(--gold)" opacity="0.4"/>
+    </svg>
+    <svg class="env-flap-corner env-flap-corner--right" viewBox="0 0 60 60" fill="none">
+      <path d="M56 4 Q42 10 46 28" stroke="var(--gold)" stroke-width="0.7" fill="none" opacity="0.7"/>
+      <path d="M56 4 Q38 8 34 22" stroke="var(--gold)" stroke-width="0.6" fill="none" opacity="0.5"/>
+      <ellipse cx="44" cy="28" rx="7" ry="4" fill="var(--blush)" stroke="var(--gold)" stroke-width="0.5" transform="rotate(40 44 28)" opacity="0.8"/>
+      <ellipse cx="34" cy="22" rx="6" ry="3.5" fill="var(--blush)" stroke="var(--gold)" stroke-width="0.5" transform="rotate(10 34 22)" opacity="0.7"/>
+      <ellipse cx="50" cy="16" rx="5" ry="3" fill="var(--cream)" stroke="var(--gold)" stroke-width="0.5" transform="rotate(55 50 16)" opacity="0.6"/>
+      <circle cx="40" cy="34" r="2" fill="var(--rose)" opacity="0.5"/>
+      <circle cx="30" cy="18" r="1.5" fill="var(--gold)" opacity="0.4"/>
+    </svg>
+  </div>
+  <div class="env-seal-wrap" id="envSeal" onclick="openEnvelope()">
+    <img class="env-seal-img" src="seal.png" alt="wax seal">
+    <div class="env-hint-wrap">
+      <div class="env-hint-line"></div>
+      <p class="env-hint">Appuyez pour ouvrir</p>
+      <div class="env-hint-line"></div>
+    </div>
+  </div>
+</div>
+
+<!-- CURTAINS (shown/hidden by JS) -->
+<div class="curtain-wrap" id="curtainWrap" style="display:none;">
+  <div class="curtain curtain-left"  id="cL"></div>
+  <div class="curtain curtain-right" id="cR"></div>
+</div>
+
+<!-- CONFETTI -->
+<div class="confetti-wrap" id="confettiWrap"></div>
+
+<!-- PAGE -->
+<div class="page">
+  <svg class="floral-top" viewBox="0 0 280 80" fill="none">
+    <path d="M30 55 Q50 30 80 40" stroke="var(--gold)" stroke-width="0.8" fill="none" opacity="0.7"/>
+    <path d="M40 48 Q45 30 55 35" stroke="var(--gold)" stroke-width="0.6" fill="none" opacity="0.5"/>
+    <ellipse cx="82" cy="38" rx="9" ry="6" fill="var(--blush)" stroke="var(--gold)" stroke-width="0.5" transform="rotate(-20 82 38)" opacity="0.8"/>
+    <ellipse cx="58" cy="33" rx="6" ry="4" fill="var(--cream)" stroke="var(--gold)" stroke-width="0.5" transform="rotate(-35 58 33)" opacity="0.7"/>
+    <ellipse cx="34" cy="42" rx="5" ry="3" fill="var(--blush)" stroke="var(--gold)" stroke-width="0.5" transform="rotate(10 34 42)" opacity="0.6"/>
+    <circle cx="90" cy="34" r="3" fill="var(--rose)" opacity="0.5"/>
+    <circle cx="63" cy="28" r="2" fill="var(--gold)" opacity="0.4"/>
+    <line x1="100" y1="55" x2="120" y2="55" stroke="var(--gold)" stroke-width="0.5" opacity="0.5"/>
+    <rect x="136" y="51" width="8" height="8" fill="none" stroke="var(--gold)" stroke-width="0.5" transform="rotate(45 140 55)" opacity="0.7"/>
+    <line x1="152" y1="55" x2="172" y2="55" stroke="var(--gold)" stroke-width="0.5" opacity="0.5"/>
+    <path d="M250 55 Q230 30 200 40" stroke="var(--gold)" stroke-width="0.8" fill="none" opacity="0.7"/>
+    <path d="M240 48 Q235 30 225 35" stroke="var(--gold)" stroke-width="0.6" fill="none" opacity="0.5"/>
+    <ellipse cx="198" cy="38" rx="9" ry="6" fill="var(--blush)" stroke="var(--gold)" stroke-width="0.5" transform="rotate(20 198 38)" opacity="0.8"/>
+    <ellipse cx="222" cy="33" rx="6" ry="4" fill="var(--cream)" stroke="var(--gold)" stroke-width="0.5" transform="rotate(35 222 33)" opacity="0.7"/>
+    <ellipse cx="246" cy="42" rx="5" ry="3" fill="var(--blush)" stroke="var(--gold)" stroke-width="0.5" transform="rotate(-10 246 42)" opacity="0.6"/>
+    <circle cx="190" cy="34" r="3" fill="var(--rose)" opacity="0.5"/>
+    <circle cx="217" cy="28" r="2" fill="var(--gold)" opacity="0.4"/>
+  </svg>
+
+  <p class="eyebrow" id="txt-eyebrow">Nous avons l'honneur de vous inviter</p>
+  <div class="names-wrap">
+    <span class="name name-1" id="txt-name1">Yasmine</span>
+    <span class="amp">&</span>
+    <span class="name name-2" id="txt-name2">Amine</span>
+  </div>
+  <div class="rule"><div class="rule-line"></div><div class="rule-diamond"></div><div class="rule-line"></div></div>
+  <p class="date"  id="txt-date">Lundi · 14 Décembre 2026</p>
+  <p class="venue" id="txt-venue">Dar Lasram, La Médina — Tunis</p>
+  <p class="time"  id="txt-time">Cérémonie à 18 heures</p>
+
+  <div class="countdown">
+    <div class="cd-item"><span class="cd-num" id="days">0</span><span class="cd-label">Jours</span></div>
+    <div class="cd-item"><span class="cd-num" id="hours">0</span><span class="cd-label">Heures</span></div>
+    <div class="cd-item"><span class="cd-num" id="mins">0</span><span class="cd-label">Minutes</span></div>
+    <div class="cd-item"><span class="cd-num" id="secs">0</span><span class="cd-label">Secondes</span></div>
+  </div>
+
+  <div class="section-divider"><div class="section-divider-line"></div><span class="section-divider-label">Programme du jour</span><div class="section-divider-line"></div></div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-left"><span class="timeline-time">17h00</span><div class="timeline-dot active"></div></div>
+      <div class="timeline-right"><p class="timeline-title">Cérémonie</p><p class="timeline-desc">Signature du contrat de mariage</p></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-left"><span class="timeline-time">19h00</span><div class="timeline-dot"></div></div>
+      <div class="timeline-right"><p class="timeline-title">Cocktail</p><p class="timeline-desc">Accueil des invités et rafraîchissements</p></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-left"><span class="timeline-time">21h00</span><div class="timeline-dot"></div></div>
+      <div class="timeline-right"><p class="timeline-title">Dîner</p><p class="timeline-desc">Dîner gastronomique en famille</p></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-left"><span class="timeline-time">23h00</span><div class="timeline-dot"></div></div>
+      <div class="timeline-right"><p class="timeline-title">Soirée</p><p class="timeline-desc">Musique et danse jusqu'à l'aube</p></div>
+    </div>
+  </div>
+
+  <div class="section-divider"><div class="section-divider-line"></div><span class="section-divider-label">Notre histoire</span><div class="section-divider-line"></div></div>
+  <div class="couple-story">
+    <p class="couple-story-text" id="txt-story">Nous nous sommes rencontrés par hasard, un soir d'été à Tunis. Ce qui a commencé par un sourire est devenu une histoire d'amour que nous souhaitons célébrer avec vous.</p>
+  </div>
+
+  <div class="section-divider"><div class="section-divider-line"></div><span class="section-divider-label">Nos photos</span><div class="section-divider-line"></div></div>
+  <div class="polaroids">
+    <div class="polaroid"><div class="polaroid-placeholder">Photo 1</div><p class="polaroid-caption">Notre première rencontre</p></div>
+    <div class="polaroid"><div class="polaroid-placeholder">Photo 2</div><p class="polaroid-caption">La demande en mariage</p></div>
+    <div class="polaroid"><div class="polaroid-placeholder">Photo 3</div><p class="polaroid-caption">Bientôt mariés</p></div>
+  </div>
+
+  <div class="location-wrap">
+    <div class="rule"><div class="rule-line"></div><div class="rule-diamond"></div><div class="rule-line"></div></div>
+    <p class="location-label">Lieu de la cérémonie</p>
+    <p class="location-name"    id="txt-locname">Dar Lasram</p>
+    <p class="location-address" id="txt-locaddr">8 Rue du Tribunal, Tunis</p>
+    <a class="btn-outline" id="btn-maps" href="#" target="_blank">Ouvrir dans Google Maps</a>
+  </div>
+
+  <svg class="floral-bottom" viewBox="0 0 200 50" fill="none">
+    <path d="M20 35 Q50 15 100 25 Q150 15 180 35" stroke="var(--gold)" stroke-width="0.6" fill="none" opacity="0.5"/>
+    <ellipse cx="100" cy="20" rx="8" ry="5" fill="var(--blush)" stroke="var(--gold)" stroke-width="0.5" opacity="0.7"/>
+    <ellipse cx="70"  cy="25" rx="6" ry="4" fill="var(--cream)" stroke="var(--gold)" stroke-width="0.5" opacity="0.6"/>
+    <ellipse cx="130" cy="25" rx="6" ry="4" fill="var(--cream)" stroke="var(--gold)" stroke-width="0.5" opacity="0.6"/>
+    <circle cx="100" cy="15" r="2.5" fill="var(--rose)" opacity="0.4"/>
+    <circle cx="50"  cy="30" r="2"   fill="var(--gold)" opacity="0.3"/>
+    <circle cx="150" cy="30" r="2"   fill="var(--gold)" opacity="0.3"/>
+  </svg>
+
+  <div class="btns">
+    <a class="btn-outline" id="btn-whatsapp" href="#" target="_blank">Confirmer via WhatsApp</a>
+  </div>
+</div>
+
+<button class="replay" onclick="location.reload()">↺ Rejouer</button>
+
+<script>
+// ── THEME → intro style mapping ──
+const ENVELOPE_THEMES = new Set([
+  'romantic','dusty-rose','medina','zellige','kairouan'
+]);
+
+// ── SLUG → theme key ──
+const SLUG_MAP = {
+  romantic:'romantic', olive:'olive', midnight:'midnight',
+  'dusty-rose':'dusty-rose', dusty_rose:'dusty-rose',
+  terracotta:'terracotta', sidibou:'sidibou',
+  'inv-zellige-royal':'zellige', zellige:'zellige',
+  olivier:'olivier', djerba:'djerba', tozeur:'tozeur',
+  carthage:'carthage', kairouan:'kairouan',
+  hammamet:'hammamet', medina:'medina'
+};
+
+// ── DEFAULT DATA per theme ──
+const DATA = {
+  romantic:    {name1:'Yasmine',name2:'Amine',  date:'Lundi · 14 Décembre 2026',     venue:'Dar Lasram, La Médina — Tunis',     time:'Cérémonie à 18 heures', target:'2026-12-14T18:00:00'},
+  olive:       {name1:'Leïla',  name2:'Karim',  date:'Samedi · 20 Juin 2026',        venue:'Villa Les Oliviers — Hammamet',     time:'Cérémonie à 17 heures', target:'2026-06-20T17:00:00'},
+  midnight:    {name1:'Sarah',  name2:'Adam',   date:'Vendredi · 5 Mars 2027',       venue:'Palais de la Mer — La Marsa',       time:'Cérémonie à 20 heures', target:'2027-03-05T20:00:00'},
+  'dusty-rose':{name1:'Nour',   name2:'Mehdi',  date:'Dimanche · 12 Avril 2026',     venue:'Jardin des Roses — Carthage',       time:'Cérémonie à 18 heures', target:'2026-04-12T18:00:00'},
+  terracotta:  {name1:'Amira',  name2:'Omar',   date:'Samedi · 15 Mai 2027',         venue:'Oasis de Tozeur — Tozeur',          time:'Cérémonie à 17 heures', target:'2027-05-15T17:00:00'},
+  sidibou:     {name1:'Yasmine',name2:'Mehdi',  date:'Mardi · 15 Juin 2027',         venue:'Dar Ennejma — Sidi Bou Saïd',       time:'Cérémonie à 18 heures', target:'2027-06-15T18:00:00'},
+  zellige:     {name1:'Salma',  name2:'Karim',  date:'Samedi · 8 Novembre 2026',     venue:'Palais Bayram — Tunis',             time:'Cérémonie à 18 heures', target:'2026-11-08T18:00:00'},
+  olivier:     {name1:'Leïla',  name2:'Amine',  date:'Vendredi · 25 Septembre 2026', venue:'Villa des Roses — Nabeul',          time:'Cérémonie à 17 heures', target:'2026-09-25T17:00:00'},
+  djerba:      {name1:'Rachel', name2:'David',  date:'Dimanche · 3 Octobre 2027',    venue:'Hôtel Dar Djerba — Djerba',         time:'Cérémonie à 18 heures', target:'2027-10-03T18:00:00'},
+  tozeur:      {name1:'Amira',  name2:'Omar',   date:'Samedi · 20 Février 2027',     venue:'Oasis de Tozeur — Tozeur',          time:'Cérémonie à 17 heures', target:'2027-02-20T17:00:00'},
+  carthage:    {name1:'Leïla',  name2:'Hamza',  date:'Vendredi · 12 Mars 2027',      venue:'Site de Carthage — Carthage',       time:'Cérémonie à 18 heures', target:'2027-03-12T18:00:00'},
+  kairouan:    {name1:'Yasmine',name2:'Mehdi',  date:'Samedi · 18 Juillet 2026',     venue:'Médina de Kairouan — Kairouan',     time:'Cérémonie à 17 heures', target:'2026-07-18T17:00:00'},
+  hammamet:    {name1:'Nour',   name2:'Anis',   date:'Dimanche · 6 Juin 2027',       venue:'Corniche de Hammamet — Hammamet',   time:'Cérémonie à 18 heures', target:'2027-06-06T18:00:00'},
+  medina:      {name1:'Aïcha',  name2:'Hamza',  date:'Samedi · 25 Septembre 2027',   venue:'Médina de Tunis — Tunis',           time:'Cérémonie à 18 heures', target:'2027-09-25T18:00:00'},
+};
+
+// ── PARSE PARAMS ──
+const p = new URLSearchParams(window.location.search);
+const rawTheme  = (p.get('theme') || 'romantic').toLowerCase();
+const themeKey  = SLUG_MAP[rawTheme] || 'romantic';
+const d         = DATA[themeKey] || DATA.romantic;
+const useEnvelope = ENVELOPE_THEMES.has(themeKey);
+
+const name1    = p.get('name1')    || d.name1;
+const name2    = p.get('name2')    || d.name2;
+const date     = p.get('date')     || d.date;
+const venue    = p.get('venue')    || d.venue;
+const time     = p.get('time')     || d.time;
+const target   = p.get('target')   || d.target;
+const whatsapp = p.get('whatsapp') || '';
+const story    = p.get('story')    || null;
+const locname  = p.get('locname')  || d.name1 + ' & ' + d.name2;
+const locaddr  = p.get('locaddr')  || '';
+const mapsurl  = p.get('mapsurl')  || '#';
+
+// ── APPLY THEME ──
+document.body.classList.add('theme-' + themeKey);
+
+// ── POPULATE TEXT ──
+document.getElementById('txt-name1').textContent  = name1;
+document.getElementById('txt-name2').textContent  = name2;
+document.getElementById('txt-date').textContent   = date;
+document.getElementById('txt-venue').textContent  = venue;
+document.getElementById('txt-time').textContent   = time;
+document.getElementById('txt-locname').textContent = locname;
+document.getElementById('txt-locaddr').textContent = locaddr;
+document.getElementById('btn-maps').href = mapsurl;
+if (story) document.getElementById('txt-story').textContent = story;
+if (whatsapp) {
+  document.getElementById('btn-whatsapp').href =
+    'https://wa.me/' + whatsapp.replace('+','') + '?text=Bonjour%2C+je+confirme+ma+présence+à+votre+mariage';
+}
+
+// ── SHOW CORRECT INTRO ──
+if (useEnvelope) {
+  document.getElementById('envScreen').style.display = '';
+} else {
+  document.getElementById('curtainWrap').style.display = '';
+  setTimeout(() => {
+    document.getElementById('cL').classList.add('open');
+    document.getElementById('cR').classList.add('open');
+  }, 500);
+}
+
+// ── ENVELOPE OPEN ──
+function openEnvelope() {
+  const seal   = document.getElementById('envSeal');
+  const flap   = document.getElementById('envFlap');
+  const body   = document.getElementById('envBody');
+  const screen = document.getElementById('envScreen');
+  seal.classList.add('fade');
+  setTimeout(() => flap.classList.add('open'), 500);
+  setTimeout(() => body.classList.add('open'), 1100);
+  setTimeout(() => screen.classList.add('gone'), 3200);
+  setTimeout(() => { screen.style.display = 'none'; }, 3800);
+}
+
+// ── CONFETTI ──
+(function() {
+  const c = document.getElementById('confettiWrap');
+  const s = getComputedStyle(document.documentElement);
+  const colors = [
+    s.getPropertyValue('--gold').trim(),
+    s.getPropertyValue('--blush').trim(),
+    s.getPropertyValue('--rose').trim(),
+    s.getPropertyValue('--muted').trim()
+  ];
+  for (let i = 0; i < 22; i++) {
+    const el    = document.createElement('div');
+    el.className = 'conf-item';
+    const size  = Math.random() * 7 + 4;
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const delay = Math.random() * 10 + 3;
+    const dur   = Math.random() * 7 + 9;
+    const left  = Math.random() * 100;
+    el.style.cssText = `left:${left}%;width:${size}px;height:${size*1.5}px;background:${color};border-radius:50% 0 50% 0;animation-duration:${dur}s;animation-delay:${delay}s;`;
+    c.appendChild(el);
+  }
+})();
+
+// ── COUNTDOWN ──
+(function() {
+  const tgt = new Date(target);
+  function tick() {
+    const diff = tgt - new Date();
+    if (diff <= 0) { ['days','hours','mins','secs'].forEach(id => document.getElementById(id).textContent = '0'); return; }
+    document.getElementById('days').textContent  = Math.floor(diff / 86400000);
+    document.getElementById('hours').textContent = Math.floor(diff % 86400000 / 3600000);
+    document.getElementById('mins').textContent  = Math.floor(diff % 3600000 / 60000);
+    document.getElementById('secs').textContent  = Math.floor(diff % 60000 / 1000);
+  }
+  tick(); setInterval(tick, 1000);
+})();
+</script>
+</body>
+</html>
