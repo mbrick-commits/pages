@@ -445,8 +445,9 @@ function buildHero(theme, n1, n2) {
     <div style="height:.5px;width:100px;background:var(--acc);margin:28px auto;opacity:.5;"></div>
     <p class="arabic" style="color:var(--primary);">ياسمين ومهدي</p></div>`;
 
-  if (theme === 'zellige') return `
-    <div style="position:relative;z-index:1;text-align:center;max-width:580px;">${bism}
+ if (theme === 'zellige') return `
+    <div class="zr-frame"><div class="zr-corner zr-tl"></div><div class="zr-corner zr-tr"></div><div class="zr-corner zr-bl"></div><div class="zr-corner zr-br"></div>
+    ${bism}
     <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin:20px 0;opacity:0;animation:fadeIn .8s ease 2.2s forwards;"><div style="height:.5px;width:64px;background:var(--acc);"></div><span style="color:var(--acc);">❋</span><div style="height:.5px;width:64px;background:var(--acc);"></div></div>
     <p style="font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--primary);opacity:0;animation:fadeUp .9s ease 2.3s forwards;">Nous avons l'immense joie de vous convier</p>
     <p style="font-size:16px;font-style:italic;margin-top:24px;color:var(--primary);opacity:0;animation:fadeUp .9s ease 2.4s forwards;">au mariage de nos enfants</p>
