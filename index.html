@@ -647,6 +647,7 @@ if (theme === 'zellige') return `
 // ══════════════════════════════
 const p = new URLSearchParams(window.location.search);
 const isPreview = p.get('preview') === '1';
+const autoOpen = p.get('auto') === '1';
 
 const rawTheme = (p.get('theme') || 'romantic').toLowerCase();
 const themeKey = SLUG_MAP[rawTheme] || 'romantic';
@@ -776,16 +777,25 @@ else {
 
 // ══════ ENVELOPE OPEN ══════
 function openEnvelope() {
-  const seal=document.getElementById('envSeal'), flap=document.getElementById('envFlap');
-  const body=document.getElementById('envBody'), screen=document.getElementById('envScreen');
-  if (!seal || !flap || !body || !screen) return;
-  seal.classList.add('fade');
-  setTimeout(()=>flap.classList.add('open'),500);
-  setTimeout(()=>body.classList.add('open'),1100);
-  setTimeout(()=>screen.classList.add('gone'),3200);
-  setTimeout(()=>screen.style.display='none',3800);
+  const seal = document.getElementById('envSeal');
+  const flap = document.getElementById('envFlap');
+  const body = document.getElementById('envBody');
+  const screen = document.getElementById('envScreen');
+
+  if (seal) seal.classList.add('fade');
+  if (flap) setTimeout(() => flap.classList.add('open'), 500);
+  if (body) setTimeout(() => body.classList.add('open'), 1100);
+  if (screen) {
+    setTimeout(() => screen.classList.add('gone'), 3200);
+    setTimeout(() => screen.style.display = 'none', 3800);
+  }
 }
 
+if (autoOpen && !isPreview && ENVELOPE_THEMES.has(themeKey)) {
+  setTimeout(() => {
+    openEnvelope();
+  }, 900);
+}
 
 if (isPreview) {
   document.body.classList.add('preview-mode');
