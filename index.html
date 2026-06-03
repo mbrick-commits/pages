@@ -40,19 +40,7 @@ body.theme-carthage  {--bg:#f8f4fc;--primary:#4a1870;--acc:#9060c0;--acc-lt:#c09
 body.theme-kairouan  {--bg:#f0f8f0;--primary:#1a5a30;--acc:#c0a030;--acc-lt:#e0c850;--dark:#0a2818;--blush:#b8ddc0;--muted:#3a7a48;--story-bg:#e8f4e8;--story-fg:#0a2818;--loc-bg:#0a2818;--loc-fg:#f0f8f0;}
 body.theme-hammamet  {--bg:#f0f6fc;--primary:#1a4888;--acc:#4070b0;--acc-lt:#80a8d8;--dark:#0a2048;--blush:#b8cce8;--muted:#4878a8;--story-bg:#e8f0f8;--story-fg:#0a2048;--loc-bg:#0a2048;--loc-fg:#f0f6fc;}
 body.theme-medina    {--bg:#f8f0e0;--primary:#5a3010;--acc:#a07840;--acc-lt:#c8a060;--dark:#281408;--blush:#e0cca0;--muted:#806040;--story-bg:#f0e4c8;--story-fg:#281408;--loc-bg:#281408;--loc-fg:#f8f0e0;}
-body.theme-zellige {
-  --bg:#f9f3ea;
-  --primary:#6b1a28;
-  --acc:#c8a050;
-  --acc-lt:#e8c878;
-  --dark:#2a0e14;
-  --blush:#ead8b8;
-  --muted:#9a6040;
-  --story-bg:#f9f3ea;
-  --story-fg:#2a0e14;
-  --loc-bg:#2a0e14;
-  --loc-fg:#f9f3ea;
-}
+
 body{background:var(--bg);min-height:100vh;overflow-x:hidden;font-family:'Cormorant Garamond',Georgia,serif;color:var(--primary);}
 
 /* ══════════════════════════════
@@ -243,6 +231,74 @@ body.theme-zellige {
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes fadeRight{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:translateX(0)}}
 @keyframes fadeLeft{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:translateX(0)}}
+
+
+/* PREVIEW MODE — used inside Shopify iframe cards */
+body.preview-mode {
+  overflow: hidden !important;
+}
+
+body.preview-mode::-webkit-scrollbar,
+body.preview-mode *::-webkit-scrollbar {
+  display: none !important;
+}
+
+body.preview-mode,
+body.preview-mode * {
+  scrollbar-width: none !important;
+}
+
+body.preview-mode .env-screen,
+body.preview-mode .curtain-wrap,
+body.preview-mode .replay,
+body.preview-mode .c-replay,
+body.preview-mode .confetti-wrap {
+  display: none !important;
+}
+
+body.preview-mode .bismillah,
+body.preview-mode .arabic,
+body.preview-mode .name,
+body.preview-mode .amp,
+body.preview-mode .details-title,
+body.preview-mode .countdown,
+body.preview-mode .tl-list,
+body.preview-mode .date-footer,
+body.preview-mode .story-quote,
+body.preview-mode .story-text,
+body.preview-mode .polaroids,
+body.preview-mode .loc-name,
+body.preview-mode .loc-addr,
+body.preview-mode .btns,
+body.preview-mode .c-floral,
+body.preview-mode .c-eyebrow,
+body.preview-mode .c-name,
+body.preview-mode .c-amp,
+body.preview-mode .c-rule,
+body.preview-mode .c-date,
+body.preview-mode .c-venue,
+body.preview-mode .c-time,
+body.preview-mode .c-countdown,
+body.preview-mode .c-divider,
+body.preview-mode .c-timeline,
+body.preview-mode .c-story,
+body.preview-mode .c-polaroids,
+body.preview-mode .c-loc,
+body.preview-mode .c-floral-b,
+body.preview-mode [style*="animation"] {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+body.preview-mode #heroSection {
+  min-height: 100vh !important;
+}
+
+body.preview-mode .c-page {
+  min-height: 100vh !important;
+}
+
 </style>
 </head>
 <body>
@@ -363,7 +419,7 @@ body.theme-zellige {
       </div>
       <div class="tl-list" id="p-timeline">
         <div class="tl-item"><div class="tl-time">17h00</div><div><p class="tl-title">Cérémonie</p><p class="tl-place">Lieu de la cérémonie</p></div></div>
-        <div class="tl-item"><div class="tl-time">19h00</div><div><p class="tl-title">Acte de marriage</p><p class="tl-place"></p></div></div>
+        <div class="tl-item"><div class="tl-time">19h00</div><div><p class="tl-title">Lecture de la Fatiha</p><p class="tl-place">Signature du contrat de mariage</p></div></div>
         <div class="tl-item"><div class="tl-time">21h00</div><div><p class="tl-title">Dîner</p><p class="tl-place">Salle de réception</p></div></div>
         <div class="tl-item"><div class="tl-time">23h00</div><div><p class="tl-title">Soirée</p><p class="tl-place">Musique et danse</p></div></div>
       </div>
@@ -590,6 +646,8 @@ if (theme === 'zellige') return `
 // PARSE URL & INIT
 // ══════════════════════════════
 const p = new URLSearchParams(window.location.search);
+const isPreview = p.get('preview') === '1';
+
 const rawTheme = (p.get('theme') || 'romantic').toLowerCase();
 const themeKey = SLUG_MAP[rawTheme] || 'romantic';
 const d = DEFAULTS[themeKey] || DEFAULTS.romantic;
@@ -639,17 +697,30 @@ document.body.classList.add('theme-' + themeKey);
 if (CLASSIC_THEMES.has(themeKey)) document.body.classList.add('classic');
 
 // Envelope/curtain
-if (ENVELOPE_THEMES.has(themeKey)) {
-  document.getElementById('envScreen').style.display = '';
+if (!isPreview && ENVELOPE_THEMES.has(themeKey)) {
+  const env = document.getElementById('envScreen');
+  if (env) env.style.display = '';
 } else {
-  document.getElementById('curtainWrap').style.display = '';
-  setTimeout(() => {
-    document.getElementById('cL').classList.add('open');
-    document.getElementById('cR').classList.add('open');
-  }, 500);
+  const env = document.getElementById('envScreen');
+  if (env) env.style.display = 'none';
 }
 
-confetti();
+if (!isPreview && !ENVELOPE_THEMES.has(themeKey)) {
+  const curtain = document.getElementById('curtainWrap');
+  if (curtain) curtain.style.display = '';
+
+  setTimeout(() => {
+    const cL = document.getElementById('cL');
+    const cR = document.getElementById('cR');
+    if (cL) cL.classList.add('open');
+    if (cR) cR.classList.add('open');
+  }, 500);
+} else {
+  const curtain = document.getElementById('curtainWrap');
+  if (curtain) curtain.style.display = 'none';
+}
+
+if (!isPreview) confetti();
 
 // ══════ CLASSIC ══════
 if (CLASSIC_THEMES.has(themeKey)) {
@@ -707,12 +778,31 @@ else {
 function openEnvelope() {
   const seal=document.getElementById('envSeal'), flap=document.getElementById('envFlap');
   const body=document.getElementById('envBody'), screen=document.getElementById('envScreen');
+  if (!seal || !flap || !body || !screen) return;
   seal.classList.add('fade');
   setTimeout(()=>flap.classList.add('open'),500);
   setTimeout(()=>body.classList.add('open'),1100);
   setTimeout(()=>screen.classList.add('gone'),3200);
   setTimeout(()=>screen.style.display='none',3800);
 }
+
+
+if (isPreview) {
+  document.body.classList.add('preview-mode');
+
+  const env = document.getElementById('envScreen');
+  if (env) env.style.display = 'none';
+
+  const curtain = document.getElementById('curtainWrap');
+  if (curtain) curtain.style.display = 'none';
+
+  const replay = document.querySelector('.replay, .c-replay');
+  if (replay) replay.style.display = 'none';
+
+  const conf = document.getElementById('confettiWrap');
+  if (conf) conf.style.display = 'none';
+}
+
 </script>
 </body>
 </html>
