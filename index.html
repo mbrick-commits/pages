@@ -6,426 +6,1061 @@
 <title>Invitation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:ital,wght@0,200;0,300;0,400;0,500;1,300;1,400&family=Aref+Ruqaa&family=Scheherazade+New&display=swap" rel="stylesheet">
+
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --cream: #faf6f0; --gold: #c4a882; --burgundy: #6b2d3e;
-  --dark: #2a1a14; --muted: #9a7e6e; --blush: #e8d4c0; --rose: #c4907a;
+/* ── RESET ── */
+*{margin:0;padding:0;box-sizing:border-box;}
+
+/* ══════════════════════════════════════════
+   CLASSIC 5 THEMES
+══════════════════════════════════════════ */
+body.classic {
+  --cream:#faf6f0;--gold:#c4a882;--burgundy:#6b2d3e;--dark:#2a1a14;--muted:#9a7e6e;--blush:#e8d4c0;--rose:#c4907a;
 }
-body.theme-olive       { --cream:#f4f1e8; --gold:#8a8c5a; --burgundy:#4a5228; --dark:#2c2e1a; --muted:#6b6e3c; --blush:#d4d5a0; --rose:#8a8c5a; }
-body.theme-midnight    { --cream:#0d1117; --gold:#c4a882; --burgundy:#c4a882; --dark:#e8ecf4; --muted:#8896b3; --blush:#1a2332; --rose:#8896b3; }
-body.theme-dusty-rose  { --cream:#fdf6f3; --gold:#d4a0b0; --burgundy:#8a4a5a; --dark:#3a1a22; --muted:#b07a8a; --blush:#f0d8e0; --rose:#b07a8a; }
-body.theme-terracotta  { --cream:#f7f0e6; --gold:#c4703a; --burgundy:#8a4020; --dark:#2a1a0e; --muted:#a07060; --blush:#f0d8c0; --rose:#a07060; }
-body.theme-sidibou     { --cream:#eef4fa; --gold:#7aa8cc; --burgundy:#1e4a7a; --dark:#0d2440; --muted:#5a7d9e; --blush:#c4ddef; --rose:#7aa8cc; }
-body.theme-zellige     { --cream:#f9f3ea; --gold:#c8a050; --burgundy:#6b1a28; --dark:#2a0e14; --muted:#9a6040; --blush:#ead8b8; --rose:#c8a050; }
-body.theme-olivier     { --cream:#f5f7f0; --gold:#8a9e60; --burgundy:#3a5228; --dark:#1e2e14; --muted:#6a7e50; --blush:#d4ddb8; --rose:#b0c080; }
-body.theme-djerba      { --cream:#f0f8fa; --gold:#3a9aaa; --burgundy:#1a5a6a; --dark:#0e2e38; --muted:#4a7a88; --blush:#b8dde4; --rose:#5ab0be; }
-body.theme-tozeur      { --cream:#faf4e8; --gold:#c87840; --burgundy:#7a3818; --dark:#2e1808; --muted:#9a6848; --blush:#ead8b8; --rose:#d89060; }
-body.theme-carthage    { --cream:#f8f4fc; --gold:#9060c0; --burgundy:#4a1870; --dark:#200a38; --muted:#7050a0; --blush:#dcc8f0; --rose:#9060c0; }
-body.theme-kairouan    { --cream:#f0f8f0; --gold:#c0a030; --burgundy:#1a5a30; --dark:#0a2818; --muted:#3a7a48; --blush:#b8ddc0; --rose:#60a870; }
-body.theme-hammamet    { --cream:#f0f6fc; --gold:#4070b0; --burgundy:#1a4888; --dark:#0a2048; --muted:#4878a8; --blush:#b8cce8; --rose:#6090c8; }
-body.theme-medina      { --cream:#f8f0e0; --gold:#a07840; --burgundy:#5a3010; --dark:#281408; --muted:#806040; --blush:#e0cca0; --rose:#c09060; }
+body.classic.theme-olive       {--cream:#f4f1e8;--gold:#8a8c5a;--burgundy:#4a5228;--dark:#2c2e1a;--muted:#6b6e3c;--blush:#d4d5a0;--rose:#8a8c5a;}
+body.classic.theme-midnight    {--cream:#0d1117;--gold:#c4a882;--burgundy:#c4a882;--dark:#e8ecf4;--muted:#8896b3;--blush:#1a2332;--rose:#8896b3;}
+body.classic.theme-dusty-rose  {--cream:#fdf6f3;--gold:#d4a0b0;--burgundy:#8a4a5a;--dark:#3a1a22;--muted:#b07a8a;--blush:#f0d8e0;--rose:#b07a8a;}
+body.classic.theme-terracotta  {--cream:#f7f0e6;--gold:#c4703a;--burgundy:#8a4020;--dark:#2a1a0e;--muted:#a07060;--blush:#f0d8c0;--rose:#a07060;}
 
-body { background: var(--cream); min-height: 100vh; overflow-x: hidden; font-family: 'Cormorant Garamond', Georgia, serif; }
+body.classic { background:var(--cream); min-height:100vh; overflow-x:hidden; font-family:'Cormorant Garamond',Georgia,serif; color:var(--dark); }
 
-/* ── ENVELOPE ── */
-.env-screen { position:fixed; inset:0; z-index:99999; background:var(--cream); transition:opacity 0.55s ease; }
-.env-screen.gone { opacity:0; pointer-events:none; }
-.env-body { position:absolute; bottom:0; left:0; right:0; height:65%; background:var(--dark); z-index:1; transition:transform 2.2s cubic-bezier(0.76,0,0.24,1); transform-origin:bottom center; }
-.env-body.open { transform:translateY(100%); }
-.env-fold-left  { position:absolute; top:0; left:0; width:50%; height:100%; clip-path:polygon(0 0,100% 0,0 100%); background:var(--cream); }
-.env-fold-right { position:absolute; top:0; right:0; width:50%; height:100%; clip-path:polygon(100% 0,0 0,100% 100%); background:var(--cream); }
-.env-flap { position:absolute; top:0; left:0; right:0; height:55%; z-index:2; transform-origin:top center; transition:transform 2s cubic-bezier(0.76,0,0.24,1); }
-.env-flap.open { transform:rotateX(180deg); }
-.env-flap-shape { width:100%; height:100%; background:var(--blush); clip-path:polygon(0 0,100% 0,50% 100%); }
-.env-flap-deco { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:1; }
-.env-flap-corner { position:absolute; top:6px; width:clamp(50px,8vw,80px); height:clamp(50px,8vw,80px); pointer-events:none; z-index:2; }
-.env-flap-corner--left  { left:8px; }
-.env-flap-corner--right { right:8px; }
-.env-seal-wrap { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:10; cursor:pointer; transition:transform 0.3s ease,opacity 0.8s ease; display:flex; flex-direction:column; align-items:center; }
-.env-seal-wrap:hover { transform:translate(-50%,-50%) scale(1.06); }
-.env-seal-wrap.fade { opacity:0; pointer-events:none; }
-.env-seal-img { width:clamp(100px,18vw,160px); height:clamp(100px,18vw,160px); object-fit:contain; filter:drop-shadow(0 4px 16px rgba(0,0,0,0.2)); }
-.env-hint-wrap { display:flex; align-items:center; gap:14px; margin-top:22px; width:260px; }
-.env-hint-line { flex:1; height:0.5px; background:var(--gold); opacity:0.6; }
-.env-hint { font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); font-family:'Cormorant Garamond',serif; animation:envPulse 2s ease infinite; white-space:nowrap; }
-@keyframes envPulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
-
-@media (max-width:600px) {
-  .env-body { inset:0; width:100%; height:100%; transform-origin:left center; transition:transform 3s cubic-bezier(.76,0,.24,1); }
-  .env-body.open { transform:translateX(100%); }
-  .env-fold-left  { clip-path:polygon(0 0,100% 50%,0 100%); }
-  .env-fold-right { clip-path:polygon(100% 0,0 50%,100% 100%); }
-  .env-flap { top:0; left:0; width:50%; height:100%; transform-origin:left center; }
-  .env-flap.open { transform:translateX(-100%); }
-  .env-flap-shape { clip-path:polygon(0 0,100% 50%,0 100%); }
-  .env-flap-deco,.env-flap-corner { display:none; }
-  .env-hint-wrap { width:220px; }
+/* ENVELOPE */
+.env-screen{position:fixed;inset:0;z-index:99999;background:var(--cream);transition:opacity 0.55s ease;}
+.env-screen.gone{opacity:0;pointer-events:none;}
+.env-body{position:absolute;bottom:0;left:0;right:0;height:65%;background:var(--dark);z-index:1;transition:transform 2.2s cubic-bezier(0.76,0,0.24,1);transform-origin:bottom center;}
+.env-body.open{transform:translateY(100%);}
+.env-fold-left{position:absolute;top:0;left:0;width:50%;height:100%;clip-path:polygon(0 0,100% 0,0 100%);background:var(--cream);}
+.env-fold-right{position:absolute;top:0;right:0;width:50%;height:100%;clip-path:polygon(100% 0,0 0,100% 100%);background:var(--cream);}
+.env-flap{position:absolute;top:0;left:0;right:0;height:55%;z-index:2;transform-origin:top center;transition:transform 2s cubic-bezier(0.76,0,0.24,1);}
+.env-flap.open{transform:rotateX(180deg);}
+.env-flap-shape{width:100%;height:100%;background:var(--blush);clip-path:polygon(0 0,100% 0,50% 100%);}
+.env-flap-deco{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;}
+.env-flap-corner{position:absolute;top:6px;width:clamp(50px,8vw,80px);height:clamp(50px,8vw,80px);pointer-events:none;z-index:2;}
+.env-flap-corner--left{left:8px;}.env-flap-corner--right{right:8px;}
+.env-seal-wrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:10;cursor:pointer;transition:transform 0.3s,opacity 0.8s;display:flex;flex-direction:column;align-items:center;}
+.env-seal-wrap:hover{transform:translate(-50%,-50%) scale(1.06);}
+.env-seal-wrap.fade{opacity:0;pointer-events:none;}
+.env-seal-img{width:clamp(100px,18vw,160px);height:clamp(100px,18vw,160px);object-fit:contain;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.2));}
+.env-hint-wrap{display:flex;align-items:center;gap:14px;margin-top:22px;width:260px;}
+.env-hint-line{flex:1;height:0.5px;background:var(--gold);opacity:0.6;}
+.env-hint{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);font-family:'Cormorant Garamond',serif;animation:envPulse 2s ease infinite;white-space:nowrap;}
+@keyframes envPulse{0%,100%{opacity:0.4}50%{opacity:1}}
+@media(max-width:600px){
+  .env-body{inset:0;width:100%;height:100%;transform-origin:left center;transition:transform 3s cubic-bezier(.76,0,.24,1);}
+  .env-body.open{transform:translateX(100%);}
+  .env-fold-left{clip-path:polygon(0 0,100% 50%,0 100%);}
+  .env-fold-right{clip-path:polygon(100% 0,0 50%,100% 100%);}
+  .env-flap{top:0;left:0;width:50%;height:100%;transform-origin:left center;}
+  .env-flap.open{transform:translateX(-100%);}
+  .env-flap-shape{clip-path:polygon(0 0,100% 50%,0 100%);}
+  .env-flap-deco,.env-flap-corner{display:none;}
+  .env-hint-wrap{width:220px;}
 }
-
-/* ── CURTAINS ── */
-.curtain-wrap { position:fixed; inset:0; z-index:99999; pointer-events:none; }
-.curtain { position:absolute; top:0; bottom:0; width:50.5%; background:var(--dark); transition:transform 1.6s cubic-bezier(0.76,0,0.24,1); overflow:hidden; }
-.curtain-left  { left:0; }
-.curtain-right { right:0; }
-.curtain-left.open  { transform:translateX(-100%); }
-.curtain-right.open { transform:translateX(100%); }
-.curtain::before { content:''; position:absolute; inset:0; background-image:repeating-linear-gradient(90deg,transparent,transparent 18px,rgba(255,255,255,0.02) 18px,rgba(255,255,255,0.02) 19px); }
-.curtain-left::after  { content:''; position:absolute; right:0; top:0; bottom:0; width:1px; background:linear-gradient(to bottom,transparent,var(--gold),transparent); opacity:0.6; }
-.curtain-right::after { content:''; position:absolute; left:0; top:0; bottom:0; width:1px; background:linear-gradient(to bottom,transparent,var(--gold),transparent); opacity:0.6; }
-
-/* ── CONFETTI ── */
-.confetti-wrap { position:fixed; inset:0; pointer-events:none; z-index:5; overflow:hidden; }
-.conf-item { position:absolute; top:-30px; opacity:0; animation:confFall linear infinite; }
-@keyframes confFall { 0%{transform:translateY(0) rotate(0deg);opacity:0} 10%{opacity:0.7} 90%{opacity:0.4} 100%{transform:translateY(105vh) rotate(480deg);opacity:0} }
-
-/* ── PAGE ── */
-.page { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding:80px 40px; }
-.floral-top { width:280px; margin-bottom:32px; opacity:0; animation:fadeIn 1.2s ease 2.0s forwards; }
-.eyebrow { font-size:10px; letter-spacing:0.32em; text-transform:uppercase; color:var(--muted); font-family:'Cormorant Garamond',serif; font-weight:300; opacity:0; animation:fadeUp 0.9s ease 2.2s forwards; margin-bottom:20px; text-align:center; }
-.names-wrap { display:flex; flex-direction:column; align-items:center; margin-bottom:6px; }
-.name { font-family:'Playfair Display',serif; font-size:58px; font-weight:400; color:var(--dark); line-height:1.1; opacity:0; text-align:center; }
-.name-1 { animation:fadeRight 1s ease 2.4s forwards; }
-.name-2 { animation:fadeLeft  1s ease 2.4s forwards; }
-.amp { font-family:'Playfair Display',serif; font-style:italic; font-size:52px; color:var(--gold); opacity:0; animation:fadeIn 0.8s ease 2.7s forwards; line-height:1.1; text-align:center; }
-.rule { display:flex; align-items:center; gap:12px; margin:28px 0; opacity:0; animation:fadeIn 1s ease 2.9s forwards; }
-.rule-line    { height:0.5px; width:80px; background:var(--gold); opacity:0.6; }
-.rule-diamond { width:5px; height:5px; background:var(--gold); transform:rotate(45deg); opacity:0.8; }
-.date  { font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:var(--burgundy); font-family:'Cormorant Garamond',serif; opacity:0; animation:fadeUp 0.8s ease 3.1s forwards; margin-bottom:14px; text-align:center; }
-.venue { font-family:'Playfair Display',serif; font-style:italic; font-size:24px; color:var(--muted); opacity:0; animation:fadeUp 0.8s ease 3.3s forwards; margin-bottom:6px; text-align:center; }
-.time  { font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:var(--rose); font-family:'Cormorant Garamond',serif; opacity:0; animation:fadeUp 0.8s ease 3.5s forwards; margin-bottom:40px; text-align:center; }
-.countdown { display:flex; align-items:flex-start; opacity:0; animation:fadeUp 0.8s ease 3.7s forwards; margin-bottom:44px; }
-.cd-item { display:flex; flex-direction:column; align-items:center; padding:0 20px; }
-.cd-item + .cd-item { border-left:0.5px solid var(--blush); }
-.cd-num   { font-family:'Playfair Display',serif; font-size:36px; color:var(--dark); line-height:1; margin-bottom:4px; }
-.cd-label { font-size:9px; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); font-family:'Cormorant Garamond',serif; }
-.section-divider { width:100%; max-width:500px; display:flex; align-items:center; gap:16px; margin:48px 0 40px; opacity:0; animation:fadeIn 1s ease 4.0s forwards; }
-.section-divider-line  { flex:1; height:0.5px; background:var(--gold); opacity:0.4; }
-.section-divider-label { font-size:9px; letter-spacing:0.28em; text-transform:uppercase; color:var(--muted); font-family:'Cormorant Garamond',serif; white-space:nowrap; }
-.timeline { width:100%; max-width:480px; display:flex; flex-direction:column; opacity:0; animation:fadeUp 0.8s ease 4.2s forwards; margin-bottom:16px; position:relative; }
-.timeline::before { content:''; position:absolute; top:24px; left:31px; width:0.5px; bottom:24px; background:var(--blush); z-index:0; }
-.timeline-item { display:flex; align-items:flex-start; gap:20px; padding:16px 0; position:relative; }
-.timeline-left { display:flex; flex-direction:column; align-items:center; gap:6px; min-width:62px; flex-shrink:0; }
-.timeline-time  { font-size:10px; letter-spacing:0.1em; color:var(--burgundy); font-family:'Cormorant Garamond',serif; white-space:nowrap; }
-.timeline-dot   { width:10px; height:10px; border-radius:50%; background:var(--cream); border:1px solid var(--gold); flex-shrink:0; position:relative; z-index:1; }
-.timeline-dot.active { background:var(--gold); }
-.timeline-right { padding-top:2px; }
-.timeline-title { font-family:'Playfair Display',serif; font-size:16px; color:var(--dark); margin-bottom:2px; }
-.timeline-desc  { font-size:12px; color:var(--muted); font-family:'Cormorant Garamond',serif; font-style:italic; }
-.couple-story { width:100%; max-width:460px; text-align:center; opacity:0; animation:fadeUp 0.8s ease 4.4s forwards; margin-bottom:16px; }
-.couple-story-text { font-family:'Playfair Display',serif; font-style:italic; font-size:17px; color:var(--muted); line-height:1.8; }
-.polaroids { width:100%; max-width:500px; position:relative; height:320px; opacity:0; animation:fadeIn 1s ease 4.6s forwards; margin-bottom:40px; }
-.polaroid { position:absolute; background:white; padding:10px 10px 32px; box-shadow:0 4px 20px rgba(0,0,0,0.10); }
-.polaroid:nth-child(1) { width:160px; height:200px; left:20px; top:30px; transform:rotate(-4deg); animation:polaroidIn 0.6s ease 4.8s both; }
-.polaroid:nth-child(2) { width:180px; height:220px; left:50%; top:10px; transform:translateX(-50%) rotate(1.5deg); animation:polaroidIn 0.6s ease 5.0s both; z-index:2; }
-.polaroid:nth-child(3) { width:155px; height:195px; right:20px; top:40px; transform:rotate(5deg); animation:polaroidIn 0.6s ease 5.2s both; }
-@keyframes polaroidIn { from{opacity:0;transform:translateY(20px)} to{opacity:1} }
-.polaroid-placeholder { width:100%; height:calc(100% - 32px); background:var(--blush); display:flex; align-items:center; justify-content:center; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:11px; color:var(--muted); opacity:0.6; }
-.polaroid-caption { text-align:center; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:11px; color:var(--muted); margin-top:6px; }
-@media (max-width:600px) {
-  .polaroids { height:auto; display:flex; flex-direction:column; align-items:center; gap:32px; padding:20px 0; }
-  .polaroid:nth-child(1) { position:relative!important; left:auto!important; top:auto!important; width:200px!important; height:240px!important; transform:rotate(-4deg)!important; }
-  .polaroid:nth-child(2) { position:relative!important; left:auto!important; top:auto!important; transform:rotate(1.5deg)!important; width:200px!important; height:240px!important; }
-  .polaroid:nth-child(3) { position:relative!important; right:auto!important; top:auto!important; width:200px!important; height:240px!important; transform:rotate(5deg)!important; }
+/* CURTAINS */
+.curtain-wrap{position:fixed;inset:0;z-index:99999;pointer-events:none;}
+.curtain{position:absolute;top:0;bottom:0;width:50.5%;background:var(--dark);transition:transform 1.6s cubic-bezier(0.76,0,0.24,1);overflow:hidden;}
+.curtain-left{left:0;}.curtain-right{right:0;}
+.curtain-left.open{transform:translateX(-100%);}.curtain-right.open{transform:translateX(100%);}
+.curtain::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,transparent,transparent 18px,rgba(255,255,255,0.02) 18px,rgba(255,255,255,0.02) 19px);}
+.curtain-left::after{content:'';position:absolute;right:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,var(--gold),transparent);opacity:0.6;}
+.curtain-right::after{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,var(--gold),transparent);opacity:0.6;}
+/* CONFETTI */
+.confetti-wrap{position:fixed;inset:0;pointer-events:none;z-index:5;overflow:hidden;}
+.conf-item{position:absolute;top:-30px;opacity:0;animation:confFall linear infinite;}
+@keyframes confFall{0%{transform:translateY(0) rotate(0deg);opacity:0}10%{opacity:0.7}90%{opacity:0.4}100%{transform:translateY(105vh) rotate(480deg);opacity:0}}
+/* CLASSIC PAGE */
+.c-page{min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:80px 40px;}
+.c-floral{width:280px;margin-bottom:32px;opacity:0;animation:fadeIn 1.2s ease 2.0s forwards;}
+.c-eyebrow{font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:var(--muted);font-family:'Cormorant Garamond',serif;opacity:0;animation:fadeUp 0.9s ease 2.2s forwards;margin-bottom:20px;text-align:center;}
+.c-names{display:flex;flex-direction:column;align-items:center;margin-bottom:6px;}
+.c-name{font-family:'Playfair Display',serif;font-size:58px;font-weight:400;color:var(--dark);line-height:1.1;opacity:0;text-align:center;}
+.c-name-1{animation:fadeRight 1s ease 2.4s forwards;}
+.c-name-2{animation:fadeLeft 1s ease 2.4s forwards;}
+.c-amp{font-family:'Playfair Display',serif;font-style:italic;font-size:52px;color:var(--gold);opacity:0;animation:fadeIn 0.8s ease 2.7s forwards;line-height:1.1;text-align:center;}
+.c-rule{display:flex;align-items:center;gap:12px;margin:28px 0;opacity:0;animation:fadeIn 1s ease 2.9s forwards;}
+.c-rule-line{height:0.5px;width:80px;background:var(--gold);opacity:0.6;}
+.c-rule-diamond{width:5px;height:5px;background:var(--gold);transform:rotate(45deg);opacity:0.8;}
+.c-date{font-size:11px;letter-spacing:0.28em;text-transform:uppercase;color:var(--burgundy);font-family:'Cormorant Garamond',serif;opacity:0;animation:fadeUp 0.8s ease 3.1s forwards;margin-bottom:14px;text-align:center;}
+.c-venue{font-family:'Playfair Display',serif;font-style:italic;font-size:24px;color:var(--muted);opacity:0;animation:fadeUp 0.8s ease 3.3s forwards;margin-bottom:6px;text-align:center;}
+.c-time{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--rose);font-family:'Cormorant Garamond',serif;opacity:0;animation:fadeUp 0.8s ease 3.5s forwards;margin-bottom:40px;text-align:center;}
+.c-countdown{display:flex;align-items:flex-start;opacity:0;animation:fadeUp 0.8s ease 3.7s forwards;margin-bottom:44px;}
+.c-cd-item{display:flex;flex-direction:column;align-items:center;padding:0 20px;}
+.c-cd-item+.c-cd-item{border-left:0.5px solid var(--blush);}
+.c-cd-num{font-family:'Playfair Display',serif;font-size:36px;color:var(--dark);line-height:1;margin-bottom:4px;}
+.c-cd-label{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);font-family:'Cormorant Garamond',serif;}
+.c-divider{width:100%;max-width:500px;display:flex;align-items:center;gap:16px;margin:48px 0 40px;opacity:0;animation:fadeIn 1s ease 4.0s forwards;}
+.c-divider-line{flex:1;height:0.5px;background:var(--gold);opacity:0.4;}
+.c-divider-label{font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--muted);font-family:'Cormorant Garamond',serif;white-space:nowrap;}
+.c-timeline{width:100%;max-width:480px;display:flex;flex-direction:column;opacity:0;animation:fadeUp 0.8s ease 4.2s forwards;margin-bottom:16px;position:relative;}
+.c-timeline::before{content:'';position:absolute;top:24px;left:31px;width:0.5px;bottom:24px;background:var(--blush);}
+.c-tl-item{display:flex;align-items:flex-start;gap:20px;padding:16px 0;}
+.c-tl-left{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:62px;flex-shrink:0;}
+.c-tl-time{font-size:10px;letter-spacing:0.1em;color:var(--burgundy);font-family:'Cormorant Garamond',serif;white-space:nowrap;}
+.c-tl-dot{width:10px;height:10px;border-radius:50%;background:var(--cream);border:1px solid var(--gold);flex-shrink:0;position:relative;z-index:1;}
+.c-tl-dot.active{background:var(--gold);}
+.c-tl-title{font-family:'Playfair Display',serif;font-size:16px;color:var(--dark);margin-bottom:2px;}
+.c-tl-desc{font-size:12px;color:var(--muted);font-family:'Cormorant Garamond',serif;font-style:italic;}
+.c-story{width:100%;max-width:460px;text-align:center;opacity:0;animation:fadeUp 0.8s ease 4.4s forwards;margin-bottom:16px;}
+.c-story-text{font-family:'Playfair Display',serif;font-style:italic;font-size:17px;color:var(--muted);line-height:1.8;}
+.c-polaroids{width:100%;max-width:500px;position:relative;height:320px;opacity:0;animation:fadeIn 1s ease 4.6s forwards;margin-bottom:40px;}
+.c-polaroid{position:absolute;background:white;padding:10px 10px 32px;box-shadow:0 4px 20px rgba(0,0,0,0.10);}
+.c-polaroid:nth-child(1){width:160px;height:200px;left:20px;top:30px;transform:rotate(-4deg);animation:polaroidIn 0.6s ease 4.8s both;}
+.c-polaroid:nth-child(2){width:180px;height:220px;left:50%;top:10px;transform:translateX(-50%) rotate(1.5deg);animation:polaroidIn 0.6s ease 5.0s both;z-index:2;}
+.c-polaroid:nth-child(3){width:155px;height:195px;right:20px;top:40px;transform:rotate(5deg);animation:polaroidIn 0.6s ease 5.2s both;}
+@keyframes polaroidIn{from{opacity:0;transform:translateY(20px)}to{opacity:1}}
+.c-polaroid-ph{width:100%;height:calc(100% - 32px);background:var(--blush);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11px;color:var(--muted);opacity:0.6;}
+.c-polaroid-cap{text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11px;color:var(--muted);margin-top:6px;}
+@media(max-width:600px){
+  .c-polaroids{height:auto;display:flex;flex-direction:column;align-items:center;gap:32px;padding:20px 0;}
+  .c-polaroid:nth-child(1){position:relative!important;left:auto!important;top:auto!important;width:200px!important;height:240px!important;transform:rotate(-4deg)!important;}
+  .c-polaroid:nth-child(2){position:relative!important;left:auto!important;top:auto!important;transform:rotate(1.5deg)!important;width:200px!important;height:240px!important;}
+  .c-polaroid:nth-child(3){position:relative!important;right:auto!important;top:auto!important;width:200px!important;height:240px!important;transform:rotate(5deg)!important;}
 }
-.location-wrap { display:flex; flex-direction:column; align-items:center; text-align:center; margin:40px 0; opacity:0; animation:fadeUp 0.8s ease 5.4s forwards; }
-.location-label   { font-size:9px; letter-spacing:0.28em; text-transform:uppercase; color:var(--muted); font-family:'Cormorant Garamond',serif; margin-bottom:10px; }
-.location-name    { font-family:'Playfair Display',serif; font-size:26px; color:var(--dark); margin-bottom:6px; }
-.location-address { font-size:13px; color:var(--muted); font-family:'Cormorant Garamond',serif; margin-bottom:20px; font-style:italic; }
-.floral-bottom { width:200px; margin-bottom:36px; opacity:0; animation:fadeIn 1s ease 5.6s forwards; }
-.btns { display:flex; gap:16px; flex-wrap:wrap; justify-content:center; opacity:0; animation:fadeUp 0.8s ease 5.6s forwards; }
-.btn-outline { border:0.5px solid var(--burgundy); color:var(--burgundy); background:transparent; padding:12px 32px; font-size:10px; letter-spacing:0.22em; text-transform:uppercase; font-family:'Cormorant Garamond',serif; border-radius:30px; cursor:pointer; text-decoration:none; display:inline-block; transition:background 0.3s,color 0.3s; }
-.btn-outline:hover { background:var(--burgundy); color:var(--cream); }
-.btn-fill { border:0.5px solid var(--burgundy); color:var(--cream); background:var(--burgundy); padding:12px 32px; font-size:10px; letter-spacing:0.22em; text-transform:uppercase; font-family:'Cormorant Garamond',serif; border-radius:30px; cursor:pointer; text-decoration:none; display:inline-block; transition:opacity 0.3s; }
-.btn-fill:hover { opacity:0.85; }
-.replay { position:fixed; bottom:20px; right:20px; background:var(--burgundy); color:var(--cream); border:none; border-radius:30px; padding:9px 18px; font-size:11px; letter-spacing:0.1em; font-family:'Cormorant Garamond',serif; cursor:pointer; z-index:200; opacity:0; animation:fadeIn 0.5s ease 6s forwards; }
-@keyframes fadeUp    { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
-@keyframes fadeIn    { from{opacity:0} to{opacity:1} }
-@keyframes fadeRight { from{opacity:0;transform:translateX(-28px)} to{opacity:1;transform:translateX(0)} }
-@keyframes fadeLeft  { from{opacity:0;transform:translateX(28px)}  to{opacity:1;transform:translateX(0)} }
+.c-loc{display:flex;flex-direction:column;align-items:center;text-align:center;margin:40px 0;opacity:0;animation:fadeUp 0.8s ease 5.4s forwards;}
+.c-loc-label{font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--muted);font-family:'Cormorant Garamond',serif;margin-bottom:10px;}
+.c-loc-name{font-family:'Playfair Display',serif;font-size:26px;color:var(--dark);margin-bottom:6px;}
+.c-loc-addr{font-size:13px;color:var(--muted);font-family:'Cormorant Garamond',serif;margin-bottom:20px;font-style:italic;}
+.c-floral-b{width:200px;margin-bottom:36px;opacity:0;animation:fadeIn 1s ease 5.6s forwards;}
+.c-btns{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;opacity:0;animation:fadeUp 0.8s ease 5.6s forwards;}
+.c-btn-out{border:0.5px solid var(--burgundy);color:var(--burgundy);background:transparent;padding:12px 32px;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;font-family:'Cormorant Garamond',serif;border-radius:30px;cursor:pointer;text-decoration:none;display:inline-block;transition:background 0.3s,color 0.3s;}
+.c-btn-out:hover{background:var(--burgundy);color:var(--cream);}
+.c-replay{position:fixed;bottom:20px;right:20px;background:var(--burgundy);color:var(--cream);border:none;border-radius:30px;padding:9px 18px;font-size:11px;letter-spacing:0.1em;font-family:'Cormorant Garamond',serif;cursor:pointer;z-index:200;opacity:0;animation:fadeIn 0.5s ease 6s forwards;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeRight{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:translateX(0)}}
+@keyframes fadeLeft{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:translateX(0)}}
+
+/* ══════════════════════════════════════════
+   PREMIUM SHARED
+══════════════════════════════════════════ */
+body.premium{overflow-x:hidden;font-family:'Cormorant Garamond',serif;}
+.p-back{position:fixed;top:20px;left:20px;z-index:999;background:rgba(255,255,255,0.4);border:0.5px solid rgba(0,0,0,0.15);color:inherit;text-decoration:none;padding:8px 18px;border-radius:30px;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;}
+.p-replay{position:fixed;bottom:20px;right:20px;border:none;border-radius:30px;padding:9px 18px;font-size:11px;letter-spacing:0.1em;font-family:'Cormorant Garamond',serif;cursor:pointer;z-index:200;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.fu{opacity:0;animation:fadeUp 0.9s ease forwards;}
+.fu1{animation-delay:0.1s}.fu2{animation-delay:0.3s}.fu3{animation-delay:0.5s}.fu4{animation-delay:0.7s}.fu5{animation-delay:0.9s}.fu6{animation-delay:1.1s}
+
+/* ── SIDI BOU SAID ── */
+body.theme-sidibou{background:oklch(0.985 0.005 90);color:oklch(0.32 0.13 245);}
+.sb-hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 24px;overflow:hidden;text-align:center;}
+.sb-hero svg.arch{position:absolute;inset:0;margin:auto;height:90%;width:auto;opacity:0.07;}
+.sb-bismillah{font-family:'Aref Ruqaa',serif;font-size:clamp(22px,4vw,36px);direction:rtl;line-height:1.6;}
+.sb-eyebrow{font-size:10px;letter-spacing:0.5em;text-transform:uppercase;opacity:0.7;margin-top:20px;}
+.sb-invite{font-size:clamp(16px,2vw,22px);font-style:italic;margin-top:28px;}
+.sb-name{font-family:'Playfair Display',serif;font-size:clamp(52px,10vw,90px);font-weight:300;line-height:1.05;}
+.sb-amp{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(40px,8vw,70px);color:oklch(0.45 0.13 240);margin:8px 0;display:block;}
+.sb-arabic{font-family:'Scheherazade New',serif;font-size:clamp(18px,3vw,28px);direction:rtl;margin-top:24px;}
+.sb-rule{height:0.5px;background:currentColor;opacity:0.3;margin:20px auto;width:100px;}
+.sb-details{border-top:0.5px solid oklch(0.45 0.13 240 / 0.2);background:white;padding:80px 24px;text-align:center;color:oklch(0.32 0.13 245);}
+.sb-day-label{font-size:10px;letter-spacing:0.4em;text-transform:uppercase;opacity:0.6;}
+.sb-day-date{font-family:'Playfair Display',serif;font-size:clamp(48px,8vw,72px);font-weight:300;margin-top:16px;}
+.sb-venues{display:grid;gap:32px;grid-template-columns:1fr 1fr;max-width:600px;margin:40px auto 0;}
+@media(max-width:560px){.sb-venues{grid-template-columns:1fr;}}
+.sb-venue-label{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;opacity:0.6;}
+.sb-venue-time{font-family:'Playfair Display',serif;font-size:24px;font-style:italic;margin-top:10px;}
+.sb-venue-place{font-size:14px;line-height:1.6;margin-top:6px;}
+.sb-cd-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:420px;margin:48px auto 0;}
+.sb-cd-item{text-align:center;}
+.sb-cd-num{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,44px);font-weight:300;line-height:1;}
+.sb-cd-label{font-size:9px;letter-spacing:0.28em;text-transform:uppercase;opacity:0.6;margin-top:6px;}
+.sb-rsvp{background:oklch(0.32 0.13 245);padding:80px 24px;text-align:center;color:white;}
+.sb-rsvp-quote{font-family:'Playfair Display',serif;font-size:clamp(18px,3vw,26px);font-style:italic;}
+.sb-rsvp-btn{margin-top:36px;display:inline-block;border:0.5px solid rgba(255,255,255,0.4);padding:12px 36px;border-radius:30px;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;text-decoration:none;color:white;transition:background 0.3s,color 0.3s;}
+.sb-rsvp-btn:hover{background:white;color:oklch(0.32 0.13 245);}
+
+/* ── ZELLIGE ROYAL ── */
+body.theme-zellige{background:oklch(0.96 0.02 85);color:oklch(0.18 0.03 25);}
+.zr-top-bar{height:8px;background:linear-gradient(90deg,oklch(0.35 0.13 20),oklch(0.78 0.13 80),oklch(0.35 0.13 20));}
+.zr-hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 24px;overflow:hidden;}
+.zr-frame{position:relative;z-index:1;max-width:580px;width:100%;border:2px solid oklch(0.62 0.14 70);background:oklch(0.96 0.02 85 / 0.95);padding:56px 48px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.15);}
+.zr-corner{position:absolute;width:24px;height:24px;}
+.zr-corner-tl{top:-3px;left:-3px;border-top:2px solid oklch(0.35 0.13 20);border-left:2px solid oklch(0.35 0.13 20);}
+.zr-corner-tr{top:-3px;right:-3px;border-top:2px solid oklch(0.35 0.13 20);border-right:2px solid oklch(0.35 0.13 20);}
+.zr-corner-bl{bottom:-3px;left:-3px;border-bottom:2px solid oklch(0.35 0.13 20);border-left:2px solid oklch(0.35 0.13 20);}
+.zr-corner-br{bottom:-3px;right:-3px;border-bottom:2px solid oklch(0.35 0.13 20);border-right:2px solid oklch(0.35 0.13 20);}
+.zr-bismillah{font-family:'Aref Ruqaa',serif;font-size:clamp(28px,5vw,44px);direction:rtl;line-height:1.6;color:oklch(0.35 0.13 20);}
+.zr-gold-rule{display:flex;align-items:center;justify-content:center;gap:12px;margin:20px 0;}
+.zr-gold-line{height:0.5px;width:64px;background:oklch(0.62 0.14 70);}
+.zr-eyebrow{font-size:10px;letter-spacing:0.4em;text-transform:uppercase;color:oklch(0.35 0.13 20);}
+.zr-subtitle{font-size:16px;font-style:italic;margin-top:24px;color:oklch(0.35 0.13 20);}
+.zr-name{font-family:'Playfair Display',serif;font-size:clamp(44px,8vw,64px);font-weight:500;color:oklch(0.35 0.13 20);}
+.zr-amp{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(32px,6vw,48px);color:oklch(0.62 0.14 70);margin:8px 0;display:block;}
+.zr-arabic{font-family:'Scheherazade New',serif;font-size:clamp(22px,4vw,32px);direction:rtl;color:oklch(0.35 0.13 20);margin-top:16px;}
+.zr-details{background:oklch(0.35 0.13 20);padding:80px 24px;color:oklch(0.96 0.02 85);}
+.zr-details-title{font-family:'Playfair Display',serif;font-size:36px;font-style:italic;color:oklch(0.78 0.13 80);text-align:center;margin-bottom:48px;}
+.zr-prog-item{display:grid;grid-template-columns:90px 1fr;gap:24px;border-bottom:0.5px solid oklch(0.78 0.13 80 / 0.3);padding-bottom:20px;margin-bottom:20px;max-width:600px;margin-left:auto;margin-right:auto;}
+.zr-prog-time{font-family:'Playfair Display',serif;font-size:22px;color:oklch(0.78 0.13 80);text-align:right;}
+.zr-prog-title{font-family:'Playfair Display',serif;font-size:18px;}
+.zr-prog-place{font-size:13px;opacity:0.7;margin-top:4px;}
+.zr-bar{height:40px;background:repeating-linear-gradient(45deg,oklch(0.62 0.14 70),oklch(0.62 0.14 70) 2px,oklch(0.35 0.13 20) 2px,oklch(0.35 0.13 20) 14px);opacity:0.6;}
+.zr-rsvp{background:oklch(0.96 0.02 85);padding:60px 24px;text-align:center;}
+.zr-rsvp-btn{display:inline-block;border:0.5px solid oklch(0.35 0.13 20 / 0.4);padding:12px 36px;border-radius:30px;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;text-decoration:none;color:oklch(0.35 0.13 20);transition:background 0.3s,color 0.3s;}
+.zr-rsvp-btn:hover{background:oklch(0.35 0.13 20);color:oklch(0.96 0.02 85);}
+
+/* ── JASMIN OLIVIER ── */
+body.theme-olivier{background:oklch(0.97 0.015 95);color:oklch(0.2 0.02 130);}
+.jo-hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:80px 24px;overflow:hidden;}
+.jo-olive{position:absolute;top:50%;transform:translateY(-50%);height:80%;width:auto;opacity:0.5;color:oklch(0.62 0.05 130);}
+.jo-olive-l{left:0;}.jo-olive-r{right:0;transform:translateY(-50%) scaleX(-1);}
+.jo-content{position:relative;z-index:1;max-width:560px;text-align:center;}
+.jo-bismillah{font-family:'Aref Ruqaa',serif;font-size:clamp(22px,4vw,34px);direction:rtl;color:oklch(0.38 0.05 130);}
+.jo-line{height:0.5px;width:64px;background:oklch(0.62 0.05 130);margin:20px auto;}
+.jo-save{font-size:10px;letter-spacing:0.5em;text-transform:uppercase;color:oklch(0.38 0.05 130);}
+.jo-name{font-family:'Playfair Display',serif;font-size:clamp(56px,12vw,96px);font-weight:200;line-height:1;}
+.jo-amp{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(40px,8vw,72px);color:oklch(0.88 0.04 30);margin:12px 0;display:block;}
+.jo-date-line{font-size:13px;letter-spacing:0.4em;text-transform:uppercase;margin-top:32px;}
+.jo-story{background:oklch(0.95 0.02 95);padding:100px 24px;text-align:center;}
+.jo-story-text{max-width:560px;margin:0 auto;font-size:15px;line-height:1.9;color:oklch(0.38 0.05 130);}
+.jo-schedule{padding:100px 24px;}
+.jo-sched-label{font-size:10px;letter-spacing:0.4em;text-transform:uppercase;color:oklch(0.38 0.05 130);text-align:center;margin-bottom:60px;}
+.jo-sched-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:720px;margin:0 auto;}
+@media(max-width:600px){.jo-sched-grid{grid-template-columns:1fr;max-width:300px;}}
+.jo-sched-item{text-align:center;}
+.jo-sched-time{font-family:'Playfair Display',serif;font-size:44px;font-weight:300;color:oklch(0.62 0.05 130);}
+.jo-sched-title{font-size:11px;letter-spacing:0.3em;text-transform:uppercase;margin-top:12px;}
+.jo-sched-place{font-size:13px;color:oklch(0.38 0.05 130);margin-top:6px;}
+.jo-rsvp{background:oklch(0.38 0.05 130);padding:80px 24px;text-align:center;color:oklch(0.97 0.015 95);}
+.jo-rsvp-text{font-family:'Playfair Display',serif;font-size:clamp(20px,3vw,30px);font-style:italic;}
+.jo-rsvp-btn{margin-top:28px;display:inline-block;border:0.5px solid oklch(0.97 0.015 95 / 0.6);padding:12px 40px;font-size:10px;letter-spacing:0.4em;text-transform:uppercase;text-decoration:none;color:oklch(0.97 0.015 95);transition:background 0.3s,color 0.3s;}
+.jo-rsvp-btn:hover{background:oklch(0.97 0.015 95);color:oklch(0.38 0.05 130);}
+
+/* ── DJERBA LUNAIRE ── */
+body.theme-djerba{background:oklch(0.985 0.005 200);color:oklch(0.22 0.05 220);}
+.dj-hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 24px;overflow:hidden;text-align:center;}
+.dj-blob1{position:absolute;width:384px;height:384px;border-radius:50%;background:oklch(0.65 0.12 195);right:-128px;top:-128px;opacity:0.1;}
+.dj-blob2{position:absolute;width:288px;height:288px;border-radius:50%;background:oklch(0.72 0.10 180);left:-80px;bottom:0;opacity:0.1;}
+.dj-eyebrow{font-size:10px;letter-spacing:0.5em;text-transform:uppercase;color:oklch(0.55 0.10 195);opacity:0.7;}
+.dj-rule{height:0.5px;background:oklch(0.55 0.10 195);width:80px;margin:24px auto;opacity:0.4;}
+.dj-invite{font-size:clamp(16px,2.5vw,22px);font-style:italic;margin-top:24px;}
+.dj-name{font-family:'Playfair Display',serif;font-size:clamp(52px,10vw,88px);font-weight:300;color:oklch(0.35 0.08 220);}
+.dj-amp{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(40px,8vw,66px);color:oklch(0.55 0.10 195);margin:8px 0;display:block;}
+.dj-arabic{font-family:'Scheherazade New',serif;font-size:clamp(18px,3vw,26px);direction:rtl;margin-top:20px;color:oklch(0.35 0.08 220);}
+.dj-details{background:white;padding:80px 24px;text-align:center;color:oklch(0.22 0.05 220);}
+.dj-day-label{font-size:10px;letter-spacing:0.4em;text-transform:uppercase;color:oklch(0.55 0.10 195);opacity:0.6;}
+.dj-day-date{font-family:'Playfair Display',serif;font-size:clamp(48px,8vw,72px);font-weight:300;color:oklch(0.35 0.08 220);margin-top:12px;}
+.dj-venues{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:720px;margin:40px auto 0;}
+@media(max-width:600px){.dj-venues{grid-template-columns:1fr;max-width:300px;}}
+.dj-venue-label{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:oklch(0.55 0.10 195);opacity:0.6;}
+.dj-venue-time{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;color:oklch(0.35 0.08 220);margin-top:10px;}
+.dj-venue-place{font-size:13px;color:oklch(0.45 0.05 220);margin-top:6px;line-height:1.5;}
+.dj-rsvp{background:oklch(0.22 0.05 220);padding:80px 24px;text-align:center;color:white;}
+.dj-rsvp-quote{font-family:'Playfair Display',serif;font-size:clamp(18px,3vw,24px);font-style:italic;color:oklch(0.85 0.03 195);}
+.dj-rsvp-btn{margin-top:36px;display:inline-block;border:0.5px solid rgba(255,255,255,0.3);padding:12px 36px;border-radius:30px;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;text-decoration:none;color:rgba(255,255,255,0.8);transition:background 0.3s,color 0.3s;}
+.dj-rsvp-btn:hover{background:white;color:oklch(0.22 0.05 220);}
+
+/* ── TOZEUR SAHARI ── */
+body.theme-tozeur{background:oklch(0.96 0.03 60);color:oklch(0.25 0.05 50);}
+.tz-hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 24px;overflow:hidden;text-align:center;}
+.tz-grad-t{position:absolute;inset-inline:0;top:0;height:160px;background:linear-gradient(to bottom,oklch(0.92 0.05 55),transparent);}
+.tz-grad-b{position:absolute;inset-inline:0;bottom:0;height:160px;background:linear-gradient(to top,oklch(0.92 0.05 55),transparent);}
+.tz-bismillah{font-family:'Aref Ruqaa',serif;font-size:clamp(22px,4vw,34px);direction:rtl;color:oklch(0.40 0.10 50);}
+.tz-rule{height:0.5px;background:oklch(0.50 0.10 50);width:80px;margin:20px auto;opacity:0.4;}
+.tz-eyebrow{font-size:10px;letter-spacing:0.5em;text-transform:uppercase;color:oklch(0.50 0.10 50);opacity:0.7;}
+.tz-invite{font-size:clamp(16px,2.5vw,22px);font-style:italic;margin-top:24px;}
+.tz-name{font-family:'Playfair Display',serif;font-size:clamp(52px,10vw,88px);font-weight:300;color:oklch(0.35 0.06 50);}
+.tz-amp{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(40px,8vw,66px);color:oklch(0.60 0.10 45);margin:8px 0;display:block;}
+.tz-arabic{font-family:'Scheherazade New',serif;font-size:clamp(18px,3vw,26px);direction:rtl;color:oklch(0.35 0.06 50);margin-top:20px;}
+.tz-details{background:oklch(0.98 0.02 60);padding:80px 24px;text-align:center;color:oklch(0.25 0.05 50);}
+.tz-day-label{font-size:10px;letter-spacing:0.4em;text-transform:uppercase;color:oklch(0.50 0.08 50);opacity:0.6;}
+.tz-day-date{font-family:'Playfair Display',serif;font-size:clamp(48px,8vw,72px);font-weight:300;color:oklch(0.30 0.06 50);margin-top:12px;}
+.tz-venues{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:600px;margin:40px auto 0;}
+@media(max-width:560px){.tz-venues{grid-template-columns:1fr;}}
+.tz-venue-card{border:0.5px solid oklch(0.65 0.08 50 / 0.15);background:oklch(0.99 0.01 60);border-radius:12px;padding:28px;}
+.tz-venue-label{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:oklch(0.50 0.08 50);opacity:0.6;}
+.tz-venue-time{font-family:'Playfair Display',serif;font-size:28px;font-style:italic;color:oklch(0.30 0.06 50);margin-top:12px;}
+.tz-venue-place{font-size:13px;color:oklch(0.45 0.04 50);margin-top:8px;line-height:1.5;}
+.tz-cd-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:420px;margin:48px auto 0;}
+.tz-cd-item{text-align:center;}
+.tz-cd-num{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,44px);font-weight:300;color:oklch(0.60 0.10 50);line-height:1;}
+.tz-cd-label{font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:oklch(0.50 0.08 50);opacity:0.7;margin-top:6px;}
+.tz-rsvp{background:oklch(0.30 0.06 50);padding:80px 24px;text-align:center;color:oklch(0.96 0.03 60);}
+.tz-rsvp-quote{font-family:'Playfair Display',serif;font-size:clamp(18px,3vw,24px);font-style:italic;color:oklch(0.85 0.05 60);}
+.tz-rsvp-btn{margin-top:36px;display:inline-block;border:0.5px solid oklch(0.85 0.05 60 / 0.4);padding:12px 36px;border-radius:30px;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;text-decoration:none;color:oklch(0.85 0.05 60);transition:background 0.3s,color 0.3s;}
+.tz-rsvp-btn:hover{background:oklch(0.85 0.05 60);color:oklch(0.30 0.06 50);}
+
+/* ── CARTHAGE IMPERIALE ── */
+body.theme-carthage{background:oklch(0.97 0.01 310);color:oklch(0.18 0.03 300);}
+.ca-top-bar{height:12px;background:linear-gradient(90deg,oklch(0.28 0.12 310),oklch(0.55 0.14 300),oklch(0.28 0.12 310));}
+.ca-hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 24px;overflow:hidden;text-align:center;}
+.ca-bismillah{font-family:'Scheherazade New',serif;font-size:clamp(20px,3.5vw,30px);direction:rtl;color:oklch(0.35 0.10 300);}
+.ca-rule{display:flex;align-items:center;justify-content:center;gap:12px;margin:20px 0;}
+.ca-rule-line{height:0.5px;width:80px;background:oklch(0.55 0.14 300);}
+.ca-eyebrow{font-size:10px;letter-spacing:0.4em;text-transform:uppercase;color:oklch(0.35 0.08 300);}
+.ca-invite{font-size:16px;font-style:italic;margin-top:20px;opacity:0.8;}
+.ca-name{font-family:'Playfair Display',serif;font-size:clamp(44px,8vw,72px);font-weight:500;color:oklch(0.28 0.10 300);}
+.ca-amp{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(32px,6vw,48px);color:oklch(0.55 0.14 300);margin:10px 0;display:block;}
+.ca-arabic{font-family:'Scheherazade New',serif;font-size:clamp(22px,4vw,32px);direction:rtl;color:oklch(0.35 0.10 300);margin-top:16px;}
+.ca-deco-bar{height:128px;background:repeating-linear-gradient(45deg,oklch(0.55 0.14 300 / 0.15),oklch(0.55 0.14 300 / 0.15) 2px,transparent 2px,transparent 12px);}
+.ca-details{background:oklch(0.28 0.10 300);padding:80px 24px;color:oklch(0.97 0.01 310);}
+.ca-details-title{font-family:'Playfair Display',serif;font-size:36px;font-style:italic;color:oklch(0.78 0.12 300);text-align:center;margin-bottom:48px;}
+.ca-prog-item{display:grid;grid-template-columns:90px 1fr;gap:24px;border-bottom:0.5px solid oklch(0.78 0.12 300 / 0.3);padding-bottom:20px;margin-bottom:20px;max-width:600px;margin-left:auto;margin-right:auto;}
+.ca-prog-time{font-family:'Playfair Display',serif;font-size:22px;color:oklch(0.78 0.12 300);text-align:right;}
+.ca-prog-title{font-family:'Playfair Display',serif;font-size:18px;}
+.ca-prog-place{font-size:13px;opacity:0.7;margin-top:4px;}
+.ca-rsvp{background:oklch(0.97 0.01 310);padding:60px 24px;text-align:center;}
+.ca-rsvp-quote{font-family:'Playfair Display',serif;font-size:clamp(18px,3vw,24px);font-style:italic;color:oklch(0.35 0.08 300);}
+.ca-rsvp-btn{margin-top:36px;display:inline-block;border:0.5px solid oklch(0.28 0.10 300 / 0.3);padding:12px 36px;border-radius:30px;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;text-decoration:none;color:oklch(0.28 0.10 300);transition:background 0.3s,color 0.3s;}
+.ca-rsvp-btn:hover{background:oklch(0.28 0.10 300);color:oklch(0.97 0.01 310);}
+
+/* ── KAIROUAN SACRE ── */
+body.theme-kairouan{background:oklch(0.97 0.02 90);color:oklch(0.20 0.04 160);}
+.kq-top-bar{height:6px;background:linear-gradient(90deg,oklch(0.38 0.10 160),oklch(0.72 0.13 80),oklch(0.38 0.10 160));}
+.kq-hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 24px;overflow:hidden;}
+.kq-arch{position:absolute;inset:0;width:100%;height:100%;}
+.kq-content{position:relative;z-index:1;max-width:560px;width:100%;text-align:center;padding:48px 32px;}
+.kq-bismillah{font-family:'Aref Ruqaa',serif;font-size:clamp(26px,4.5vw,40px);direction:rtl;color:oklch(0.38 0.10 160);}
+.kq-flourish{margin:24px auto;width:176px;color:oklch(0.72 0.13 80);}
+.kq-eyebrow{font-size:10px;letter-spacing:0.5em;text-transform:uppercase;color:oklch(0.38 0.10 160);}
+.kq-invite{font-size:16px;font-style:italic;margin-top:28px;opacity:0.7;}
+.kq-name{font-family:'Playfair Display',serif;font-size:clamp(48px,9vw,72px);font-weight:300;color:oklch(0.38 0.10 160);}
+.kq-amp{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(36px,7vw,56px);color:oklch(0.72 0.13 80);margin:6px 0;display:block;}
+.kq-arabic{font-family:'Scheherazade New',serif;font-size:clamp(20px,3.5vw,28px);direction:rtl;color:oklch(0.38 0.10 160);margin-top:16px;}
+.kq-details{background:oklch(0.38 0.10 160);padding:80px 24px;color:oklch(0.97 0.02 90);}
+.kq-details-title{font-family:'Playfair Display',serif;font-size:36px;font-style:italic;color:oklch(0.72 0.13 80);text-align:center;}
+.kq-details-date{font-size:10px;letter-spacing:0.4em;text-transform:uppercase;opacity:0.7;text-align:center;margin-top:8px;margin-bottom:40px;}
+.kq-cd-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:420px;margin:0 auto 40px;}
+.kq-cd-item{text-align:center;}
+.kq-cd-num{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,44px);font-weight:300;line-height:1;color:oklch(0.97 0.02 90);}
+.kq-cd-label{font-size:9px;letter-spacing:0.28em;text-transform:uppercase;opacity:0.6;margin-top:6px;}
+.kq-prog-item{display:grid;grid-template-columns:110px 1fr;gap:20px;border-bottom:0.5px solid oklch(0.72 0.13 80 / 0.4);padding-bottom:18px;margin-bottom:18px;max-width:600px;margin-left:auto;margin-right:auto;}
+.kq-prog-time{font-family:'Playfair Display',serif;font-size:22px;color:oklch(0.72 0.13 80);text-align:right;}
+.kq-prog-title{font-family:'Playfair Display',serif;font-size:18px;}
+.kq-prog-place{font-size:13px;opacity:0.7;margin-top:4px;}
+.kq-zellige{height:128px;background:repeating-linear-gradient(135deg,oklch(0.72 0.13 80 / 0.12),oklch(0.72 0.13 80 / 0.12) 2px,transparent 2px,transparent 14px);}
+.kq-rsvp{padding:60px 24px;text-align:center;}
+.kq-rsvp-btn{display:inline-block;border:0.5px solid oklch(0.38 0.10 160 / 0.4);padding:12px 36px;border-radius:30px;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;text-decoration:none;color:oklch(0.38 0.10 160);transition:background 0.3s,color 0.3s;}
+.kq-rsvp-btn:hover{background:oklch(0.38 0.10 160);color:oklch(0.97 0.02 90);}
+
+/* ── HAMMAMET AZUR ── */
+body.theme-hammamet{background:oklch(0.985 0.008 90);color:oklch(0.22 0.05 230);}
+.ha-wave-top{display:block;width:100%;height:96px;}
+.ha-hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 24px 80px;overflow:hidden;margin-top:-96px;}
+.ha-frame{position:absolute;inset:0;width:100%;height:100%;}
+.ha-content{position:relative;z-index:1;max-width:560px;width:100%;text-align:center;padding:60px 32px;}
+.ha-bismillah{font-family:'Aref Ruqaa',serif;font-size:clamp(24px,4vw,36px);direction:rtl;color:oklch(0.50 0.10 220);}
+.ha-arabesque{margin:24px auto;width:220px;color:oklch(0.50 0.10 220);}
+.ha-eyebrow{font-size:10px;letter-spacing:0.5em;text-transform:uppercase;color:oklch(0.50 0.10 220);}
+.ha-invite{font-size:16px;font-style:italic;margin-top:28px;opacity:0.7;}
+.ha-name{font-family:'Playfair Display',serif;font-size:clamp(48px,9vw,72px);font-weight:300;color:oklch(0.50 0.10 220);}
+.ha-amp{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(36px,7vw,56px);color:oklch(0.50 0.10 220);opacity:0.8;margin:6px 0;display:block;}
+.ha-arabic{font-family:'Scheherazade New',serif;font-size:clamp(20px,3.5vw,28px);direction:rtl;color:oklch(0.50 0.10 220);margin-top:16px;}
+.ha-details{background:oklch(0.96 0.02 80);padding:80px 24px;text-align:center;color:oklch(0.22 0.05 230);}
+.ha-details-title{font-family:'Playfair Display',serif;font-size:36px;font-style:italic;color:oklch(0.50 0.10 220);}
+.ha-details-date{font-size:10px;letter-spacing:0.4em;text-transform:uppercase;opacity:0.6;margin-top:6px;margin-bottom:40px;}
+.ha-cd-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:420px;margin:0 auto 48px;}
+.ha-cd-item{text-align:center;}
+.ha-cd-num{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,44px);font-weight:300;line-height:1;}
+.ha-cd-label{font-size:9px;letter-spacing:0.28em;text-transform:uppercase;opacity:0.6;margin-top:6px;}
+.ha-prog-item{display:grid;grid-template-columns:100px 1fr;gap:20px;border-bottom:0.5px solid oklch(0.50 0.10 220 / 0.3);padding-bottom:16px;margin-bottom:16px;max-width:560px;margin-left:auto;margin-right:auto;text-align:left;}
+.ha-prog-time{font-family:'Playfair Display',serif;font-size:22px;color:oklch(0.50 0.10 220);text-align:right;}
+.ha-prog-title{font-family:'Playfair Display',serif;font-size:18px;}
+.ha-prog-place{font-size:13px;opacity:0.7;margin-top:4px;}
+.ha-rsvp{padding:60px 24px;text-align:center;}
+.ha-rsvp-btn{display:inline-block;border:0.5px solid oklch(0.50 0.10 220 / 0.4);padding:12px 36px;border-radius:30px;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;text-decoration:none;color:oklch(0.50 0.10 220);transition:background 0.3s,color 0.3s;}
+.ha-rsvp-btn:hover{background:oklch(0.50 0.10 220);color:white;}
+
+/* ── MEDINA SEPIA ── */
+body.theme-medina{background:oklch(0.94 0.03 80);color:oklch(0.25 0.04 50);}
+.ms-hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 24px;overflow:hidden;}
+.ms-parchment{position:absolute;inset:0;opacity:0.4;background:radial-gradient(circle at 20% 30%,oklch(0.42 0.07 50 / 0.1) 0,transparent 40%),radial-gradient(circle at 80% 70%,oklch(0.55 0.10 40 / 0.15) 0,transparent 50%);}
+.ms-arch{position:absolute;inset:0;width:100%;height:100%;}
+.ms-content{position:relative;z-index:1;max-width:560px;width:100%;text-align:center;padding:60px 32px;}
+.ms-bismillah{font-family:'Aref Ruqaa',serif;font-size:clamp(24px,4vw,36px);direction:rtl;color:oklch(0.42 0.07 50);}
+.ms-ornament{margin:24px auto;width:208px;color:oklch(0.55 0.10 40);}
+.ms-eyebrow{font-size:10px;letter-spacing:0.5em;text-transform:uppercase;color:oklch(0.42 0.07 50);}
+.ms-invite{font-size:16px;font-style:italic;margin-top:28px;opacity:0.7;}
+.ms-name{font-family:'Playfair Display',serif;font-size:clamp(48px,9vw,72px);font-weight:300;color:oklch(0.42 0.07 50);}
+.ms-amp{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(36px,7vw,56px);color:oklch(0.55 0.10 40);margin:6px 0;display:block;}
+.ms-arabic{font-family:'Scheherazade New',serif;font-size:clamp(20px,3.5vw,28px);direction:rtl;color:oklch(0.42 0.07 50);margin-top:16px;}
+.ms-details{background:oklch(0.25 0.04 50);padding:80px 24px;color:oklch(0.94 0.03 80);}
+.ms-details-title{font-family:'Playfair Display',serif;font-size:36px;font-style:italic;color:oklch(0.55 0.10 40);text-align:center;}
+.ms-details-date{font-size:10px;letter-spacing:0.4em;text-transform:uppercase;opacity:0.6;text-align:center;margin-top:6px;margin-bottom:40px;}
+.ms-cd-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:420px;margin:0 auto 48px;}
+.ms-cd-item{text-align:center;}
+.ms-cd-num{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,44px);font-weight:300;line-height:1;}
+.ms-cd-label{font-size:9px;letter-spacing:0.28em;text-transform:uppercase;opacity:0.6;margin-top:6px;}
+.ms-prog-item{display:grid;grid-template-columns:110px 1fr;gap:20px;border-bottom:0.5px solid oklch(0.55 0.10 40 / 0.4);padding-bottom:18px;margin-bottom:18px;max-width:580px;margin-left:auto;margin-right:auto;}
+.ms-prog-time{font-family:'Playfair Display',serif;font-size:22px;color:oklch(0.55 0.10 40);text-align:right;}
+.ms-prog-title{font-family:'Playfair Display',serif;font-size:18px;}
+.ms-prog-place{font-size:13px;opacity:0.7;margin-top:4px;}
+.ms-rsvp{padding:60px 24px;text-align:center;background:oklch(0.94 0.03 80);}
+.ms-rsvp-btn{display:inline-block;border:0.5px solid oklch(0.42 0.07 50 / 0.4);padding:12px 36px;border-radius:30px;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;text-decoration:none;color:oklch(0.42 0.07 50);transition:background 0.3s,color 0.3s;}
+.ms-rsvp-btn:hover{background:oklch(0.42 0.07 50);color:oklch(0.94 0.03 80);}
 </style>
 </head>
 <body>
 
-<!-- ENVELOPE (shown/hidden by JS) -->
+<!-- ══════════ CLASSIC ENVELOPE ══════════ -->
 <div class="env-screen" id="envScreen" style="display:none;">
-  <div class="env-body" id="envBody">
-    <div class="env-fold-left"></div>
-    <div class="env-fold-right"></div>
-  </div>
+  <div class="env-body" id="envBody"><div class="env-fold-left"></div><div class="env-fold-right"></div></div>
   <div class="env-flap" id="envFlap">
     <div class="env-flap-shape"></div>
-    <svg class="env-flap-deco" viewBox="0 0 100 55" preserveAspectRatio="none" fill="none">
-      <path d="M1 1 L50 54 L99 1" stroke="var(--gold)" stroke-width="0.3" opacity="0.5"/>
-    </svg>
+    <svg class="env-flap-deco" viewBox="0 0 100 55" preserveAspectRatio="none" fill="none"><path d="M1 1 L50 54 L99 1" stroke="var(--gold)" stroke-width="0.3" opacity="0.5"/></svg>
     <svg class="env-flap-corner env-flap-corner--left" viewBox="0 0 60 60" fill="none">
       <path d="M4 4 Q18 10 14 28" stroke="var(--gold)" stroke-width="0.7" fill="none" opacity="0.7"/>
       <path d="M4 4 Q22 8 26 22" stroke="var(--gold)" stroke-width="0.6" fill="none" opacity="0.5"/>
       <ellipse cx="16" cy="28" rx="7" ry="4" fill="var(--blush)" stroke="var(--gold)" stroke-width="0.5" transform="rotate(-40 16 28)" opacity="0.8"/>
       <ellipse cx="26" cy="22" rx="6" ry="3.5" fill="var(--blush)" stroke="var(--gold)" stroke-width="0.5" transform="rotate(-10 26 22)" opacity="0.7"/>
-      <ellipse cx="10" cy="16" rx="5" ry="3" fill="var(--cream)" stroke="var(--gold)" stroke-width="0.5" transform="rotate(-55 10 16)" opacity="0.6"/>
       <circle cx="20" cy="34" r="2" fill="var(--rose)" opacity="0.5"/>
-      <circle cx="30" cy="18" r="1.5" fill="var(--gold)" opacity="0.4"/>
     </svg>
     <svg class="env-flap-corner env-flap-corner--right" viewBox="0 0 60 60" fill="none">
       <path d="M56 4 Q42 10 46 28" stroke="var(--gold)" stroke-width="0.7" fill="none" opacity="0.7"/>
       <path d="M56 4 Q38 8 34 22" stroke="var(--gold)" stroke-width="0.6" fill="none" opacity="0.5"/>
       <ellipse cx="44" cy="28" rx="7" ry="4" fill="var(--blush)" stroke="var(--gold)" stroke-width="0.5" transform="rotate(40 44 28)" opacity="0.8"/>
       <ellipse cx="34" cy="22" rx="6" ry="3.5" fill="var(--blush)" stroke="var(--gold)" stroke-width="0.5" transform="rotate(10 34 22)" opacity="0.7"/>
-      <ellipse cx="50" cy="16" rx="5" ry="3" fill="var(--cream)" stroke="var(--gold)" stroke-width="0.5" transform="rotate(55 50 16)" opacity="0.6"/>
       <circle cx="40" cy="34" r="2" fill="var(--rose)" opacity="0.5"/>
-      <circle cx="30" cy="18" r="1.5" fill="var(--gold)" opacity="0.4"/>
     </svg>
   </div>
   <div class="env-seal-wrap" id="envSeal" onclick="openEnvelope()">
-<img class="env-seal-img" src="seal.png.webp" alt="wax seal">
-    <div class="env-hint-wrap">
-      <div class="env-hint-line"></div>
-      <p class="env-hint">Appuyez pour ouvrir</p>
-      <div class="env-hint-line"></div>
-    </div>
+    <img class="env-seal-img" src="seal.png.webp" alt="wax seal">
+    <div class="env-hint-wrap"><div class="env-hint-line"></div><p class="env-hint">Appuyez pour ouvrir</p><div class="env-hint-line"></div></div>
   </div>
 </div>
-
-<!-- CURTAINS (shown/hidden by JS) -->
+<!-- CURTAINS -->
 <div class="curtain-wrap" id="curtainWrap" style="display:none;">
-  <div class="curtain curtain-left"  id="cL"></div>
+  <div class="curtain curtain-left" id="cL"></div>
   <div class="curtain curtain-right" id="cR"></div>
 </div>
-
 <!-- CONFETTI -->
 <div class="confetti-wrap" id="confettiWrap"></div>
 
-<!-- PAGE -->
-<div class="page">
-  <svg class="floral-top" viewBox="0 0 280 80" fill="none">
-    <path d="M30 55 Q50 30 80 40" stroke="var(--gold)" stroke-width="0.8" fill="none" opacity="0.7"/>
-    <path d="M40 48 Q45 30 55 35" stroke="var(--gold)" stroke-width="0.6" fill="none" opacity="0.5"/>
-    <ellipse cx="82" cy="38" rx="9" ry="6" fill="var(--blush)" stroke="var(--gold)" stroke-width="0.5" transform="rotate(-20 82 38)" opacity="0.8"/>
-    <ellipse cx="58" cy="33" rx="6" ry="4" fill="var(--cream)" stroke="var(--gold)" stroke-width="0.5" transform="rotate(-35 58 33)" opacity="0.7"/>
-    <ellipse cx="34" cy="42" rx="5" ry="3" fill="var(--blush)" stroke="var(--gold)" stroke-width="0.5" transform="rotate(10 34 42)" opacity="0.6"/>
-    <circle cx="90" cy="34" r="3" fill="var(--rose)" opacity="0.5"/>
-    <circle cx="63" cy="28" r="2" fill="var(--gold)" opacity="0.4"/>
-    <line x1="100" y1="55" x2="120" y2="55" stroke="var(--gold)" stroke-width="0.5" opacity="0.5"/>
-    <rect x="136" y="51" width="8" height="8" fill="none" stroke="var(--gold)" stroke-width="0.5" transform="rotate(45 140 55)" opacity="0.7"/>
-    <line x1="152" y1="55" x2="172" y2="55" stroke="var(--gold)" stroke-width="0.5" opacity="0.5"/>
-    <path d="M250 55 Q230 30 200 40" stroke="var(--gold)" stroke-width="0.8" fill="none" opacity="0.7"/>
-    <path d="M240 48 Q235 30 225 35" stroke="var(--gold)" stroke-width="0.6" fill="none" opacity="0.5"/>
-    <ellipse cx="198" cy="38" rx="9" ry="6" fill="var(--blush)" stroke="var(--gold)" stroke-width="0.5" transform="rotate(20 198 38)" opacity="0.8"/>
-    <ellipse cx="222" cy="33" rx="6" ry="4" fill="var(--cream)" stroke="var(--gold)" stroke-width="0.5" transform="rotate(35 222 33)" opacity="0.7"/>
-    <ellipse cx="246" cy="42" rx="5" ry="3" fill="var(--blush)" stroke="var(--gold)" stroke-width="0.5" transform="rotate(-10 246 42)" opacity="0.6"/>
-    <circle cx="190" cy="34" r="3" fill="var(--rose)" opacity="0.5"/>
-    <circle cx="217" cy="28" r="2" fill="var(--gold)" opacity="0.4"/>
-  </svg>
-
-  <p class="eyebrow" id="txt-eyebrow">Nous avons l'honneur de vous inviter</p>
-  <div class="names-wrap">
-    <span class="name name-1" id="txt-name1">Yasmine</span>
-    <span class="amp">&</span>
-    <span class="name name-2" id="txt-name2">Amine</span>
-  </div>
-  <div class="rule"><div class="rule-line"></div><div class="rule-diamond"></div><div class="rule-line"></div></div>
-  <p class="date"  id="txt-date">Lundi · 14 Décembre 2026</p>
-  <p class="venue" id="txt-venue">Dar Lasram, La Médina — Tunis</p>
-  <p class="time"  id="txt-time">Cérémonie à 18 heures</p>
-
-  <div class="countdown">
-    <div class="cd-item"><span class="cd-num" id="days">0</span><span class="cd-label">Jours</span></div>
-    <div class="cd-item"><span class="cd-num" id="hours">0</span><span class="cd-label">Heures</span></div>
-    <div class="cd-item"><span class="cd-num" id="mins">0</span><span class="cd-label">Minutes</span></div>
-    <div class="cd-item"><span class="cd-num" id="secs">0</span><span class="cd-label">Secondes</span></div>
-  </div>
-
-  <div class="section-divider"><div class="section-divider-line"></div><span class="section-divider-label">Programme du jour</span><div class="section-divider-line"></div></div>
-  <div class="timeline">
-    <div class="timeline-item">
-      <div class="timeline-left"><span class="timeline-time">17h00</span><div class="timeline-dot active"></div></div>
-      <div class="timeline-right"><p class="timeline-title">Cérémonie</p><p class="timeline-desc">Signature du contrat de mariage</p></div>
+<!-- ══════════ CLASSIC PAGE ══════════ -->
+<div id="classicPage" style="display:none;">
+  <div class="c-page">
+    <svg class="c-floral" viewBox="0 0 280 80" fill="none">
+      <path d="M30 55 Q50 30 80 40" stroke="var(--gold)" stroke-width="0.8" fill="none" opacity="0.7"/>
+      <ellipse cx="82" cy="38" rx="9" ry="6" fill="var(--blush)" stroke="var(--gold)" stroke-width="0.5" transform="rotate(-20 82 38)" opacity="0.8"/>
+      <ellipse cx="58" cy="33" rx="6" ry="4" fill="var(--cream)" stroke="var(--gold)" stroke-width="0.5" transform="rotate(-35 58 33)" opacity="0.7"/>
+      <circle cx="90" cy="34" r="3" fill="var(--rose)" opacity="0.5"/>
+      <line x1="100" y1="55" x2="120" y2="55" stroke="var(--gold)" stroke-width="0.5" opacity="0.5"/>
+      <rect x="136" y="51" width="8" height="8" fill="none" stroke="var(--gold)" stroke-width="0.5" transform="rotate(45 140 55)" opacity="0.7"/>
+      <line x1="152" y1="55" x2="172" y2="55" stroke="var(--gold)" stroke-width="0.5" opacity="0.5"/>
+      <path d="M250 55 Q230 30 200 40" stroke="var(--gold)" stroke-width="0.8" fill="none" opacity="0.7"/>
+      <ellipse cx="198" cy="38" rx="9" ry="6" fill="var(--blush)" stroke="var(--gold)" stroke-width="0.5" transform="rotate(20 198 38)" opacity="0.8"/>
+      <ellipse cx="222" cy="33" rx="6" ry="4" fill="var(--cream)" stroke="var(--gold)" stroke-width="0.5" transform="rotate(35 222 33)" opacity="0.7"/>
+      <circle cx="190" cy="34" r="3" fill="var(--rose)" opacity="0.5"/>
+    </svg>
+    <p class="c-eyebrow">Nous avons l'honneur de vous inviter</p>
+    <div class="c-names">
+      <span class="c-name c-name-1" id="c-name1">Yasmine</span>
+      <span class="c-amp">&</span>
+      <span class="c-name c-name-2" id="c-name2">Amine</span>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-left"><span class="timeline-time">19h00</span><div class="timeline-dot"></div></div>
-      <div class="timeline-right"><p class="timeline-title">Cocktail</p><p class="timeline-desc">Accueil des invités et rafraîchissements</p></div>
+    <div class="c-rule"><div class="c-rule-line"></div><div class="c-rule-diamond"></div><div class="c-rule-line"></div></div>
+    <p class="c-date"  id="c-date">Lundi · 14 Décembre 2026</p>
+    <p class="c-venue" id="c-venue">Dar Lasram, La Médina — Tunis</p>
+    <p class="c-time"  id="c-time">Cérémonie à 18 heures</p>
+    <div class="c-countdown">
+      <div class="c-cd-item"><span class="c-cd-num" id="c-days">0</span><span class="c-cd-label">Jours</span></div>
+      <div class="c-cd-item"><span class="c-cd-num" id="c-hours">0</span><span class="c-cd-label">Heures</span></div>
+      <div class="c-cd-item"><span class="c-cd-num" id="c-mins">0</span><span class="c-cd-label">Minutes</span></div>
+      <div class="c-cd-item"><span class="c-cd-num" id="c-secs">0</span><span class="c-cd-label">Secondes</span></div>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-left"><span class="timeline-time">21h00</span><div class="timeline-dot"></div></div>
-      <div class="timeline-right"><p class="timeline-title">Dîner</p><p class="timeline-desc">Dîner gastronomique en famille</p></div>
+    <div class="c-divider"><div class="c-divider-line"></div><span class="c-divider-label">Programme du jour</span><div class="c-divider-line"></div></div>
+    <div class="c-timeline">
+      <div class="c-tl-item"><div class="c-tl-left"><span class="c-tl-time">17h00</span><div class="c-tl-dot active"></div></div><div><p class="c-tl-title">Cérémonie</p><p class="c-tl-desc">Signature du contrat de mariage</p></div></div>
+      <div class="c-tl-item"><div class="c-tl-left"><span class="c-tl-time">19h00</span><div class="c-tl-dot"></div></div><div><p class="c-tl-title">Cocktail</p><p class="c-tl-desc">Accueil des invités</p></div></div>
+      <div class="c-tl-item"><div class="c-tl-left"><span class="c-tl-time">21h00</span><div class="c-tl-dot"></div></div><div><p class="c-tl-title">Dîner</p><p class="c-tl-desc">Dîner gastronomique en famille</p></div></div>
+      <div class="c-tl-item"><div class="c-tl-left"><span class="c-tl-time">23h00</span><div class="c-tl-dot"></div></div><div><p class="c-tl-title">Soirée</p><p class="c-tl-desc">Musique et danse jusqu'à l'aube</p></div></div>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-left"><span class="timeline-time">23h00</span><div class="timeline-dot"></div></div>
-      <div class="timeline-right"><p class="timeline-title">Soirée</p><p class="timeline-desc">Musique et danse jusqu'à l'aube</p></div>
+    <div class="c-divider"><div class="c-divider-line"></div><span class="c-divider-label">Notre histoire</span><div class="c-divider-line"></div></div>
+    <div class="c-story"><p class="c-story-text">Nous nous sommes rencontrés par hasard, un soir d'été à Tunis. Ce qui a commencé par un sourire est devenu une histoire d'amour que nous souhaitons célébrer avec vous.</p></div>
+    <div class="c-divider"><div class="c-divider-line"></div><span class="c-divider-label">Nos photos</span><div class="c-divider-line"></div></div>
+    <div class="c-polaroids">
+      <div class="c-polaroid"><div class="c-polaroid-ph">Photo 1</div><p class="c-polaroid-cap">Notre première rencontre</p></div>
+      <div class="c-polaroid"><div class="c-polaroid-ph">Photo 2</div><p class="c-polaroid-cap">La demande en mariage</p></div>
+      <div class="c-polaroid"><div class="c-polaroid-ph">Photo 3</div><p class="c-polaroid-cap">Bientôt mariés</p></div>
     </div>
+    <div class="c-loc">
+      <div class="c-rule"><div class="c-rule-line"></div><div class="c-rule-diamond"></div><div class="c-rule-line"></div></div>
+      <p class="c-loc-label">Lieu de la cérémonie</p>
+      <p class="c-loc-name" id="c-locname">Dar Lasram</p>
+      <p class="c-loc-addr" id="c-locaddr">8 Rue du Tribunal, Tunis</p>
+      <a class="c-btn-out" id="c-maps" href="#" target="_blank">Ouvrir dans Google Maps</a>
+    </div>
+    <svg class="c-floral-b" viewBox="0 0 200 50" fill="none">
+      <path d="M20 35 Q50 15 100 25 Q150 15 180 35" stroke="var(--gold)" stroke-width="0.6" fill="none" opacity="0.5"/>
+      <ellipse cx="100" cy="20" rx="8" ry="5" fill="var(--blush)" stroke="var(--gold)" stroke-width="0.5" opacity="0.7"/>
+      <circle cx="100" cy="15" r="2.5" fill="var(--rose)" opacity="0.4"/>
+    </svg>
+    <div class="c-btns"><a class="c-btn-out" id="c-whatsapp" href="#" target="_blank">Confirmer via WhatsApp</a></div>
   </div>
-
-  <div class="section-divider"><div class="section-divider-line"></div><span class="section-divider-label">Notre histoire</span><div class="section-divider-line"></div></div>
-  <div class="couple-story">
-    <p class="couple-story-text" id="txt-story">Nous nous sommes rencontrés par hasard, un soir d'été à Tunis. Ce qui a commencé par un sourire est devenu une histoire d'amour que nous souhaitons célébrer avec vous.</p>
-  </div>
-
-  <div class="section-divider"><div class="section-divider-line"></div><span class="section-divider-label">Nos photos</span><div class="section-divider-line"></div></div>
-  <div class="polaroids">
-    <div class="polaroid"><div class="polaroid-placeholder">Photo 1</div><p class="polaroid-caption">Notre première rencontre</p></div>
-    <div class="polaroid"><div class="polaroid-placeholder">Photo 2</div><p class="polaroid-caption">La demande en mariage</p></div>
-    <div class="polaroid"><div class="polaroid-placeholder">Photo 3</div><p class="polaroid-caption">Bientôt mariés</p></div>
-  </div>
-
-  <div class="location-wrap">
-    <div class="rule"><div class="rule-line"></div><div class="rule-diamond"></div><div class="rule-line"></div></div>
-    <p class="location-label">Lieu de la cérémonie</p>
-    <p class="location-name"    id="txt-locname">Dar Lasram</p>
-    <p class="location-address" id="txt-locaddr">8 Rue du Tribunal, Tunis</p>
-    <a class="btn-outline" id="btn-maps" href="#" target="_blank">Ouvrir dans Google Maps</a>
-  </div>
-
-  <svg class="floral-bottom" viewBox="0 0 200 50" fill="none">
-    <path d="M20 35 Q50 15 100 25 Q150 15 180 35" stroke="var(--gold)" stroke-width="0.6" fill="none" opacity="0.5"/>
-    <ellipse cx="100" cy="20" rx="8" ry="5" fill="var(--blush)" stroke="var(--gold)" stroke-width="0.5" opacity="0.7"/>
-    <ellipse cx="70"  cy="25" rx="6" ry="4" fill="var(--cream)" stroke="var(--gold)" stroke-width="0.5" opacity="0.6"/>
-    <ellipse cx="130" cy="25" rx="6" ry="4" fill="var(--cream)" stroke="var(--gold)" stroke-width="0.5" opacity="0.6"/>
-    <circle cx="100" cy="15" r="2.5" fill="var(--rose)" opacity="0.4"/>
-    <circle cx="50"  cy="30" r="2"   fill="var(--gold)" opacity="0.3"/>
-    <circle cx="150" cy="30" r="2"   fill="var(--gold)" opacity="0.3"/>
-  </svg>
-
-  <div class="btns">
-    <a class="btn-outline" id="btn-whatsapp" href="#" target="_blank">Confirmer via WhatsApp</a>
-  </div>
+  <button class="c-replay" onclick="location.reload()">↺ Rejouer</button>
 </div>
 
-<button class="replay" onclick="location.reload()">↺ Rejouer</button>
+<!-- ══════════ SIDI BOU SAID ══════════ -->
+<div id="page-sidibou" style="display:none;">
+  <a class="p-back" href="#">← Tous les modèles</a>
+  <section class="sb-hero">
+    <svg class="sb-hero arch" viewBox="0 0 400 600" fill="none" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;margin:auto;height:90%;width:auto;opacity:0.07;">
+      <path d="M50 600 V250 Q50 50 200 50 Q350 50 350 250 V600 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M100 600 V280 Q100 120 200 120 Q300 120 300 280 V600 Z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    </svg>
+    <div style="position:absolute;width:160px;height:160px;border-radius:50%;background:oklch(0.55 0.12 240);left:-40px;top:40px;opacity:0.2;"></div>
+    <div style="position:absolute;width:220px;height:220px;border-radius:50%;background:oklch(0.55 0.12 240);right:-60px;bottom:40px;opacity:0.2;"></div>
+    <div style="position:relative;z-index:1;">
+      <p class="sb-bismillah fu fu1">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+      <div class="sb-rule fu fu1"></div>
+      <p class="sb-eyebrow fu fu2">٢٠٢٦ · Tunis</p>
+      <div class="sb-rule fu fu2"></div>
+      <p class="sb-invite fu fu3">Nous avons l'honneur de vous inviter au mariage de</p>
+      <div class="fu fu4" style="margin-top:24px;">
+        <span class="sb-name" id="sb-name1">Yasmine</span>
+        <span class="sb-amp">&</span>
+        <span class="sb-name" id="sb-name2">Mehdi</span>
+      </div>
+      <div class="sb-rule fu fu5"></div>
+      <p class="sb-arabic fu fu6">ياسمين ومهدي</p>
+    </div>
+  </section>
+  <section class="sb-details">
+    <p class="sb-day-label">Samedi</p>
+    <h2 class="sb-day-date" id="sb-daydate">14 · Juin</h2>
+    <p style="font-size:22px;font-weight:300;color:oklch(0.45 0.13 240);margin-top:6px;">Deux mille vingt-six</p>
+    <div style="display:flex;align-items:center;justify-content:center;gap:16px;margin:40px 0;"><div style="height:0.5px;width:48px;background:currentColor;opacity:0.3;"></div><span style="font-size:20px;">✦</span><div style="height:0.5px;width:48px;background:currentColor;opacity:0.3;"></div></div>
+    <div class="sb-venues">
+      <div><p class="sb-venue-label">Cérémonie</p><p class="sb-venue-time">17h00</p><p class="sb-venue-place">Dar El Annabi<br>Sidi Bou Saïd, Tunis</p></div>
+      <div><p class="sb-venue-label">Réception</p><p class="sb-venue-time">20h00</p><p class="sb-venue-place" id="sb-venue">Dar Ennejma Ezzahra<br>Sidi Bou Saïd</p></div>
+    </div>
+    <div class="sb-cd-grid">
+      <div class="sb-cd-item"><div class="sb-cd-num" id="sb-days">0</div><div class="sb-cd-label">Jours</div></div>
+      <div class="sb-cd-item"><div class="sb-cd-num" id="sb-hours">0</div><div class="sb-cd-label">Heures</div></div>
+      <div class="sb-cd-item"><div class="sb-cd-num" id="sb-mins">0</div><div class="sb-cd-label">Minutes</div></div>
+      <div class="sb-cd-item"><div class="sb-cd-num" id="sb-secs">0</div><div class="sb-cd-label">Secondes</div></div>
+    </div>
+  </section>
+  <section class="sb-rsvp">
+    <p class="sb-rsvp-quote">"L'amour est la poésie des sens."</p>
+    <a class="sb-rsvp-btn" id="sb-rsvp-btn" href="#" target="_blank">Confirmer ma présence</a>
+  </section>
+  <button class="p-replay" style="background:oklch(0.32 0.13 245);color:white;" onclick="location.reload()">↺ Rejouer</button>
+</div>
+
+<!-- ══════════ ZELLIGE ROYAL ══════════ -->
+<div id="page-zellige" style="display:none;">
+  <a class="p-back" href="#">← Tous les modèles</a>
+  <div class="zr-top-bar"></div>
+  <section class="zr-hero">
+    <div class="zr-frame">
+      <div class="zr-corner zr-corner-tl"></div><div class="zr-corner zr-corner-tr"></div>
+      <div class="zr-corner zr-corner-bl"></div><div class="zr-corner zr-corner-br"></div>
+      <p class="zr-bismillah fu fu1">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+      <div class="zr-gold-rule fu fu2"><div class="zr-gold-line"></div><span style="color:oklch(0.62 0.14 70);">❋</span><div class="zr-gold-line"></div></div>
+      <p class="zr-eyebrow fu fu2">Nous avons l'immense joie de vous convier</p>
+      <p class="zr-subtitle fu fu3">au mariage de nos enfants</p>
+      <div class="fu fu4" style="margin-top:20px;">
+        <span class="zr-name" id="zr-name1">Salma</span>
+        <span class="zr-amp">et</span>
+        <span class="zr-name" id="zr-name2">Karim</span>
+      </div>
+      <div class="zr-gold-rule fu fu5"><div class="zr-gold-line"></div><span style="color:oklch(0.62 0.14 70);">❋</span><div class="zr-gold-line"></div></div>
+      <p class="zr-arabic fu fu5">سلمى و كريم</p>
+    </div>
+  </section>
+  <section class="zr-details">
+    <h2 class="zr-details-title">Programme</h2>
+    <div class="zr-prog-item"><div class="zr-prog-time">16h00</div><div><p class="zr-prog-title">Cérémonie religieuse</p><p class="zr-prog-place">Mosquée Zitouna, Médina de Tunis</p></div></div>
+    <div class="zr-prog-item"><div class="zr-prog-time">18h30</div><div><p class="zr-prog-title">Cocktail d'accueil</p><p class="zr-prog-place">Jardins du Palais</p></div></div>
+    <div class="zr-prog-item"><div class="zr-prog-time">20h00</div><div><p class="zr-prog-title">Dîner & festivités</p><p class="zr-prog-place" id="zr-venue">Dar El Bey, Tunis</p></div></div>
+    <p style="font-family:'Playfair Display',serif;font-size:22px;font-style:italic;color:oklch(0.78 0.13 80);text-align:center;margin-top:48px;" id="zr-datefooter">Samedi 5 septembre 2026</p>
+  </section>
+  <div class="zr-bar"></div>
+  <section class="zr-rsvp"><a class="zr-rsvp-btn" id="zr-rsvp-btn" href="#" target="_blank">Confirmer ma présence</a></section>
+  <button class="p-replay" style="background:oklch(0.35 0.13 20);color:oklch(0.96 0.02 85);" onclick="location.reload()">↺ Rejouer</button>
+</div>
+
+<!-- ══════════ JASMIN OLIVIER ══════════ -->
+<div id="page-olivier" style="display:none;">
+  <a class="p-back" href="#">← Tous les modèles</a>
+  <section class="jo-hero">
+    <svg class="jo-olive jo-olive-l" viewBox="0 0 200 400" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M100 0 Q60 100 100 200 Q140 300 100 400"/>
+      <ellipse cx="82" cy="30" rx="14" ry="5" fill="currentColor" opacity="0.6" transform="rotate(-30 82 30)"/>
+      <ellipse cx="118" cy="55" rx="14" ry="5" fill="currentColor" opacity="0.6" transform="rotate(30 118 55)"/>
+      <ellipse cx="82" cy="80" rx="14" ry="5" fill="currentColor" opacity="0.6" transform="rotate(-30 82 80)"/>
+      <ellipse cx="118" cy="105" rx="14" ry="5" fill="currentColor" opacity="0.6" transform="rotate(30 118 105)"/>
+      <ellipse cx="82" cy="130" rx="14" ry="5" fill="currentColor" opacity="0.6" transform="rotate(-30 82 130)"/>
+      <ellipse cx="118" cy="155" rx="14" ry="5" fill="currentColor" opacity="0.6" transform="rotate(30 118 155)"/>
+      <ellipse cx="82" cy="180" rx="14" ry="5" fill="currentColor" opacity="0.6" transform="rotate(-30 82 180)"/>
+      <ellipse cx="118" cy="205" rx="14" ry="5" fill="currentColor" opacity="0.6" transform="rotate(30 118 205)"/>
+    </svg>
+    <svg class="jo-olive jo-olive-r" viewBox="0 0 200 400" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M100 0 Q60 100 100 200 Q140 300 100 400"/>
+      <ellipse cx="82" cy="30" rx="14" ry="5" fill="currentColor" opacity="0.6" transform="rotate(-30 82 30)"/>
+      <ellipse cx="118" cy="55" rx="14" ry="5" fill="currentColor" opacity="0.6" transform="rotate(30 118 55)"/>
+      <ellipse cx="82" cy="80" rx="14" ry="5" fill="currentColor" opacity="0.6" transform="rotate(-30 82 80)"/>
+      <ellipse cx="118" cy="105" rx="14" ry="5" fill="currentColor" opacity="0.6" transform="rotate(30 118 105)"/>
+      <ellipse cx="82" cy="130" rx="14" ry="5" fill="currentColor" opacity="0.6" transform="rotate(-30 82 130)"/>
+      <ellipse cx="118" cy="155" rx="14" ry="5" fill="currentColor" opacity="0.6" transform="rotate(30 118 155)"/>
+    </svg>
+    <div class="jo-content">
+      <p class="jo-bismillah fu fu1">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+      <div class="jo-line fu fu1"></div>
+      <p class="jo-save fu fu2">Save the date</p>
+      <div class="fu fu3" style="margin-top:40px;">
+        <span class="jo-name" id="jo-name1">Leïla</span>
+        <span class="jo-amp">&</span>
+        <span class="jo-name" id="jo-name2">Amine</span>
+      </div>
+      <p class="jo-date-line fu fu4" id="jo-dateline">Vendredi 25 Septembre 2026 · Nabeul</p>
+    </div>
+  </section>
+  <section class="jo-story">
+    <p class="jo-story-text">Sous les oliviers et les jasmins en fleurs, nous célébrons notre union et vous invitons à partager ce moment de bonheur avec nous.</p>
+  </section>
+  <section class="jo-schedule">
+    <p class="jo-sched-label">Programme de la journée</p>
+    <div class="jo-sched-grid">
+      <div class="jo-sched-item"><div class="jo-sched-time">17h</div><p class="jo-sched-title">Cérémonie</p><p class="jo-sched-place" id="jo-venue">Villa des Roses, Nabeul</p></div>
+      <div class="jo-sched-item"><div class="jo-sched-time">19h</div><p class="jo-sched-title">Cocktail</p><p class="jo-sched-place">Jardins d'oliviers</p></div>
+      <div class="jo-sched-item"><div class="jo-sched-time">21h</div><p class="jo-sched-title">Dîner</p><p class="jo-sched-place">Salle de réception</p></div>
+    </div>
+  </section>
+  <section class="jo-rsvp">
+    <p class="jo-rsvp-text">"Deux âmes, un seul chemin."</p>
+    <a class="jo-rsvp-btn" id="jo-rsvp-btn" href="#" target="_blank">Confirmer ma présence</a>
+  </section>
+  <button class="p-replay" style="background:oklch(0.38 0.05 130);color:oklch(0.97 0.015 95);" onclick="location.reload()">↺ Rejouer</button>
+</div>
+
+<!-- ══════════ DJERBA LUNAIRE ══════════ -->
+<div id="page-djerba" style="display:none;">
+  <a class="p-back" href="#">← Tous les modèles</a>
+  <section class="dj-hero">
+    <div class="dj-blob1"></div><div class="dj-blob2"></div>
+    <svg style="position:absolute;left:24px;top:24px;width:64px;height:64px;color:oklch(0.55 0.10 195);opacity:0.3;" viewBox="0 0 64 64" fill="none"><path d="M2 2 L24 2 L2 24 Z" fill="currentColor" opacity="0.4"/><circle cx="32" cy="32" r="2" fill="currentColor"/></svg>
+    <svg style="position:absolute;right:24px;bottom:24px;width:64px;height:64px;color:oklch(0.55 0.10 195);opacity:0.3;" viewBox="0 0 64 64" fill="none"><path d="M62 62 L40 62 L62 40 Z" fill="currentColor" opacity="0.4"/><circle cx="32" cy="32" r="2" fill="currentColor"/></svg>
+    <div style="position:relative;z-index:1;">
+      <p class="dj-eyebrow fu fu1" id="dj-location">Juillet 2026 · Djerba</p>
+      <div class="dj-rule fu fu1"></div>
+      <p class="dj-invite fu fu2">Nous vous invitons à célébrer notre union</p>
+      <div style="display:flex;align-items:center;justify-content:center;gap:24px;margin:32px 0;" class="fu fu3">
+        <div style="height:0.5px;width:64px;background:oklch(0.55 0.10 195);opacity:0.3;"></div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="oklch(0.55 0.10 195)" opacity="0.5"><path d="M12 2L14.5 9H21.5L16 13.5L18.5 21L12 16.5L5.5 21L8 13.5L2.5 9H9.5L12 2Z"/></svg>
+        <div style="height:0.5px;width:64px;background:oklch(0.55 0.10 195);opacity:0.3;"></div>
+      </div>
+      <div class="fu fu4">
+        <span class="dj-name" id="dj-name1">Rachel</span>
+        <span class="dj-amp">&</span>
+        <span class="dj-name" id="dj-name2">David</span>
+      </div>
+      <div class="dj-rule fu fu5"></div>
+      <p class="dj-arabic fu fu5">راحيل وداود</p>
+    </div>
+  </section>
+  <section class="dj-details">
+    <p class="dj-day-label">Samedi</p>
+    <h2 class="dj-day-date" id="dj-daydate">18 · Juillet</h2>
+    <p style="font-size:22px;font-weight:300;color:oklch(0.45 0.05 220);margin-top:6px;">Deux mille vingt-six</p>
+    <div style="display:flex;align-items:center;justify-content:center;gap:16px;margin:40px 0;">
+      <div style="height:0.5px;width:48px;background:oklch(0.55 0.10 195);opacity:0.3;"></div>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="oklch(0.55 0.10 195)" opacity="0.5"><path d="M12 2L14.5 9H21.5L16 13.5L18.5 21L12 16.5L5.5 21L8 13.5L2.5 9H9.5L12 2Z"/></svg>
+      <div style="height:0.5px;width:48px;background:oklch(0.55 0.10 195);opacity:0.3;"></div>
+    </div>
+    <div class="dj-venues">
+      <div><p class="dj-venue-label">Cérémonie</p><p class="dj-venue-time">16h00</p><p class="dj-venue-place">Synagogue Ghriba<br>Hara Sghira, Djerba</p></div>
+      <div><p class="dj-venue-label">Cocktail</p><p class="dj-venue-time">18h30</p><p class="dj-venue-place">Jardins de Dar Dhiafa<br>Houmt Souk</p></div>
+      <div><p class="dj-venue-label">Dîner</p><p class="dj-venue-time">20h00</p><p class="dj-venue-place" id="dj-venue">Dar Dhiafa<br>Erriadh, Djerba</p></div>
+    </div>
+  </section>
+  <section class="dj-rsvp">
+    <p class="dj-rsvp-quote">"Tu as trouvé celui que ton âme aime..."</p>
+    <a class="dj-rsvp-btn" id="dj-rsvp-btn" href="#" target="_blank">Confirmer ma présence</a>
+  </section>
+  <button class="p-replay" style="background:oklch(0.22 0.05 220);color:white;" onclick="location.reload()">↺ Rejouer</button>
+</div>
+
+<!-- ══════════ TOZEUR SAHARI ══════════ -->
+<div id="page-tozeur" style="display:none;">
+  <a class="p-back" href="#">← Tous les modèles</a>
+  <section class="tz-hero">
+    <div class="tz-grad-t"></div><div class="tz-grad-b"></div>
+    <div style="position:relative;z-index:1;">
+      <p class="tz-bismillah fu fu1">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+      <div class="tz-rule fu fu1"></div>
+      <p class="tz-eyebrow fu fu2" id="tz-location">Octobre 2026 · Tozeur</p>
+      <div class="tz-rule fu fu2"></div>
+      <p class="tz-invite fu fu3">Au cœur de l'oasis, nous unissons nos destins</p>
+      <div style="display:flex;align-items:center;justify-content:center;gap:16px;margin:32px 0;" class="fu fu3">
+        <div style="height:0.5px;width:48px;background:oklch(0.65 0.10 50);opacity:0.4;"></div>
+        <span style="font-size:22px;color:oklch(0.65 0.10 50);">❋</span>
+        <div style="height:0.5px;width:48px;background:oklch(0.65 0.10 50);opacity:0.4;"></div>
+      </div>
+      <div class="fu fu4">
+        <span class="tz-name" id="tz-name1">Amira</span>
+        <span class="tz-amp">&</span>
+        <span class="tz-name" id="tz-name2">Omar</span>
+      </div>
+      <div class="tz-rule fu fu5"></div>
+      <p class="tz-arabic fu fu5">أميرة وعمر</p>
+    </div>
+  </section>
+  <section class="tz-details">
+    <p class="tz-day-label">Samedi</p>
+    <h2 class="tz-day-date" id="tz-daydate">10 · Octobre</h2>
+    <p style="font-size:22px;font-weight:300;color:oklch(0.45 0.04 50);margin-top:6px;">Deux mille vingt-six</p>
+    <div style="display:flex;align-items:center;justify-content:center;gap:16px;margin:48px 0;">
+      <div style="height:0.5px;width:48px;background:oklch(0.65 0.08 50);opacity:0.3;"></div>
+      <span style="color:oklch(0.65 0.08 50);">❋</span>
+      <div style="height:0.5px;width:48px;background:oklch(0.65 0.08 50);opacity:0.3;"></div>
+    </div>
+    <div class="tz-venues">
+      <div class="tz-venue-card"><p class="tz-venue-label">Cérémonie</p><p class="tz-venue-time">16h00</p><p class="tz-venue-place">Dar Chraiet<br>Musée des Arts, Tozeur</p></div>
+      <div class="tz-venue-card"><p class="tz-venue-label">Réception</p><p class="tz-venue-time">19h30</p><p class="tz-venue-place" id="tz-venue">Ksar Rouge<br>Route de Nefta, Tozeur</p></div>
+    </div>
+    <div class="tz-cd-grid">
+      <div class="tz-cd-item"><div class="tz-cd-num" id="tz-days">0</div><div class="tz-cd-label">Jours</div></div>
+      <div class="tz-cd-item"><div class="tz-cd-num" id="tz-hours">0</div><div class="tz-cd-label">Heures</div></div>
+      <div class="tz-cd-item"><div class="tz-cd-num" id="tz-mins">0</div><div class="tz-cd-label">Minutes</div></div>
+      <div class="tz-cd-item"><div class="tz-cd-num" id="tz-secs">0</div><div class="tz-cd-label">Secondes</div></div>
+    </div>
+  </section>
+  <section class="tz-rsvp">
+    <p class="tz-rsvp-quote">"Deux âmes sous le même soleil de Tozeur."</p>
+    <a class="tz-rsvp-btn" id="tz-rsvp-btn" href="#" target="_blank">Confirmer ma présence</a>
+  </section>
+  <button class="p-replay" style="background:oklch(0.30 0.06 50);color:oklch(0.96 0.03 60);" onclick="location.reload()">↺ Rejouer</button>
+</div>
+
+<!-- ══════════ CARTHAGE IMPERIALE ══════════ -->
+<div id="page-carthage" style="display:none;">
+  <a class="p-back" href="#">← Tous les modèles</a>
+  <div class="ca-top-bar"></div>
+  <section class="ca-hero">
+    <div style="position:relative;z-index:1;">
+      <p class="ca-bismillah fu fu1">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+      <div class="ca-rule fu fu2"><div class="ca-rule-line"></div><span style="color:oklch(0.55 0.14 300);">✦</span><div class="ca-rule-line"></div></div>
+      <p class="ca-eyebrow fu fu2">Nous avons l'honneur de vous convier</p>
+      <p class="ca-invite fu fu3">à la célébration du mariage de</p>
+      <div class="fu fu4" style="margin-top:24px;">
+        <span class="ca-name" id="ca-name1">Leïla</span>
+        <span class="ca-amp">et</span>
+        <span class="ca-name" id="ca-name2">Hamza</span>
+      </div>
+      <div class="ca-rule fu fu5"><div class="ca-rule-line"></div><span style="color:oklch(0.55 0.14 300);">✦</span><div class="ca-rule-line"></div></div>
+      <p class="ca-arabic fu fu5">ليلى وحمزة</p>
+      <p style="font-size:10px;letter-spacing:0.5em;text-transform:uppercase;color:oklch(0.40 0.06 300);opacity:0.6;margin-top:24px;" class="fu fu5" id="ca-location">Carthage · Août 2026</p>
+    </div>
+  </section>
+  <div class="ca-deco-bar"></div>
+  <section class="ca-details">
+    <h2 class="ca-details-title">Programme</h2>
+    <div class="ca-prog-item"><div class="ca-prog-time">15h00</div><div><p class="ca-prog-title">Cérémonie religieuse</p><p class="ca-prog-place">Mosquée El Abidine, Carthage</p></div></div>
+    <div class="ca-prog-item"><div class="ca-prog-time">17h00</div><div><p class="ca-prog-title">Séance photo</p><p class="ca-prog-place">Villas romaines de Carthage</p></div></div>
+    <div class="ca-prog-item"><div class="ca-prog-time">19h00</div><div><p class="ca-prog-title">Cocktail & Dîner</p><p class="ca-prog-place" id="ca-venue">Villa Didon, Byrsa</p></div></div>
+    <div class="ca-prog-item"><div class="ca-prog-time">22h00</div><div><p class="ca-prog-title">Soirée & Musique live</p><p class="ca-prog-place">Terrasse de Villa Didon</p></div></div>
+  </section>
+  <section class="ca-rsvp">
+    <p class="ca-rsvp-quote">"L'amour est l'éternelle jeunesse du cœur."</p>
+    <a class="ca-rsvp-btn" id="ca-rsvp-btn" href="#" target="_blank">Confirmer ma présence</a>
+  </section>
+  <div class="ca-top-bar"></div>
+  <button class="p-replay" style="background:oklch(0.28 0.10 300);color:oklch(0.97 0.01 310);" onclick="location.reload()">↺ Rejouer</button>
+</div>
+
+<!-- ══════════ KAIROUAN SACRE ══════════ -->
+<div id="page-kairouan" style="display:none;">
+  <a class="p-back" href="#">← Tous les modèles</a>
+  <div class="kq-top-bar"></div>
+  <section class="kq-hero">
+    <svg class="kq-arch" viewBox="0 0 400 560" preserveAspectRatio="none" fill="none">
+      <path d="M20 100 Q20 20 200 20 Q380 20 380 100 L380 540 L20 540 Z" stroke="oklch(0.38 0.10 160)" stroke-width="1.5"/>
+      <path d="M30 100 Q30 30 200 30 Q370 30 370 100 L370 530 L30 530 Z" stroke="oklch(0.72 0.13 80)" stroke-width="0.6"/>
+    </svg>
+    <div class="kq-content">
+      <p class="kq-bismillah fu fu1">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+      <svg class="kq-flourish fu fu2" viewBox="0 0 200 24" fill="none" stroke="currentColor" stroke-width="1">
+        <path d="M0 12 H70"/><path d="M130 12 H200"/><circle cx="100" cy="12" r="6"/><circle cx="100" cy="12" r="2" fill="currentColor"/>
+        <path d="M76 12 q12 -10 24 0 q12 10 24 0"/>
+      </svg>
+      <p class="kq-eyebrow fu fu2">Avec la bénédiction d'Allah</p>
+      <p class="kq-invite fu fu3">nous célébrons l'union de</p>
+      <div class="fu fu4" style="margin-top:16px;">
+        <span class="kq-name" id="kq-name1">Yasmine</span>
+        <span class="kq-amp">&</span>
+        <span class="kq-name" id="kq-name2">Mehdi</span>
+      </div>
+      <svg class="kq-flourish fu fu5" viewBox="0 0 200 24" fill="none" stroke="currentColor" stroke-width="1">
+        <path d="M0 12 H70"/><path d="M130 12 H200"/><circle cx="100" cy="12" r="6"/><circle cx="100" cy="12" r="2" fill="currentColor"/>
+        <path d="M76 12 q12 -10 24 0 q12 10 24 0"/>
+      </svg>
+      <p class="kq-arabic fu fu5">ياسمين و مهدي</p>
+    </div>
+  </section>
+  <section class="kq-details">
+    <svg style="display:block;margin:0 auto 20px;width:176px;color:oklch(0.72 0.13 80);" viewBox="0 0 200 24" fill="none" stroke="currentColor" stroke-width="1">
+      <path d="M0 12 H70"/><path d="M130 12 H200"/><circle cx="100" cy="12" r="6"/><circle cx="100" cy="12" r="2" fill="currentColor"/>
+      <path d="M76 12 q12 -10 24 0 q12 10 24 0"/>
+    </svg>
+    <h2 class="kq-details-title">Le Grand Jour</h2>
+    <p class="kq-details-date" id="kq-detaildate">Samedi 12 septembre 2026 · Kairouan</p>
+    <div class="kq-cd-grid">
+      <div class="kq-cd-item"><div class="kq-cd-num" id="kq-days">0</div><div class="kq-cd-label">Jours</div></div>
+      <div class="kq-cd-item"><div class="kq-cd-num" id="kq-hours">0</div><div class="kq-cd-label">Heures</div></div>
+      <div class="kq-cd-item"><div class="kq-cd-num" id="kq-mins">0</div><div class="kq-cd-label">Minutes</div></div>
+      <div class="kq-cd-item"><div class="kq-cd-num" id="kq-secs">0</div><div class="kq-cd-label">Secondes</div></div>
+    </div>
+    <div class="kq-prog-item"><div class="kq-prog-time">17h00</div><div><p class="kq-prog-title">Cérémonie religieuse</p><p class="kq-prog-place">Grande Mosquée de Kairouan</p></div></div>
+    <div class="kq-prog-item"><div class="kq-prog-time">19h30</div><div><p class="kq-prog-title">Réception</p><p class="kq-prog-place">Dar Hassine Allani</p></div></div>
+    <div class="kq-prog-item"><div class="kq-prog-time">21h00</div><div><p class="kq-prog-title">Dîner & festivités</p><p class="kq-prog-place" id="kq-venue">Patio des Aghlabides</p></div></div>
+  </section>
+  <div class="kq-zellige"></div>
+  <section class="kq-rsvp"><a class="kq-rsvp-btn" id="kq-rsvp-btn" href="#" target="_blank">Confirmer ma présence</a></section>
+  <button class="p-replay" style="background:oklch(0.38 0.10 160);color:oklch(0.97 0.02 90);" onclick="location.reload()">↺ Rejouer</button>
+</div>
+
+<!-- ══════════ HAMMAMET AZUR ══════════ -->
+<div id="page-hammamet" style="display:none;">
+  <a class="p-back" href="#">← Tous les modèles</a>
+  <svg class="ha-wave-top" viewBox="0 0 1440 120" preserveAspectRatio="none">
+    <path d="M0 60 C 240 100 480 20 720 60 S 1200 100 1440 60 L1440 0 L0 0 Z" fill="oklch(0.50 0.10 220)" opacity="0.15"/>
+    <path d="M0 80 C 240 120 480 40 720 80 S 1200 120 1440 80 L1440 0 L0 0 Z" fill="oklch(0.50 0.10 220)" opacity="0.25"/>
+  </svg>
+  <section class="ha-hero">
+    <svg class="ha-frame" viewBox="0 0 400 540" preserveAspectRatio="none" fill="none">
+      <path d="M30 10 L370 10 L390 30 L390 510 L370 530 L30 530 L10 510 L10 30 Z" stroke="oklch(0.50 0.10 220)" stroke-width="1.4"/>
+      <path d="M40 22 L358 22 L378 42 L378 498 L358 518 L42 518 L22 498 L22 42 Z" stroke="oklch(0.50 0.10 220)" stroke-width="0.5"/>
+    </svg>
+    <div class="ha-content">
+      <p class="ha-bismillah fu fu1">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+      <svg class="ha-arabesque fu fu2" viewBox="0 0 240 40" fill="none" stroke="currentColor" stroke-width="0.8">
+        <path d="M0 20 C30 0, 50 40, 80 20 S130 0, 160 20 S210 40, 240 20"/>
+        <path d="M0 20 C30 40, 50 0, 80 20 S130 40, 160 20 S210 0, 240 20"/>
+        <circle cx="120" cy="20" r="3" fill="currentColor"/>
+      </svg>
+      <p class="ha-eyebrow fu fu2" id="ha-eyebrow">À l'ombre des jasmins de Hammamet</p>
+      <p class="ha-invite fu fu3">nous unissons nos vies</p>
+      <div class="fu fu4" style="margin-top:16px;">
+        <span class="ha-name" id="ha-name1">Nour</span>
+        <span class="ha-amp">et</span>
+        <span class="ha-name" id="ha-name2">Anis</span>
+      </div>
+      <svg class="ha-arabesque fu fu5" viewBox="0 0 240 40" fill="none" stroke="currentColor" stroke-width="0.8">
+        <path d="M0 20 C30 0, 50 40, 80 20 S130 0, 160 20 S210 40, 240 20"/>
+        <path d="M0 20 C30 40, 50 0, 80 20 S130 40, 160 20 S210 0, 240 20"/>
+        <circle cx="120" cy="20" r="3" fill="currentColor"/>
+      </svg>
+      <p class="ha-arabic fu fu5">نور و أنيس</p>
+    </div>
+  </section>
+  <section class="ha-details">
+    <svg style="display:block;margin:0 auto 20px;width:192px;color:oklch(0.50 0.10 220);" viewBox="0 0 240 40" fill="none" stroke="currentColor" stroke-width="0.8">
+      <path d="M0 20 C30 0, 50 40, 80 20 S130 0, 160 20 S210 40, 240 20"/>
+      <path d="M0 20 C30 40, 50 0, 80 20 S130 40, 160 20 S210 0, 240 20"/>
+      <circle cx="120" cy="20" r="3" fill="currentColor"/>
+    </svg>
+    <h2 class="ha-details-title">Compte à rebours</h2>
+    <p class="ha-details-date" id="ha-detaildate">Samedi 27 juin 2026 · Yasmine Hammamet</p>
+    <div class="ha-cd-grid">
+      <div class="ha-cd-item"><div class="ha-cd-num" id="ha-days">0</div><div class="ha-cd-label">Jours</div></div>
+      <div class="ha-cd-item"><div class="ha-cd-num" id="ha-hours">0</div><div class="ha-cd-label">Heures</div></div>
+      <div class="ha-cd-item"><div class="ha-cd-num" id="ha-mins">0</div><div class="ha-cd-label">Minutes</div></div>
+      <div class="ha-cd-item"><div class="ha-cd-num" id="ha-secs">0</div><div class="ha-cd-label">Secondes</div></div>
+    </div>
+    <div class="ha-prog-item"><div class="ha-prog-time">17h00</div><div><p class="ha-prog-title">Cérémonie</p><p class="ha-prog-place">Dar Zitouna, Hammamet</p></div></div>
+    <div class="ha-prog-item"><div class="ha-prog-time">19h00</div><div><p class="ha-prog-title">Cocktail</p><p class="ha-prog-place">Jardins du Jasmin</p></div></div>
+    <div class="ha-prog-item"><div class="ha-prog-time">21h00</div><div><p class="ha-prog-title">Dîner & Soirée</p><p class="ha-prog-place" id="ha-venue">Hôtel Médina Solazur</p></div></div>
+  </section>
+  <section class="ha-rsvp"><a class="ha-rsvp-btn" id="ha-rsvp-btn" href="#" target="_blank">Confirmer ma présence</a></section>
+  <button class="p-replay" style="background:oklch(0.50 0.10 220);color:white;" onclick="location.reload()">↺ Rejouer</button>
+</div>
+
+<!-- ══════════ MEDINA SEPIA ══════════ -->
+<div id="page-medina" style="display:none;">
+  <a class="p-back" href="#">← Tous les modèles</a>
+  <section class="ms-hero">
+    <div class="ms-parchment"></div>
+    <svg class="ms-arch" viewBox="0 0 400 580" preserveAspectRatio="none" fill="none">
+      <path d="M40 140 Q40 60 110 50 Q140 20 200 20 Q260 20 290 50 Q360 60 360 140 L360 540 L40 540 Z" stroke="oklch(0.42 0.07 50)" stroke-width="1.6"/>
+      <path d="M52 140 Q52 70 114 62 Q142 34 200 34 Q258 34 286 62 Q348 70 348 140 L348 528 L52 528 Z" stroke="oklch(0.55 0.10 40)" stroke-width="0.5" stroke-dasharray="2 3"/>
+    </svg>
+    <div class="ms-content">
+      <p class="ms-bismillah fu fu1">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+      <svg class="ms-ornament fu fu2" viewBox="0 0 220 40" fill="none" stroke="currentColor" stroke-width="0.9">
+        <path d="M0 20 H80"/><path d="M140 20 H220"/>
+        <path d="M110 6 L122 20 L110 34 L98 20 Z"/><path d="M110 12 L116 20 L110 28 L104 20 Z" fill="currentColor"/>
+        <circle cx="86" cy="20" r="2" fill="currentColor"/><circle cx="134" cy="20" r="2" fill="currentColor"/>
+      </svg>
+      <p class="ms-eyebrow fu fu2">Dans la médina, sous les arcades anciennes</p>
+      <p class="ms-invite fu fu3">nos familles ont l'honneur d'annoncer</p>
+      <div class="fu fu4" style="margin-top:16px;">
+        <span class="ms-name" id="ms-name1">Aïcha</span>
+        <span class="ms-amp">&</span>
+        <span class="ms-name" id="ms-name2">Hamza</span>
+      </div>
+      <svg class="ms-ornament fu fu5" viewBox="0 0 220 40" fill="none" stroke="currentColor" stroke-width="0.9">
+        <path d="M0 20 H80"/><path d="M140 20 H220"/>
+        <path d="M110 6 L122 20 L110 34 L98 20 Z"/><path d="M110 12 L116 20 L110 28 L104 20 Z" fill="currentColor"/>
+        <circle cx="86" cy="20" r="2" fill="currentColor"/><circle cx="134" cy="20" r="2" fill="currentColor"/>
+      </svg>
+      <p class="ms-arabic fu fu5">عائشة و حمزة</p>
+    </div>
+  </section>
+  <section class="ms-details">
+    <svg style="display:block;margin:0 auto 20px;width:208px;color:oklch(0.55 0.10 40);" viewBox="0 0 220 40" fill="none" stroke="currentColor" stroke-width="0.9">
+      <path d="M0 20 H80"/><path d="M140 20 H220"/>
+      <path d="M110 6 L122 20 L110 34 L98 20 Z"/><path d="M110 12 L116 20 L110 28 L104 20 Z" fill="currentColor"/>
+      <circle cx="86" cy="20" r="2" fill="currentColor"/><circle cx="134" cy="20" r="2" fill="currentColor"/>
+    </svg>
+    <h2 class="ms-details-title">Programme de la journée</h2>
+    <p class="ms-details-date" id="ms-detaildate">Samedi 18 avril 2026 · Médina de Tunis</p>
+    <div class="ms-cd-grid">
+      <div class="ms-cd-item"><div class="ms-cd-num" id="ms-days">0</div><div class="ms-cd-label">Jours</div></div>
+      <div class="ms-cd-item"><div class="ms-cd-num" id="ms-hours">0</div><div class="ms-cd-label">Heures</div></div>
+      <div class="ms-cd-item"><div class="ms-cd-num" id="ms-mins">0</div><div class="ms-cd-label">Minutes</div></div>
+      <div class="ms-cd-item"><div class="ms-cd-num" id="ms-secs">0</div><div class="ms-cd-label">Secondes</div></div>
+    </div>
+    <div class="ms-prog-item"><div class="ms-prog-time">16h00</div><div><p class="ms-prog-title">Cérémonie religieuse</p><p class="ms-prog-place">Mosquée Zitouna, Médina</p></div></div>
+    <div class="ms-prog-item"><div class="ms-prog-time">18h30</div><div><p class="ms-prog-title">Réception</p><p class="ms-prog-place">Dar Ben Abdallah</p></div></div>
+    <div class="ms-prog-item"><div class="ms-prog-time">21h00</div><div><p class="ms-prog-title">Dîner & festivités</p><p class="ms-prog-place" id="ms-venue">Dar El Jeld, Médina de Tunis</p></div></div>
+  </section>
+  <section class="ms-rsvp"><a class="ms-rsvp-btn" id="ms-rsvp-btn" href="#" target="_blank">Confirmer ma présence</a></section>
+  <button class="p-replay" style="background:oklch(0.42 0.07 50);color:oklch(0.94 0.03 80);" onclick="location.reload()">↺ Rejouer</button>
+</div>
 
 <script>
-// ── THEME → intro style mapping ──
-const ENVELOPE_THEMES = new Set([
-  'romantic','dusty-rose','medina','zellige','kairouan'
-]);
-
-// ── SLUG → theme key ──
+// ── THEME CONFIG ──
+const ENVELOPE_THEMES = new Set(['romantic','dusty-rose','medina','zellige','kairouan']);
 const SLUG_MAP = {
   romantic:'romantic', olive:'olive', midnight:'midnight',
-  'dusty-rose':'dusty-rose', dusty_rose:'dusty-rose',
-  terracotta:'terracotta', sidibou:'sidibou',
-  'inv-zellige-royal':'zellige', zellige:'zellige',
+  'dusty-rose':'dusty-rose', dusty_rose:'dusty-rose', terracotta:'terracotta',
+  sidibou:'sidibou', 'inv-zellige-royal':'zellige', zellige:'zellige',
   olivier:'olivier', djerba:'djerba', tozeur:'tozeur',
-  carthage:'carthage', kairouan:'kairouan',
-  hammamet:'hammamet', medina:'medina'
+  carthage:'carthage', kairouan:'kairouan', hammamet:'hammamet', medina:'medina'
 };
-
-// ── DEFAULT DATA per theme ──
+const CLASSIC_THEMES = new Set(['romantic','olive','midnight','dusty-rose','terracotta']);
+const PREMIUM_PAGE_MAP = {
+  sidibou:'sidibou', zellige:'zellige', olivier:'olivier', djerba:'djerba',
+  tozeur:'tozeur', carthage:'carthage', kairouan:'kairouan', hammamet:'hammamet', medina:'medina'
+};
 const DATA = {
-  romantic:    {name1:'Yasmine',name2:'Amine',  date:'Lundi · 14 Décembre 2026',     venue:'Dar Lasram, La Médina — Tunis',     time:'Cérémonie à 18 heures', target:'2026-12-14T18:00:00'},
-  olive:       {name1:'Leïla',  name2:'Karim',  date:'Samedi · 20 Juin 2026',        venue:'Villa Les Oliviers — Hammamet',     time:'Cérémonie à 17 heures', target:'2026-06-20T17:00:00'},
-  midnight:    {name1:'Sarah',  name2:'Adam',   date:'Vendredi · 5 Mars 2027',       venue:'Palais de la Mer — La Marsa',       time:'Cérémonie à 20 heures', target:'2027-03-05T20:00:00'},
-  'dusty-rose':{name1:'Nour',   name2:'Mehdi',  date:'Dimanche · 12 Avril 2026',     venue:'Jardin des Roses — Carthage',       time:'Cérémonie à 18 heures', target:'2026-04-12T18:00:00'},
-  terracotta:  {name1:'Amira',  name2:'Omar',   date:'Samedi · 15 Mai 2027',         venue:'Oasis de Tozeur — Tozeur',          time:'Cérémonie à 17 heures', target:'2027-05-15T17:00:00'},
-  sidibou:     {name1:'Yasmine',name2:'Mehdi',  date:'Mardi · 15 Juin 2027',         venue:'Dar Ennejma — Sidi Bou Saïd',       time:'Cérémonie à 18 heures', target:'2027-06-15T18:00:00'},
-  zellige:     {name1:'Salma',  name2:'Karim',  date:'Samedi · 8 Novembre 2026',     venue:'Palais Bayram — Tunis',             time:'Cérémonie à 18 heures', target:'2026-11-08T18:00:00'},
-  olivier:     {name1:'Leïla',  name2:'Amine',  date:'Vendredi · 25 Septembre 2026', venue:'Villa des Roses — Nabeul',          time:'Cérémonie à 17 heures', target:'2026-09-25T17:00:00'},
-  djerba:      {name1:'Rachel', name2:'David',  date:'Dimanche · 3 Octobre 2027',    venue:'Hôtel Dar Djerba — Djerba',         time:'Cérémonie à 18 heures', target:'2027-10-03T18:00:00'},
-  tozeur:      {name1:'Amira',  name2:'Omar',   date:'Samedi · 20 Février 2027',     venue:'Oasis de Tozeur — Tozeur',          time:'Cérémonie à 17 heures', target:'2027-02-20T17:00:00'},
-  carthage:    {name1:'Leïla',  name2:'Hamza',  date:'Vendredi · 12 Mars 2027',      venue:'Site de Carthage — Carthage',       time:'Cérémonie à 18 heures', target:'2027-03-12T18:00:00'},
-  kairouan:    {name1:'Yasmine',name2:'Mehdi',  date:'Samedi · 18 Juillet 2026',     venue:'Médina de Kairouan — Kairouan',     time:'Cérémonie à 17 heures', target:'2026-07-18T17:00:00'},
-  hammamet:    {name1:'Nour',   name2:'Anis',   date:'Dimanche · 6 Juin 2027',       venue:'Corniche de Hammamet — Hammamet',   time:'Cérémonie à 18 heures', target:'2027-06-06T18:00:00'},
-  medina:      {name1:'Aïcha',  name2:'Hamza',  date:'Samedi · 25 Septembre 2027',   venue:'Médina de Tunis — Tunis',           time:'Cérémonie à 18 heures', target:'2027-09-25T18:00:00'},
+  romantic:    {n1:'Yasmine',n2:'Amine',  target:'2026-12-14T18:00:00'},
+  olive:       {n1:'Leïla',  n2:'Karim',  target:'2026-06-20T17:00:00'},
+  midnight:    {n1:'Sarah',  n2:'Adam',   target:'2027-03-05T20:00:00'},
+  'dusty-rose':{n1:'Nour',   n2:'Mehdi',  target:'2026-04-12T18:00:00'},
+  terracotta:  {n1:'Amira',  n2:'Omar',   target:'2027-05-15T17:00:00'},
+  sidibou:     {n1:'Yasmine',n2:'Mehdi',  target:'2027-06-14T17:00:00'},
+  zellige:     {n1:'Salma',  n2:'Karim',  target:'2026-09-05T16:00:00'},
+  olivier:     {n1:'Leïla',  n2:'Amine',  target:'2026-09-25T17:00:00'},
+  djerba:      {n1:'Rachel', n2:'David',  target:'2026-07-18T16:00:00'},
+  tozeur:      {n1:'Amira',  n2:'Omar',   target:'2026-10-10T16:00:00'},
+  carthage:    {n1:'Leïla',  n2:'Hamza',  target:'2026-08-22T15:00:00'},
+  kairouan:    {n1:'Yasmine',n2:'Mehdi',  target:'2026-09-12T17:00:00'},
+  hammamet:    {n1:'Nour',   n2:'Anis',   target:'2026-06-27T17:00:00'},
+  medina:      {n1:'Aïcha',  n2:'Hamza',  target:'2026-04-18T16:00:00'},
 };
 
 // ── PARSE PARAMS ──
 const p = new URLSearchParams(window.location.search);
-const rawTheme  = (p.get('theme') || 'romantic').toLowerCase();
-const themeKey  = SLUG_MAP[rawTheme] || 'romantic';
-const d         = DATA[themeKey] || DATA.romantic;
-const useEnvelope = ENVELOPE_THEMES.has(themeKey);
-
-const name1    = p.get('name1')    || d.name1;
-const name2    = p.get('name2')    || d.name2;
-const date     = p.get('date')     || d.date;
-const venue    = p.get('venue')    || d.venue;
-const time     = p.get('time')     || d.time;
-const target   = p.get('target')   || d.target;
+const rawTheme = (p.get('theme') || 'romantic').toLowerCase();
+const themeKey = SLUG_MAP[rawTheme] || 'romantic';
+const d = DATA[themeKey] || DATA.romantic;
+const name1    = p.get('name1') || d.n1;
+const name2    = p.get('name2') || d.n2;
 const whatsapp = p.get('whatsapp') || '';
-const story    = p.get('story')    || null;
-const locname  = p.get('locname')  || d.name1 + ' & ' + d.name2;
-const locaddr  = p.get('locaddr')  || '';
-const mapsurl  = p.get('mapsurl')  || '#';
+const target   = p.get('target') || d.target;
+const venue    = p.get('venue') || '';
+const mapsurl  = p.get('mapsurl') || '#';
 
-// ── APPLY THEME ──
-document.body.classList.add('theme-' + themeKey);
-
-// ── POPULATE TEXT ──
-document.getElementById('txt-name1').textContent  = name1;
-document.getElementById('txt-name2').textContent  = name2;
-document.getElementById('txt-date').textContent   = date;
-document.getElementById('txt-venue').textContent  = venue;
-document.getElementById('txt-time').textContent   = time;
-document.getElementById('txt-locname').textContent = locname;
-document.getElementById('txt-locaddr').textContent = locaddr;
-document.getElementById('btn-maps').href = mapsurl;
-if (story) document.getElementById('txt-story').textContent = story;
-if (whatsapp) {
-  document.getElementById('btn-whatsapp').href =
-    'https://wa.me/' + whatsapp.replace('+','') + '?text=Bonjour%2C+je+confirme+ma+présence+à+votre+mariage';
+function rsvpUrl() {
+  if (!whatsapp) return '#';
+  return 'https://wa.me/' + whatsapp.replace('+','') + '?text=Bonjour%2C+je+confirme+ma+présence+à+votre+mariage';
 }
 
-// ── SHOW CORRECT INTRO ──
-if (useEnvelope) {
-  document.getElementById('envScreen').style.display = '';
+// ── COUNTDOWN FACTORY ──
+function startCountdown(prefix) {
+  const tgt = new Date(target);
+  function tick() {
+    const diff = tgt - new Date();
+    if (diff <= 0) {['days','hours','mins','secs'].forEach(s => { const el = document.getElementById(prefix+'-'+s); if(el) el.textContent='0'; }); return; }
+    const el = id => document.getElementById(prefix+'-'+id);
+    if(el('days'))  el('days').textContent  = Math.floor(diff/86400000);
+    if(el('hours')) el('hours').textContent = Math.floor(diff%86400000/3600000);
+    if(el('mins'))  el('mins').textContent  = Math.floor(diff%3600000/60000);
+    if(el('secs'))  el('secs').textContent  = Math.floor(diff%60000/1000);
+  }
+  tick(); setInterval(tick, 1000);
+}
+function setText(id, val) { const el = document.getElementById(id); if(el && val) el.textContent = val; }
+
+// ── RENDER ──
+if (CLASSIC_THEMES.has(themeKey)) {
+  // Classic 5
+  document.body.classList.add('classic', 'theme-' + themeKey);
+  document.getElementById('classicPage').style.display = '';
+  setText('c-name1', name1); setText('c-name2', name2);
+  setText('c-date',  p.get('date')  || '');
+  setText('c-venue', p.get('venue2') || '');
+  setText('c-time',  p.get('time')  || '');
+  setText('c-locname', p.get('locname') || '');
+  setText('c-locaddr', p.get('locaddr') || '');
+  if (mapsurl !== '#') document.getElementById('c-maps').href = mapsurl;
+  if (whatsapp) document.getElementById('c-whatsapp').href = rsvpUrl();
+  startCountdown('c');
+  if (ENVELOPE_THEMES.has(themeKey)) {
+    document.getElementById('envScreen').style.display = '';
+  } else {
+    document.getElementById('curtainWrap').style.display = '';
+    setTimeout(()=>{ document.getElementById('cL').classList.add('open'); document.getElementById('cR').classList.add('open'); }, 500);
+  }
+  // confetti
+  (function(){
+    const c = document.getElementById('confettiWrap');
+    const s = getComputedStyle(document.documentElement);
+    const colors=[s.getPropertyValue('--gold').trim(),s.getPropertyValue('--blush').trim(),s.getPropertyValue('--rose').trim(),s.getPropertyValue('--muted').trim()];
+    for(let i=0;i<22;i++){
+      const el=document.createElement('div'); el.className='conf-item';
+      const size=Math.random()*7+4, color=colors[Math.floor(Math.random()*colors.length)];
+      const delay=Math.random()*10+3, dur=Math.random()*7+9, left=Math.random()*100;
+      el.style.cssText=`left:${left}%;width:${size}px;height:${size*1.5}px;background:${color};border-radius:50% 0 50% 0;animation-duration:${dur}s;animation-delay:${delay}s;`;
+      c.appendChild(el);
+    }
+  })();
+
 } else {
-  document.getElementById('curtainWrap').style.display = '';
-  setTimeout(() => {
-    document.getElementById('cL').classList.add('open');
-    document.getElementById('cR').classList.add('open');
-  }, 500);
+  // Premium
+  document.body.classList.add('premium', 'theme-' + themeKey);
+  const pageId = 'page-' + themeKey;
+  const pg = document.getElementById(pageId);
+  if (pg) pg.style.display = '';
+
+  // Populate names & rsvp per template
+  const prefix = themeKey.substring(0,2);
+  // generic name setter
+  ['name1','name2'].forEach(k => {
+    ['sb','zr','jo','dj','tz','ca','kq','ha','ms'].forEach(pfx => {
+      const el = document.getElementById(pfx + '-' + k);
+      if (el) el.textContent = k === 'name1' ? name1 : name2;
+    });
+  });
+  // rsvp buttons
+  ['sb','zr','jo','dj','tz','ca','kq','ha','ms'].forEach(pfx => {
+    const el = document.getElementById(pfx + '-rsvp-btn');
+    if (el) el.href = rsvpUrl();
+  });
+  // venue override
+  if (venue) {
+    ['sb-venue','zr-venue','jo-venue','dj-venue','tz-venue','ca-venue','kq-venue','ha-venue','ms-venue'].forEach(id => {
+      const el = document.getElementById(id); if(el) el.textContent = venue;
+    });
+  }
+  // countdowns
+  const cdPrefixes = {sidibou:'sb',zellige:null,olivier:null,djerba:'dj',tozeur:'tz',carthage:null,kairouan:'kq',hammamet:'ha',medina:'ms'};
+  const cdPfx = cdPrefixes[themeKey];
+  if (cdPfx) startCountdown(cdPfx);
 }
 
 // ── ENVELOPE OPEN ──
 function openEnvelope() {
-  const seal   = document.getElementById('envSeal');
-  const flap   = document.getElementById('envFlap');
-  const body   = document.getElementById('envBody');
-  const screen = document.getElementById('envScreen');
+  const seal=document.getElementById('envSeal'), flap=document.getElementById('envFlap');
+  const body=document.getElementById('envBody'), screen=document.getElementById('envScreen');
   seal.classList.add('fade');
-  setTimeout(() => flap.classList.add('open'), 500);
-  setTimeout(() => body.classList.add('open'), 1100);
-  setTimeout(() => screen.classList.add('gone'), 3200);
-  setTimeout(() => { screen.style.display = 'none'; }, 3800);
+  setTimeout(()=>flap.classList.add('open'),500);
+  setTimeout(()=>body.classList.add('open'),1100);
+  setTimeout(()=>screen.classList.add('gone'),3200);
+  setTimeout(()=>screen.style.display='none',3800);
 }
-
-// ── CONFETTI ──
-(function() {
-  const c = document.getElementById('confettiWrap');
-  const s = getComputedStyle(document.documentElement);
-  const colors = [
-    s.getPropertyValue('--gold').trim(),
-    s.getPropertyValue('--blush').trim(),
-    s.getPropertyValue('--rose').trim(),
-    s.getPropertyValue('--muted').trim()
-  ];
-  for (let i = 0; i < 22; i++) {
-    const el    = document.createElement('div');
-    el.className = 'conf-item';
-    const size  = Math.random() * 7 + 4;
-    const color = colors[Math.floor(Math.random() * colors.length)];
-    const delay = Math.random() * 10 + 3;
-    const dur   = Math.random() * 7 + 9;
-    const left  = Math.random() * 100;
-    el.style.cssText = `left:${left}%;width:${size}px;height:${size*1.5}px;background:${color};border-radius:50% 0 50% 0;animation-duration:${dur}s;animation-delay:${delay}s;`;
-    c.appendChild(el);
-  }
-})();
-
-// ── COUNTDOWN ──
-(function() {
-  const tgt = new Date(target);
-  function tick() {
-    const diff = tgt - new Date();
-    if (diff <= 0) { ['days','hours','mins','secs'].forEach(id => document.getElementById(id).textContent = '0'); return; }
-    document.getElementById('days').textContent  = Math.floor(diff / 86400000);
-    document.getElementById('hours').textContent = Math.floor(diff % 86400000 / 3600000);
-    document.getElementById('mins').textContent  = Math.floor(diff % 3600000 / 60000);
-    document.getElementById('secs').textContent  = Math.floor(diff % 60000 / 1000);
-  }
-  tick(); setInterval(tick, 1000);
-})();
 </script>
 </body>
 </html>
