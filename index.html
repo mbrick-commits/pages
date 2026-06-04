@@ -763,10 +763,16 @@ else {
   const ln = document.getElementById('p-loc-name'); if(ln) ln.textContent = locname;
   const la = document.getElementById('p-loc-addr'); if(la) la.textContent = locaddr;
 const pm = document.getElementById('p-maps');
-if(pm) pm.href = (mapsurl && mapsurl !== '#') ? mapsurl : '#';
+if(pm) {
+  pm.href = (mapsurl && mapsurl !== '#') ? mapsurl : '#';
+  pm.onclick = function(e) { e.preventDefault(); return false; }
+}
 
 const pw = document.getElementById('p-whatsapp');
-if(pw) pw.href = whatsapp ? rsvpUrl() : '#';
+if(pw) {
+  pw.href = whatsapp ? rsvpUrl() : '#';
+  pw.onclick = function(e) { e.preventDefault(); return false; }
+}
 
   // date footer
   const df = document.getElementById('p-date-footer');
