@@ -762,10 +762,11 @@ else {
   // location
   const ln = document.getElementById('p-loc-name'); if(ln) ln.textContent = locname;
   const la = document.getElementById('p-loc-addr'); if(la) la.textContent = locaddr;
-  const pm = document.getElementById('p-maps');
-  if(pm && mapsurl !== '#') { pm.href = mapsurl; pm.style.display = ''; }
-  const pw = document.getElementById('p-whatsapp');
-  if(pw) pw.href = rsvpUrl();
+const pm = document.getElementById('p-maps');
+if(pm) pm.href = (mapsurl && mapsurl !== '#') ? mapsurl : '#';
+
+const pw = document.getElementById('p-whatsapp');
+if(pw) pw.href = whatsapp ? rsvpUrl() : '#';
 
   // date footer
   const df = document.getElementById('p-date-footer');
