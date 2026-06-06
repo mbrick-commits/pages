@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>دعوة زفاف — أمين و يسمين</title>
+<title> أمين العيسري
+و
+هيفاء وهبي </title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +19,7 @@
 }
 
 :root {
-  --bg: #f2eadc;
+  --bg: #F4EDE1;
   --paper: #fbf6ec;
   --green: #7c8b5b;
   --pink: #c98797;
@@ -65,7 +67,7 @@ img {
 
 .hero-names {
   position: absolute;
-  top: 28%;
+  top: 35%;
   left: 50%;
   transform: translateX(-50%);
   font-size: 30px;
@@ -87,7 +89,7 @@ img {
 
 .countdown-frame {
   position: relative;
-  width: 250px;
+  width: 300px;
   margin: 0 auto;
 }
 
@@ -108,20 +110,20 @@ img {
 
 .countdown-title {
   font-size: 22px;
-  margin-bottom: 8px;
+  margin-bottom: 15px;
 }
 
 .countdown-date {
-  font-size: 13px;
+  font-size: 10px;
   letter-spacing: 2px;
   direction: ltr;
   color: var(--green);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .countdown-row {
   display: flex;
-  gap: 10px;
+  gap: 6px;
   direction: ltr;
 }
 
@@ -187,21 +189,24 @@ img {
 
 /* VENUE CARD */
 .venue-section {
-  padding: 35px 22px 50px;
+  padding: 0px 0px 0px;
 }
 
 .big-frame {
   position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 .big-frame-img {
-  width: 100%;
+  width: 150%;
 }
 
 .venue-content {
   position: absolute;
   inset: 0;
-  padding: 20% 13% 12%;
+  padding: 5% 13% 12%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -239,7 +244,7 @@ img {
 
 .program-card {
   position: relative;
-  width: 260px;
+  width: 300px;
   margin: 0 auto;
 }
 
@@ -327,25 +332,24 @@ img {
 .btn-map {
   background: var(--green);
 }
-
-/* FOOTER */
 .footer {
   padding: 35px 20px 50px;
 }
 
 .footer-deco {
-  width: 120px;
-  margin: 0 auto 20px;
+  width: 70px;
+  margin: 0 auto 8px;
 }
 
 .footer-names {
   font-size: 38px;
   line-height: 1.5;
   color: var(--green);
+  margin-bottom: 6px;
 }
 
 .footer-date {
-  margin-top: 10px;
+  margin-top: 6px;
   direction: ltr;
   letter-spacing: 3px;
   font-size: 13px;
@@ -353,12 +357,53 @@ img {
 }
 
 .brand {
-  margin-top: 30px;
-  font-size: 11px;
-  color: rgba(91, 85, 56, 0.55);
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 13px;
+  color: rgba(91, 85, 56, 0.65);
   direction: ltr;
+  text-decoration: none;
+  letter-spacing: 0.5px;
 }
 
+.brand:hover {
+  color: var(--pink);
+}
+
+.footer-links {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  direction: ltr;
+
+  transform: translateY(-35px);
+}
+
+.footer-links a {
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(124, 139, 91, 0.4);
+  border-radius: 50%;
+  color: var(--green);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: transform 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.footer-links a:hover {
+  transform: translateY(-2px);
+  color: var(--pink);
+  border-color: var(--pink);
+}
+
+.social-icon {
+  width: 18px;
+  height: 18px;
+}
 /* MOBILE SMALL */
 @media (max-width: 380px) {
   .hero-names {
@@ -377,6 +422,43 @@ img {
     font-size: 24px;
   }
 }
+
+#intro-video-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s ease;
+}
+
+#intro-video-overlay.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#intro-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#skip-intro {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: none;
+  background: rgba(255, 255, 255, 0.75);
+  color: var(--text);
+  font-family: 'Gulzar', serif;
+  font-size: 15px;
+  padding: 8px 22px;
+  border-radius: 999px;
+  cursor: pointer;
+}
 </style>
 </head>
 
@@ -384,23 +466,78 @@ img {
 
 <main class="page">
 
+
+    <div id="intro-video-overlay">
+  <video id="intro-video" autoplay muted playsinline preload="auto">
+    <source src="vid.mp4" type="video/mp4">
+  </video>
+
+  <button id="skip-intro" type="button">تخطي</button>
+</div>
   <!-- HERO -->
   <section class="hero">
     <img class="hero-img" src="z.png" alt="دعوة زفاف">
     <div class="hero-names">
       أمين
       <span>و</span>
-      يسمين
+هيفاء  
     </div>
   </section>
 
-  <!-- COUNTDOWN -->
+  
+
+  <!-- FLORAL DIVIDER -->
+  <img class="divider k" src="k.png" alt="" loading="lazy">
+
+  <!-- WELCOME -->
+  <section class="welcome">
+    <p class="basmala">بسم الله الرحمن الرحيم</p>
+
+    <p class="welcome-text">
+      بعد أطيب التحايا وأزكى السلام، تتشرّف عائلتا
+    </p>
+
+    <div class="couple-names">
+      أمين العيسري
+      <span>و</span>
+      هيفاء وهبي
+  
+    </div>
+
+    <p class="welcome-text">
+      بدعوتكم لحضور حفل زفافهما<br>
+      يوم الأحد السابع والعشرين من سبتمبر
+    </p>
+  </section>
+
+  <!-- SECOND FLORAL DIVIDER -->
+  <img class="divider a" src="a.png" alt="" loading="lazy">
+
+
+
+  <!-- VENUE -->
+  <section class="venue-section">
+    <div class="big-frame">
+      <img class="big-frame-img" src="y.png" alt="" loading="lazy">
+      <div class="venue-content">
+        <div class="venue-title">قاعة قصر الأفراح</div>
+        <div class="venue-place">سيدي بوسعيد، تونس</div>
+        <div class="venue-details">
+          يوم الأحد 27 سبتمبر 2026<br>
+          على الساعة السادسة والنصف مساءً<br>
+          الرجاء تأكيد الحضور قبل 10 سبتمبر
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- COUNTDOWN -->
   <section class="countdown-section">
     <div class="countdown-frame">
       <img src="x.png" alt="">
       <div class="countdown-content">
         <div class="countdown-title">موعد الفرح</div>
-        <div class="countdown-date">27 · 09 · 2026</div>
+
         <div class="countdown-row">
           <div class="count-box">
             <span class="count-num" id="days">00</span>
@@ -423,54 +560,12 @@ img {
     </div>
   </section>
 
-  <!-- FLORAL DIVIDER -->
-  <img class="divider k" src="k.png" alt="" loading="lazy">
-
-  <!-- WELCOME -->
-  <section class="welcome">
-    <p class="basmala">بسم الله الرحمن الرحيم</p>
-
-    <p class="welcome-text">
-      بعد أطيب التحايا وأزكى السلام، تتشرّف عائلتا
-    </p>
-
-    <div class="couple-names">
-      أمين العيسري
-      <span>و</span>
-      هيفاء وجدي
-    </div>
-
-    <p class="welcome-text">
-      بدعوتكم لحضور حفل زفافهما<br>
-      يوم الأحد السابع والعشرين من سبتمبر
-    </p>
-  </section>
-
-  <!-- SECOND FLORAL DIVIDER -->
-  <img class="divider a" src="a.png" alt="" loading="lazy">
-
-  <!-- VENUE -->
-  <section class="venue-section">
-    <div class="big-frame">
-      <img class="big-frame-img" src="h.png" alt="" loading="lazy">
-      <div class="venue-content">
-        <div class="venue-title">قاعة قصر الأفراح</div>
-        <div class="venue-place">سيدي بوسعيد، تونس</div>
-        <div class="venue-details">
-          يوم الأحد 27 سبتمبر 2026<br>
-          على الساعة السادسة والنصف مساءً<br>
-          الرجاء تأكيد الحضور قبل 10 سبتمبر
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- PROGRAM -->
   <section class="program-section">
     <h2 class="program-title">موعدنا مع الفرح</h2>
 
     <div class="program-card">
-      <img src="j.png" alt="" loading="lazy">
+      <img src="b.png" alt="" loading="lazy">
       <div class="program-content">
         <div class="program-row">
           <span class="program-time">5:30</span>
@@ -503,39 +598,57 @@ img {
 
       <div class="rsvp-content">
         <div class="rsvp-title">تأكيد الحضور</div>
-        <div class="rsvp-note">يرجى التأكيد قبل 10 سبتمبر 2026</div>
 
         <a class="btn btn-wa"
            href="https://wa.me/21600000000?text=أؤكد%20حضوري%20لحفل%20زفاف%20أمين%20ويسمين"
            target="_blank"
            rel="noopener">
-          تأكيد عبر واتساب
+         الحضور تأكيد 
         </a>
 
         <a class="btn btn-map"
            href="https://www.google.com/maps/search/سيدي+بوسعيد+تونس"
            target="_blank"
-           rel="noopener">
-          الموقع على الخريطة
-        </a>
+           rel="noopener"> Google maps        </a>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
+   <!-- FOOTER -->
   <footer class="footer">
     <img class="footer-deco" src="i.png" alt="" loading="lazy">
 
-    <div class="footer-names">
-      أمين<br>
-      و<br>
-      يسمين
-    </div>
 
-    <div class="footer-date">27 · 09 · 2026</div>
-    <div class="brand">@3ersna</div>
-  </footer>
+<a class="brand" href="https://yourwebsite.com" target="_blank" rel="noopener">
+  3ersna - Votre invitation digitale
+</a>  </footer>
 
+<div class="footer-links">
+
+  <a href="https://www.instagram.com/yourusername" target="_blank" rel="noopener" aria-label="Instagram">
+    <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+      <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+      <circle cx="12" cy="12" r="4"></circle>
+      <circle cx="17.5" cy="6.5" r="1"></circle>
+    </svg>
+  </a>
+
+  <a href="https://www.tiktok.com/@yourusername" target="_blank" rel="noopener" aria-label="TikTok">
+    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M16.6 5.1c.8.9 1.8 1.5 3 1.7v3.3c-1.3 0-2.5-.4-3.6-1.1v5.7c0 3-2.4 5.4-5.4 5.4S5.2 17.7 5.2 14.7s2.4-5.4 5.4-5.4c.3 0 .7 0 1 .1v3.4c-.3-.1-.6-.2-1-.2-1.1 0-2.1.9-2.1 2.1s.9 2.1 2.1 2.1 2.1-.9 2.1-2.1V3.8h3.2c.1.5.3.9.7 1.3z"/>
+    </svg>
+  </a>
+
+  <a href="https://yourwebsite.com" target="_blank" rel="noopener" aria-label="Website">
+    <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+      <circle cx="12" cy="12" r="9"></circle>
+      <path d="M3 12h18"></path>
+      <path d="M12 3c2.3 2.5 3.5 5.5 3.5 9s-1.2 6.5-3.5 9"></path>
+      <path d="M12 3c-2.3 2.5-3.5 5.5-3.5 9s1.2 6.5 3.5 9"></path>
+    </svg>
+  </a>
+
+</div>
 </main>
 
 <script>
@@ -566,6 +679,44 @@ function updateCountdown() {
 
 updateCountdown();
 setInterval(updateCountdown, 1000);
+
+const introOverlay = document.getElementById('intro-video-overlay');
+const introVideo = document.getElementById('intro-video');
+const skipIntro = document.getElementById('skip-intro');
+
+function closeIntro() {
+  if (!introOverlay) return;
+
+  introOverlay.classList.add('hide');
+
+  setTimeout(() => {
+    introOverlay.style.display = 'none';
+  }, 900);
+}
+
+if (introOverlay && introVideo) {
+  document.documentElement.style.overflow = 'hidden';
+
+  function unlockAndClose() {
+    document.documentElement.style.overflow = '';
+    closeIntro();
+  }
+
+  introVideo.addEventListener('ended', unlockAndClose);
+  introVideo.addEventListener('error', unlockAndClose);
+
+  skipIntro.addEventListener('click', unlockAndClose);
+
+  setTimeout(() => {
+    if (introVideo.paused || introVideo.readyState < 2) {
+      unlockAndClose();
+    }
+  }, 4000);
+
+  introVideo.play().catch(() => {
+    unlockAndClose();
+  });
+}
 </script>
 
 </body>
