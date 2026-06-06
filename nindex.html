@@ -143,23 +143,19 @@ body {
 }
 
 /* ══════════════════════════════════════
-   HERO  — identical look to the intro
-   Same image, same height, same crop,
-   same name position → seamless cut.
+   HERO  — natural image height, no svh,
+   no object-fit → no zoom glitch on iOS
 ══════════════════════════════════════ */
 .hero {
   position: relative;
-  height: 100svh;
-  overflow: hidden;
   background: var(--cream2);
+  line-height: 0;
 }
 
 .hero-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: top center;
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .hero-content {
@@ -169,7 +165,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding-top: 33%; /* SAME as #intro-names — names land in same spot */
+  padding-top: 33%;
+  line-height: normal;
 }
 
 .hero-names {
