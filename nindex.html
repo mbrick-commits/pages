@@ -3,566 +3,420 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>دعوة زفاف — أمين & يسمين</title>
+<title>دعوة زفاف — أمين و يسمين</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gulzar&display=swap" rel="stylesheet">
 
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 :root {
-  --cream:  #f5ede2;
-  --cream2: #fdf6ee;
-  --green:  #6b7f4a;
-  --pink:   #c87d98;
-  --text:   #3a3228;
-  --text2:  #5c4a3a;
-  --col:    480px;
+  --bg: #f2eadc;
+  --paper: #fbf6ec;
+  --green: #7c8b5b;
+  --pink: #c98797;
+  --text: #5b5538;
+  --muted: #8b835f;
+  --col: 480px;
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+}
 
 body {
-  background: var(--cream);
-  color: var(--text);
+  background: var(--bg);
   font-family: 'Gulzar', serif;
+  color: var(--text);
   text-align: center;
   overflow-x: hidden;
-  direction: rtl;
 }
 
-/* ══════════════════════════════════════
-   COLUMN WRAPPER
-   On desktop: 480px centered card.
-   On mobile: full width.
-══════════════════════════════════════ */
-#main-page {
-  position: relative; /* needed so absolute intro stays inside */
-}
-
-@media (min-width: 520px) {
-  body  { background: #e8ddd0; }
-  #main-page {
-    max-width: var(--col);
-    margin: 0 auto;
-    background: var(--cream);
-    box-shadow: 0 0 60px rgba(0,0,0,0.14);
-  }
-}
-
-.col {
-  max-width: var(--col);
-  margin-left: auto;
-  margin-right: auto;
+.page {
   width: 100%;
+  max-width: var(--col);
+  margin: 0 auto;
+  background: var(--bg);
+  min-height: 100vh;
 }
 
-/* ══════════════════════════════════════
-   VIDEO INTRO OVERLAY
-   • absolute = stays inside the 480px
-     column on desktop
-   • On mobile (<520px) we switch to
-     fixed so it truly covers the screen
-══════════════════════════════════════ */
-#intro-overlay {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 100svh;
-  z-index: 999;
-  overflow: hidden;
-  background: var(--cream2);
-  transition: opacity 1.2s ease;
-}
-
-/* Mobile only: fullscreen fixed overlay */
-@media (max-width: 519px) {
-  #intro-overlay {
-    position: fixed;
-    inset: 0;
-    height: 100%;
-  }
-}
-
-/* Desktop: skip intro entirely — show page immediately */
-@media (min-width: 520px) {
-  #intro-overlay { display: none !important; }
-}
-
-#intro-overlay.fade-out {
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* Same image, same crop as hero — seamless fade */
-.intro-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: top center;
-}
-
-#intro-video {
-  position: absolute;
-  inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: top center;
-  z-index: 1; /* video on top of static bg */
-}
-
-/* Names appear on top of the video, in the oval */
-#intro-names {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding-top: 33%; /* ← lines up with the oval in the image */
-  opacity: 0;
-  transition: opacity 1.4s ease;
-  pointer-events: none;
-}
-
-#intro-names.show { opacity: 1; }
-
-.intro-name-text {
-  font-family: 'Gulzar', serif;
-  font-size: 64px;
-  line-height: 1.3;
-  color: var(--text);
-}
-
-.intro-name-text .waw {
-  font-size: 40px;
-  color: var(--green);
+img {
+  max-width: 100%;
   display: block;
-  margin: 4px 0;
 }
 
-/* ══════════════════════════════════════
-   HERO  — natural image height, no svh,
-   no object-fit → no zoom glitch on iOS
-══════════════════════════════════════ */
+/* HERO */
 .hero {
   position: relative;
-  background: var(--cream2);
-  line-height: 0;
+  width: 100%;
+  background: var(--paper);
 }
 
-.hero-bg {
+.hero-img {
   width: 100%;
   height: auto;
-  display: block;
-}
-
-.hero-content {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding-top: 33%;
-  line-height: normal;
 }
 
 .hero-names {
-  font-family: 'Gulzar', serif;
-  font-size: 64px;
-  line-height: 1.3;
+  position: absolute;
+  top: 28%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 30px;
+  line-height: 1.8;
   color: var(--text);
+  white-space: nowrap;
 }
 
-.hero-names .waw {
-  font-size: 40px;
-  color: var(--green);
+.hero-names span {
   display: block;
-  margin: 4px 0;
+  font-size: 20px;
+  color: var(--green);
 }
 
-/* ══════════════════════════════════════
-   COUNTDOWN
-══════════════════════════════════════ */
-.countdown-section { padding: 60px 20px; }
+/* COUNTDOWN */
+.countdown-section {
+  padding: 70px 28px 55px;
+}
 
 .countdown-frame {
   position: relative;
-  display: inline-block;
-  max-width: 360px;
-  width: 90%;
+  width: 250px;
+  margin: 0 auto;
 }
 
-.countdown-frame-img { width: 100%; display: block; }
+.countdown-frame img {
+  width: 100%;
+}
 
-.countdown-inner {
+.countdown-content {
   position: absolute;
   inset: 0;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: center;
-  padding: 20px 30px 30px;
+  color: var(--text);
+  padding-top: 8px;
 }
 
-.countdown-label {
+.countdown-title {
   font-size: 22px;
-  color: var(--text2);
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 
-.countdown-date-display {
-  font-size: 16px;
+.countdown-date {
+  font-size: 13px;
+  letter-spacing: 2px;
+  direction: ltr;
   color: var(--green);
-  letter-spacing: 3px;
-  margin-bottom: 18px;
-  direction: ltr;
+  margin-bottom: 12px;
 }
 
-.count-row {
+.countdown-row {
   display: flex;
-  justify-content: center;
-  gap: 20px;
+  gap: 10px;
   direction: ltr;
 }
 
-.count-unit { text-align: center; }
+.count-box {
+  min-width: 38px;
+}
 
 .count-num {
-  font-size: 46px;
+  display: block;
+  font-size: 22px;
   line-height: 1;
-  color: var(--text);
-  display: block;
-  min-width: 52px;
 }
 
-.count-lbl {
-  font-size: 10px;
-  letter-spacing: 2px;
-  color: var(--text2);
-  margin-top: 5px;
+.count-label {
   display: block;
+  font-size: 9px;
+  color: var(--muted);
 }
 
-/* ══════════════════════════════════════
-   FLORAL DIVIDER
-══════════════════════════════════════ */
-.floral-divider { line-height: 0; overflow: hidden; }
-
-.floral-divider img {
+/* DIVIDERS */
+.divider {
   width: 100%;
-  max-height: 220px;
-  object-fit: cover;
-  object-position: top center;
+  margin: 0 auto;
 }
 
-/* ══════════════════════════════════════
-   WELCOME
-══════════════════════════════════════ */
-.welcome-section { padding: 70px 30px 60px; }
+.divider.k {
+  margin-top: 20px;
+}
 
-.welcome-basmala {
-  font-size: 20px;
-  color: var(--text2);
-  line-height: 2;
+.divider.a {
+  margin-top: 40px;
+}
+
+/* WELCOME */
+.welcome {
+  padding: 60px 35px 35px;
+}
+
+.basmala {
+  font-size: 19px;
+  line-height: 2.2;
   margin-bottom: 20px;
 }
 
-.welcome-names {
-  font-size: 58px;
-  line-height: 1.4;
-  color: var(--text);
-  margin-bottom: 18px;
-}
-
-.welcome-names .amp {
-  font-size: 34px;
-  color: var(--pink);
-  display: block;
-}
-
-.welcome-sub {
+.welcome-text {
   font-size: 17px;
-  color: var(--text2);
   line-height: 2.1;
+  color: var(--text);
 }
 
-/* ══════════════════════════════════════
-   VENUE
-══════════════════════════════════════ */
-.venue-section { padding: 0 20px 60px; }
+.couple-names {
+  margin: 25px 0 15px;
+  font-size: 42px;
+  line-height: 1.5;
+  color: var(--green);
+}
 
-.venue-card { position: relative; width: 100%; }
+.couple-names span {
+  display: block;
+  font-size: 26px;
+  color: var(--pink);
+}
 
-.venue-card-img { width: 100%; display: block; }
+/* VENUE CARD */
+.venue-section {
+  padding: 35px 22px 50px;
+}
 
-.venue-text {
+.big-frame {
+  position: relative;
+}
+
+.big-frame-img {
+  width: 100%;
+}
+
+.venue-content {
   position: absolute;
   inset: 0;
+  padding: 20% 13% 12%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  padding: 12% 14% 32%;
-  gap: 8px;
+  justify-content: center;
 }
 
 .venue-title {
-  font-size: clamp(22px, 6vw, 34px);
+  font-size: 28px;
   color: var(--text);
-  line-height: 1.4;
+  margin-bottom: 10px;
 }
-@media (min-width: 520px) { .venue-title { font-size: 30px; } }
 
-.venue-sub {
-  font-size: clamp(14px, 4vw, 19px);
+.venue-place {
+  font-size: 20px;
   color: var(--green);
+  margin-bottom: 16px;
 }
 
 .venue-details {
-  font-size: clamp(12px, 3.5vw, 16px);
-  color: var(--text2);
+  font-size: 15px;
   line-height: 2;
-}
-
-.venue-note {
-  font-size: clamp(10px, 2.8vw, 13px);
-  color: var(--text2);
-  line-height: 1.7;
-}
-
-/* ══════════════════════════════════════
-   PROGRAMME
-══════════════════════════════════════ */
-.programme-section { padding: 20px 20px 60px; }
-
-.programme-heading {
-  font-size: 52px;
   color: var(--text);
-  margin-bottom: 28px;
 }
 
-.programme-card { position: relative; width: 100%; }
+/* PROGRAM */
+.program-section {
+  padding: 30px 28px 60px;
+}
 
-.programme-card-img { width: 100%; display: block; }
+.program-title {
+  font-size: 48px;
+  color: var(--green);
+  margin-bottom: 25px;
+}
 
-.programme-items {
+.program-card {
+  position: relative;
+  width: 260px;
+  margin: 0 auto;
+}
+
+.program-card img {
+  width: 100%;
+}
+
+.program-content {
   position: absolute;
   inset: 0;
+  padding: 17% 18%;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  padding: 18% 22% 14%;
+  gap: 7px;
 }
 
-.prog-item {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.prog-time {
-  font-size: clamp(11px, 3vw, 15px);
-  color: var(--green);
-  direction: ltr;
-}
-
-.prog-label {
-  font-size: clamp(12px, 3.5vw, 16px);
-  color: var(--text);
-  font-weight: 600;
-  line-height: 1.3;
-}
-
-/* ══════════════════════════════════════
-   RSVP / ACTIONS
-══════════════════════════════════════ */
-.rsvp-section { padding: 40px 20px 70px; }
-
-.butterflies {
-  width: 240px;
-  margin: 0 auto 28px;
-  display: block;
-  animation: float 5s ease-in-out infinite;
-}
-
-.rsvp-title-big {
-  font-size: 46px;
-  color: var(--text);
-}
-
-.rsvp-deadline {
+.program-row {
   font-size: 15px;
-  color: var(--text2);
-  margin-top: 6px;
-  margin-bottom: 22px;
-}
-
-.btn-wa, .btn-maps {
-  display: inline-flex;
-  align-items: center;
+  line-height: 1.5;
+  display: flex;
   justify-content: center;
   gap: 10px;
-  padding: 14px 36px;
-  border-radius: 50px;
-  font-family: 'Gulzar', serif;
-  font-size: 18px;
-  font-weight: 600;
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.15s, opacity 0.15s;
-  width: 260px;
 }
 
-.btn-wa   { background: #25d366; color: #fff; }
-.btn-maps { background: var(--green); color: #fff; }
-.btn-wa:hover, .btn-maps:hover { transform: translateY(-2px); opacity: 0.9; }
-.btn-icon { width: 22px; height: 22px; flex-shrink: 0; }
+.program-time {
+  direction: ltr;
+  color: var(--green);
+}
 
-/* ══════════════════════════════════════
-   FOOTER
-══════════════════════════════════════ */
-.footer { padding: 50px 20px 80px; }
+/* RSVP */
+.rsvp-section {
+  padding: 30px 20px 80px;
+}
 
-.footer-flower {
-  width: 170px;
-  margin: 0 auto 26px;
-  display: block;
-  animation: float 6s ease-in-out infinite;
+.rsvp-box {
+  position: relative;
+  min-height: 260px;
+}
+
+.rsvp-bg {
+  width: 100%;
+}
+
+.rsvp-content {
+  position: absolute;
+  inset: 0;
+  padding: 55px 35px 45px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+
+.rsvp-title {
+  font-size: 28px;
+  color: var(--text);
+}
+
+.rsvp-note {
+  font-size: 15px;
+  color: var(--muted);
+  margin-bottom: 5px;
+}
+
+.btn {
+  width: 230px;
+  padding: 12px 18px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-family: 'Gulzar', serif;
+  font-size: 17px;
+  line-height: 1.2;
+  color: white;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-wa {
+  background: #25d366;
+}
+
+.btn-map {
+  background: var(--green);
+}
+
+/* FOOTER */
+.footer {
+  padding: 35px 20px 50px;
+}
+
+.footer-deco {
+  width: 120px;
+  margin: 0 auto 20px;
 }
 
 .footer-names {
-  font-size: 54px;
-  color: var(--text);
-  line-height: 1.4;
+  font-size: 38px;
+  line-height: 1.5;
+  color: var(--green);
 }
 
 .footer-date {
-  font-size: 13px;
-  letter-spacing: 5px;
-  color: var(--text2);
   margin-top: 10px;
+  direction: ltr;
+  letter-spacing: 3px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.brand {
+  margin-top: 30px;
+  font-size: 11px;
+  color: rgba(91, 85, 56, 0.55);
   direction: ltr;
 }
 
-.footer-handle {
-  margin-top: 28px;
-  font-size: 13px;
-  letter-spacing: 2px;
-  color: var(--text2);
-  opacity: 0.6;
-}
-
-/* ══════════════════════════════════════
-   REVEAL ANIMATIONS
-   Opacity only — NO transform.
-   Transform on scroll causes the
-   zoom-in/zoom-out glitch on iOS.
-══════════════════════════════════════ */
-.reveal {
-  opacity: 0;
-  transition: opacity 0.9s ease;
-}
-.reveal.visible { opacity: 1; }
-
-/* ══════════════════════════════════════
-   FLOATING ANIMATION
-══════════════════════════════════════ */
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50%      { transform: translateY(-9px); }
-}
-
-/* ══════════════════════════════════════
-   SMALL PHONE
-══════════════════════════════════════ */
+/* MOBILE SMALL */
 @media (max-width: 380px) {
-  .hero-names, .intro-name-text { font-size: 50px; }
-  .welcome-names { font-size: 46px; }
-  .count-num { font-size: 36px; }
+  .hero-names {
+    font-size: 25px;
+  }
+
+  .couple-names {
+    font-size: 34px;
+  }
+
+  .program-title {
+    font-size: 40px;
+  }
+
+  .venue-title {
+    font-size: 24px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div id="main-page">
+<main class="page">
 
-  <!-- ════════════════════════════════
-       INTRO OVERLAY
-       Lives inside #main-page so on
-       desktop it's contained in the
-       480px column, not full-browser.
-  ════════════════════════════════ -->
-  <div id="intro-overlay">
-
-    <!-- Same floral PNG as hero → seamless fade-out -->
-    <img class="intro-bg"
-         src="Capture d'écran 2026-06-06 153024.png" alt="">
-
-    <!-- The actual intro video plays on top -->
-    <video id="intro-video" autoplay muted playsinline preload="auto">
-      <source src="intro-video-2-a-H3NxSy.mp4" type="video/mp4">
-    </video>
-
-    <!-- Names appear near the end, in the oval position -->
-    <div id="intro-names">
-      <div class="intro-name-text">
-        أمين
-        <span class="waw">و</span>
-        يسمين
-      </div>
-    </div>
-
-  </div>
-
-  <!-- ════════════════════════════════
-       HERO  (identical to intro)
-  ════════════════════════════════ -->
+  <!-- HERO -->
   <section class="hero">
-    <img class="hero-bg"
-         src="Capture d'écran 2026-06-06 153024.png" alt="">
-    <div class="hero-content">
-      <div class="hero-names">
-        أمين
-        <span class="waw">و</span>
-        يسمين
-      </div>
+    <img class="hero-img" src="z.png" alt="دعوة زفاف">
+    <div class="hero-names">
+      أمين
+      <span>و</span>
+      يسمين
     </div>
   </section>
 
   <!-- COUNTDOWN -->
-  <section class="countdown-section reveal">
-    <div class="col">
-      <div class="countdown-frame">
-        <img class="countdown-frame-img"
-             src="Capture d'écran 2026-06-06 164046.png" alt="">
-        <div class="countdown-inner">
-          <div class="countdown-label">موعد الفرح</div>
-          <div class="countdown-date-display">27 · 09 · 2026</div>
-          <div class="count-row">
-            <div class="count-unit">
-              <span class="count-num" id="cd-days">—</span>
-              <span class="count-lbl">يوم</span>
-            </div>
-            <div class="count-unit">
-              <span class="count-num" id="cd-hours">—</span>
-              <span class="count-lbl">ساعة</span>
-            </div>
-            <div class="count-unit">
-              <span class="count-num" id="cd-mins">—</span>
-              <span class="count-lbl">دقيقة</span>
-            </div>
-            <div class="count-unit">
-              <span class="count-num" id="cd-secs">—</span>
-              <span class="count-lbl">ثانية</span>
-            </div>
+  <section class="countdown-section">
+    <div class="countdown-frame">
+      <img src="x.png" alt="">
+      <div class="countdown-content">
+        <div class="countdown-title">موعد الفرح</div>
+        <div class="countdown-date">27 · 09 · 2026</div>
+        <div class="countdown-row">
+          <div class="count-box">
+            <span class="count-num" id="days">00</span>
+            <span class="count-label">يوم</span>
+          </div>
+          <div class="count-box">
+            <span class="count-num" id="hours">00</span>
+            <span class="count-label">ساعة</span>
+          </div>
+          <div class="count-box">
+            <span class="count-num" id="mins">00</span>
+            <span class="count-label">دقيقة</span>
+          </div>
+          <div class="count-box">
+            <span class="count-num" id="secs">00</span>
+            <span class="count-label">ثانية</span>
           </div>
         </div>
       </div>
@@ -570,198 +424,148 @@ body {
   </section>
 
   <!-- FLORAL DIVIDER -->
-  <div class="floral-divider">
-    <img src="Capture d'écran 2026-06-06 155254.png" alt="">
-  </div>
+  <img class="divider k" src="k.png" alt="" loading="lazy">
 
   <!-- WELCOME -->
-  <section class="welcome-section reveal">
-    <div class="col">
-      <p class="welcome-basmala">
-        بسم الله الرحمن الرحيم<br>
-        بعد أهدأكم عاطر التحية وأزكى السلام، تشرّف عائلتا
-      </p>
-      <div class="welcome-names">
-        أمين العيسري
-        <span class="amp">و</span>
-        حيفاء وجدي
-      </div>
-      <p class="welcome-sub">
-        بدعوتكم لحضور حفل زفافهما البهيج<br>
-        نسأل الله أن يبارك لهما ويبارك عليهما
-      </p>
+  <section class="welcome">
+    <p class="basmala">بسم الله الرحمن الرحيم</p>
+
+    <p class="welcome-text">
+      بعد أطيب التحايا وأزكى السلام، تتشرّف عائلتا
+    </p>
+
+    <div class="couple-names">
+      أمين العيسري
+      <span>و</span>
+      هيفاء وجدي
     </div>
+
+    <p class="welcome-text">
+      بدعوتكم لحضور حفل زفافهما<br>
+      يوم الأحد السابع والعشرين من سبتمبر
+    </p>
   </section>
 
+  <!-- SECOND FLORAL DIVIDER -->
+  <img class="divider a" src="a.png" alt="" loading="lazy">
+
   <!-- VENUE -->
-  <section class="venue-section reveal">
-    <div class="col">
-      <div class="venue-card">
-        <img class="venue-card-img"
-             src="Capture d'écran 2026-06-06 155329.png" alt="">
-        <div class="venue-text">
-          <div class="venue-title">قاعة قصر الأفراح</div>
-          <div class="venue-sub">سيدي بوسعيد، تونس</div>
-          <div class="venue-details">
-            يوم الأحد 27 سبتمبر 2026<br>
-            على الساعة السادسة والنصف مساءً
-          </div>
-          <div class="venue-note">
-            اللباس الرسمي مطلوب<br>
-            رجاء التأكيد قبل 10 سبتمبر 2026
-          </div>
+  <section class="venue-section">
+    <div class="big-frame">
+      <img class="big-frame-img" src="h.png" alt="" loading="lazy">
+      <div class="venue-content">
+        <div class="venue-title">قاعة قصر الأفراح</div>
+        <div class="venue-place">سيدي بوسعيد، تونس</div>
+        <div class="venue-details">
+          يوم الأحد 27 سبتمبر 2026<br>
+          على الساعة السادسة والنصف مساءً<br>
+          الرجاء تأكيد الحضور قبل 10 سبتمبر
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PROGRAMME -->
-  <section class="programme-section reveal">
-    <div class="col">
-      <div class="programme-heading">موعدنا مع الفرح</div>
-      <div class="programme-card">
-        <img class="programme-card-img"
-             src="Capture d'écran 2026-06-06 155629.png" alt="">
-        <div class="programme-items">
-          <div class="prog-item">
-            <div class="prog-time">5:30</div>
-            <div class="prog-label">استقبال الضيوف</div>
-          </div>
-          <div class="prog-item">
-            <div class="prog-time">6:00</div>
-            <div class="prog-label">تقديم العشاء</div>
-          </div>
-          <div class="prog-item">
-            <div class="prog-time">7:00</div>
-            <div class="prog-label">الأفراح والرقص</div>
-          </div>
-          <div class="prog-item">
-            <div class="prog-time">9:00</div>
-            <div class="prog-label">تقطيع الكعكة</div>
-          </div>
-          <div class="prog-item">
-            <div class="prog-time">حتى 1:30</div>
-            <div class="prog-label">تنزهوا معنا بلا حدود</div>
-          </div>
+  <!-- PROGRAM -->
+  <section class="program-section">
+    <h2 class="program-title">موعدنا مع الفرح</h2>
+
+    <div class="program-card">
+      <img src="j.png" alt="" loading="lazy">
+      <div class="program-content">
+        <div class="program-row">
+          <span class="program-time">5:30</span>
+          <span>استقبال الضيوف</span>
+        </div>
+        <div class="program-row">
+          <span class="program-time">6:00</span>
+          <span>زفة العروسين</span>
+        </div>
+        <div class="program-row">
+          <span class="program-time">7:00</span>
+          <span>العشاء</span>
+        </div>
+        <div class="program-row">
+          <span class="program-time">9:00</span>
+          <span>الأفراح والرقص</span>
+        </div>
+        <div class="program-row">
+          <span class="program-time">1:30</span>
+          <span>نهاية السهرة</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- RSVP -->
-  <section class="rsvp-section reveal">
-    <div class="col">
-      <img class="butterflies"
-           src="Capture d'écran 2026-06-06 155750.png" alt="">
-      <div class="rsvp-title-big">تأكيد الحضور</div>
-      <div class="rsvp-deadline">يرجى التأكيد قبل 10 سبتمبر 2026</div>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
+  <section class="rsvp-section">
+    <div class="rsvp-box">
+      <img class="rsvp-bg" src="f.png" alt="" loading="lazy">
 
-        <a class="btn-wa"
+      <div class="rsvp-content">
+        <div class="rsvp-title">تأكيد الحضور</div>
+        <div class="rsvp-note">يرجى التأكيد قبل 10 سبتمبر 2026</div>
+
+        <a class="btn btn-wa"
            href="https://wa.me/21600000000?text=أؤكد%20حضوري%20لحفل%20زفاف%20أمين%20ويسمين"
-           target="_blank">
-          <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-          </svg>
+           target="_blank"
+           rel="noopener">
           تأكيد عبر واتساب
         </a>
 
-        <a class="btn-maps"
-           href="https://www.google.com/maps/search/قاعة+قصر+الأفراح+سيدي+بوسعيد+تونس"
-           target="_blank">
-          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
-            <circle cx="12" cy="9" r="2.5"/>
-          </svg>
+        <a class="btn btn-map"
+           href="https://www.google.com/maps/search/سيدي+بوسعيد+تونس"
+           target="_blank"
+           rel="noopener">
           الموقع على الخريطة
         </a>
-
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="footer reveal">
-    <div class="col">
-      <img class="footer-flower"
-           src="Capture d'écran 2026-06-06 155806.png" alt="">
-      <div class="footer-names">
-        أمين<br>
-        <span style="font-size:30px;color:var(--pink)">و</span><br>
-        يسمين
-      </div>
-      <div class="footer-date">27 · 09 · 2026</div>
-      <div class="footer-handle">@3eraria</div>
+  <footer class="footer">
+    <img class="footer-deco" src="i.png" alt="" loading="lazy">
+
+    <div class="footer-names">
+      أمين<br>
+      و<br>
+      يسمين
     </div>
+
+    <div class="footer-date">27 · 09 · 2026</div>
+    <div class="brand">@3ersna</div>
   </footer>
 
-</div><!-- end #main-page -->
+</main>
 
 <script>
-/* ── COUNTDOWN ── */
-function tick() {
-  const diff = new Date('2026-09-27T18:30:00') - new Date();
+const weddingDate = new Date('2026-09-27T18:30:00');
+
+function updateCountdown() {
+  const now = new Date();
+  const diff = weddingDate - now;
+
   if (diff <= 0) {
-    ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id =>
-      document.getElementById(id).textContent = '00');
+    document.getElementById('days').textContent = '00';
+    document.getElementById('hours').textContent = '00';
+    document.getElementById('mins').textContent = '00';
+    document.getElementById('secs').textContent = '00';
     return;
   }
-  document.getElementById('cd-days').textContent  = String(Math.floor(diff/86400000)).padStart(2,'0');
-  document.getElementById('cd-hours').textContent = String(Math.floor(diff%86400000/3600000)).padStart(2,'0');
-  document.getElementById('cd-mins').textContent  = String(Math.floor(diff%3600000/60000)).padStart(2,'0');
-  document.getElementById('cd-secs').textContent  = String(Math.floor(diff%60000/1000)).padStart(2,'0');
-}
-tick();
-setInterval(tick, 1000);
 
-/* ── VIDEO INTRO — mobile only ── */
-const overlay    = document.getElementById('intro-overlay');
-const vid        = document.getElementById('intro-video');
-const introNames = document.getElementById('intro-names');
-const isMobile   = window.innerWidth < 520;
+  const days = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const mins = Math.floor((diff % 3600000) / 60000);
+  const secs = Math.floor((diff % 60000) / 1000);
 
-if (!isMobile) {
-  // Desktop: overlay already hidden by CSS, nothing to do
-} else {
-  // Mobile: lock scroll and run the intro
-  document.documentElement.style.overflow = 'hidden';
-
-  let introEnded = false;
-  function endIntro() {
-    if (introEnded) return;
-    introEnded = true;
-    overlay.classList.add('fade-out');
-    document.documentElement.style.overflow = '';
-    setTimeout(() => { overlay.style.display = 'none'; }, 1300);
-  }
-
-  // Show names 1.5s before video ends
-  vid.addEventListener('timeupdate', () => {
-    if (vid.duration && (vid.duration - vid.currentTime) <= 1.5) {
-      introNames.classList.add('show');
-    }
-  });
-
-  vid.addEventListener('ended',  () => setTimeout(endIntro, 900));
-  vid.addEventListener('error',  () => endIntro());
-
-  // If video hasn't started in 3s, skip
-  const playTimeout = setTimeout(() => endIntro(), 3000);
-  vid.addEventListener('playing', () => clearTimeout(playTimeout));
-
-  vid.play().catch(() => {
-    introNames.classList.add('show');
-    setTimeout(endIntro, 1500);
-  });
+  document.getElementById('days').textContent = String(days).padStart(2, '0');
+  document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+  document.getElementById('mins').textContent = String(mins).padStart(2, '0');
+  document.getElementById('secs').textContent = String(secs).padStart(2, '0');
 }
 
-/* ── SCROLL REVEAL (opacity only — no transform) ── */
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
-  });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+updateCountdown();
+setInterval(updateCountdown, 1000);
 </script>
 
 </body>
