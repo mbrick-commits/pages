@@ -1,138 +1,411 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bloom Invitation</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bloom Style Invitation</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&display=swap');
 
-    body {
-      overflow-x: hidden;
-      background: #f3eadf;
-      font-family: Georgia, serif;
-    }
+*{box-sizing:border-box;margin:0;padding:0}
 
-    .hero {
-      position: relative;
-      width: 100%;
-      min-height: 100vh;
-      overflow: hidden;
-      background: #f3eadf;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
+body{
+  background:#f3eadf;
+  color:#344b1f;
+  font-family:'Cormorant Garamond',serif;
+  text-align:center;
+  overflow-x:hidden;
+}
 
-    .hero-bg,
-    .hero-video {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+section{
+  position:relative;
+  padding:90px 20px;
+  overflow:hidden;
+}
 
-    .hero-bg {
-      z-index: 1;
-    }
+.script{
+  font-family:'Great Vibes',cursive;
+  font-weight:400;
+  color:#344b1f;
+}
 
-    .hero-video {
-      z-index: 2;
-      pointer-events: none;
-    }
+h1{font-size:64px}
+h2{font-size:52px}
+p{font-size:18px;line-height:1.5}
 
-    .invite-card {
-      position: relative;
-      z-index: 3;
-      width: min(86%, 430px);
-      padding: 45px 28px;
-      background: rgba(255, 250, 244, 0.72);
-      border: 1px solid rgba(120, 95, 70, 0.25);
-      backdrop-filter: blur(3px);
-      color: #4b3a2d;
-    }
+.deco{
+  position:absolute;
+  pointer-events:none;
+  user-select:none;
+  animation:float 6s ease-in-out infinite;
+}
 
-    .small {
-      font-size: 13px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-    }
+@keyframes float{
+  0%,100%{transform:translateY(0) rotate(0)}
+  50%{transform:translateY(-10px) rotate(1.5deg)}
+}
 
-    h1 {
-      font-size: 48px;
-      font-weight: 400;
-      line-height: 1.1;
-      margin-bottom: 20px;
-    }
+/* HERO */
+.hero{
+  min-height:100vh;
+  padding:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 
-    .date {
-      font-size: 18px;
-      margin-bottom: 24px;
-    }
+.hero-bg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
 
-    .button {
-      display: inline-block;
-      padding: 12px 24px;
-      border: 1px solid #4b3a2d;
-      text-decoration: none;
-      color: #4b3a2d;
-      font-size: 14px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
+.hero-content{
+  position:relative;
+  z-index:2;
+  margin-top:40px;
+}
 
-    @media (max-width: 600px) {
-      .hero {
-        min-height: 100svh;
-      }
+.oval{
+  width:360px;
+  height:520px;
+  border:4px double #8a9b6c;
+  border-radius:50%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  background:rgba(243,234,223,.35);
+}
 
-      .invite-card {
-        width: 84%;
-        padding: 36px 22px;
-      }
+.arc{
+  letter-spacing:10px;
+  font-size:22px;
+  font-weight:600;
+  margin-bottom:30px;
+}
 
-      h1 {
-        font-size: 38px;
-      }
-    }
-  </style>
+.names{
+  font-size:58px;
+  line-height:1.2;
+}
+
+.date{
+  margin-top:25px;
+  letter-spacing:8px;
+  font-size:14px;
+}
+
+/* COUNTDOWN */
+.count-box{
+  max-width:620px;
+  margin:auto;
+  padding:55px 30px;
+  border:4px double #8a9b6c;
+  border-radius:45% 45% 38% 38%;
+  background:#fffaf0;
+}
+
+.count-row{
+  display:flex;
+  justify-content:center;
+  gap:35px;
+  margin-top:25px;
+}
+
+.count-row div{
+  font-size:44px;
+}
+
+.count-row span{
+  display:block;
+  font-size:11px;
+  letter-spacing:4px;
+  margin-top:10px;
+}
+
+/* SIMPLE TEXT */
+.text-section{
+  max-width:520px;
+  margin:auto;
+}
+
+.floral-top{
+  width:520px;
+  max-width:100%;
+  margin:0 auto 50px;
+}
+
+/* VENUE */
+.venue-card{
+  position:relative;
+  max-width:520px;
+  margin:auto;
+}
+
+.venue-img{
+  width:100%;
+}
+
+.venue-text{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:70px;
+}
+
+.small{
+  letter-spacing:5px;
+  font-size:12px;
+  text-transform:uppercase;
+  margin:20px 0;
+}
+
+/* PROGRAMME */
+.programme-frame{
+  width:440px;
+  max-width:90%;
+  margin:35px auto 0;
+  position:relative;
+}
+
+.programme-frame img{
+  width:100%;
+}
+
+.programme-text{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:28px;
+  font-size:16px;
+  letter-spacing:2px;
+}
+
+/* STORY */
+.gallery{
+  display:flex;
+  gap:18px;
+  overflow-x:auto;
+  padding:40px 20px;
+}
+
+.gallery img{
+  width:280px;
+  height:190px;
+  object-fit:cover;
+  border-radius:4px;
+  flex:0 0 auto;
+}
+
+/* WEEKEND CARD */
+.info-card{
+  position:relative;
+  max-width:820px;
+  min-height:420px;
+  margin:auto;
+  border:1px solid #e3c7bd;
+  padding:70px 30px;
+  background:#f3eadf;
+}
+
+.info-card .corner-flower{
+  width:190px;
+  top:-45px;
+  right:-35px;
+}
+
+.info-card .bird{
+  width:120px;
+  left:-70px;
+  top:210px;
+}
+
+.info-card .star{
+  width:120px;
+  right:-55px;
+  bottom:-40px;
+}
+
+/* RSVP */
+.rsvp-card{
+  max-width:520px;
+  margin:auto;
+  border:1px solid #e3c7bd;
+  background:#f3eadf;
+  padding:50px 35px;
+  text-align:left;
+}
+
+.rsvp-card input,
+.rsvp-card textarea{
+  width:100%;
+  padding:13px;
+  margin:10px 0 22px;
+  border:1px solid #e3c7bd;
+  background:transparent;
+  font-family:inherit;
+}
+
+.rsvp-card button{
+  width:100%;
+  padding:15px;
+  background:#c87d98;
+  color:white;
+  border:0;
+  letter-spacing:3px;
+  font-weight:bold;
+}
+
+/* FOOTER */
+.footer-frame{
+  width:430px;
+  max-width:90%;
+  margin:auto;
+}
+
+@media(max-width:600px){
+  h1{font-size:46px}
+  h2{font-size:40px}
+  section{padding:70px 18px}
+  .oval{width:290px;height:430px}
+  .names{font-size:46px}
+  .arc{font-size:15px;letter-spacing:6px}
+  .count-row{gap:18px}
+  .count-row div{font-size:34px}
+  .venue-text{padding:45px}
+}
+</style>
 </head>
 
 <body>
 
-  <section class="hero">
-    <img
-      class="hero-bg"
-      src="Capture d'écran 2026-06-06 153024.png"
-      alt=""
-    />
-
-    <video
-      class="hero-video"
-      autoplay
-      muted
-      loop
-      playsinline
-      preload="auto"
-    >
-      <source src="intro-video-2-a-H3NxSy.mp4" type="video/mp4" />
-    </video>
-
-    <div class="invite-card">
-      <div class="small">Nous célébrons</div>
-      <h1>Sarah<br>&<br>Youssef</h1>
-      <div class="date">24 Août 2026</div>
-      <a href="#" class="button">Voir l’invitation</a>
+<section class="hero">
+  <img class="hero-bg" src="Capture d'écran 2026-06-06 155254.png">
+  <div class="hero-content">
+    <div class="oval">
+      <div class="arc">WE’RE GETTING MARRIED</div>
+      <div class="script names">Martina<br>&<br>Javier</div>
+      <div class="date">27<br>SEP<br>2026</div>
     </div>
-  </section>
+  </div>
+</section>
+
+<section>
+  <div class="count-box">
+    <h2 class="script">Countdown</h2>
+    <p class="small">Until 27 September 2026</p>
+    <div class="count-row">
+      <div>113<span>Days</span></div>
+      <div>05<span>Hours</span></div>
+      <div>12<span>Minutes</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <img class="floral-top" src="Capture d'écran 2026-06-06 155309.png">
+  <div class="text-section">
+    <h2 class="script">Welcome</h2>
+    <br>
+    <p><em>Together with their families</em></p>
+    <br>
+    <h2 class="script">Martina<br><span style="font-size:30px;color:#c87d98">and</span><br>Javier</h2>
+    <br>
+    <p>request the honor of your presence as they exchange vows of marriage</p>
+  </div>
+</section>
+
+<section>
+  <div class="venue-card">
+    <img class="venue-img" src="Capture d'écran 2026-06-06 155329.png">
+    <div class="venue-text">
+      <h2 class="script">Ceremony<br>& Reception</h2>
+      <p class="small">Where we celebrate</p>
+      <h2 class="script" style="font-size:34px">Hotel du Cap-Eden-Roc</h2>
+      <p>Sunday, 27th of September, 2026<br>5:30 PM</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="script">Wedding Day Programme</h2>
+  <div class="programme-frame">
+    <img src="Capture d'écran 2026-06-06 155629.png">
+    <div class="programme-text">
+      <p><b>5:30 PM</b><br>CEREMONY</p>
+      <p><b>6:30 PM</b><br>COCKTAIL HOUR</p>
+      <p><b>7:30 PM</b><br>DINNER & DANCING</p>
+      <p><b>UNTIL 1:30 AM</b><br>CELEBRATION</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <img src="Capture d'écran 2026-06-06 155750.png" style="width:160px;margin:auto">
+  <h2 class="script">How it all started...</h2>
+  <div class="gallery">
+    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e">
+    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee">
+    <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d">
+    <img src="https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac">
+  </div>
+</section>
+
+<section>
+  <img src="Capture d'écran 2026-06-06 155753.png" style="width:180px;margin:0 auto 50px">
+  <h2 class="script">The Weekend</h2>
+  <p class="small">Join us the evening before</p>
+
+  <div class="info-card">
+    <img class="deco corner-flower" src="Capture d'écran 2026-06-06 155806.png">
+    <img class="deco bird" src="Capture d'écran 2026-06-06 155835.png">
+    <img class="deco star" src="Capture d'écran 2026-06-06 155841.png">
+
+    <h2 class="script" style="font-size:36px">Restaurant César</h2>
+    <p class="small">Cap d’Antibes, France</p>
+    <p>Saturday, 26 September 2026<br>5:30 – 8:30 PM</p>
+    <br>
+    <p>Open in Maps &nbsp;&nbsp; Add to Calendar</p>
+  </div>
+</section>
+
+<section>
+  <h2 class="script">RSVP</h2>
+  <p class="small">Kindly respond by 15 July 2026</p>
+
+  <form class="rsvp-card">
+    <label>Full name *</label>
+    <input type="text" placeholder="Enter your full name">
+
+    <label>Will you be attending?</label>
+    <p><input type="radio" style="width:auto"> Joyfully accepts</p>
+    <p><input type="radio" style="width:auto"> Regretfully declines</p>
+
+    <br>
+    <label>A personal message for the couple</label>
+    <textarea rows="5" placeholder="Share a wish, a memory, or anything you'd like us to read..."></textarea>
+
+    <button type="button">SEND RSVP</button>
+  </form>
+</section>
+
+<section>
+  <div class="footer-frame" style="position:relative">
+    <img src="Capture d'écran 2026-06-06 155909.png" style="width:100%">
+    <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+      <h2 class="script">Martina &<br>Javier</h2>
+      <p class="small">September 27, 2026</p>
+    </div>
+  </div>
+</section>
 
 </body>
 </html>
