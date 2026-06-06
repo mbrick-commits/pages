@@ -679,12 +679,8 @@ function updateCountdown() {
   document.getElementById('secs').textContent = String(secs).padStart(2, '0');
 }
 
-updateCountdown();
-setInterval(updateCountdown, 1000);
-
 const introOverlay = document.getElementById('intro-video-overlay');
 const introVideo = document.getElementById('intro-video');
-const skipIntro = document.getElementById('skip-intro');
 
 function closeIntro() {
   if (!introOverlay) return;
@@ -706,10 +702,11 @@ if (introOverlay && introVideo) {
     closeIntro();
   }
 
-  skipIntro.addEventListener('click', unlockAndClose);
+  introVideo.addEventListener('ended', unlockAndClose);
+  introVideo.addEventListener('error', unlockAndClose);
 
   introVideo.play().catch(() => {
-    console.log('Video autoplay failed, but keeping overlay visible for testing.');
+    unlockAndClose();
   });
 }
 </script>
