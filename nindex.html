@@ -74,12 +74,18 @@ body {
   transition: opacity 1.2s ease;
 }
 
+/* Mobile only: fullscreen fixed overlay */
 @media (max-width: 519px) {
   #intro-overlay {
     position: fixed;
     inset: 0;
     height: 100%;
   }
+}
+
+/* Desktop: skip intro entirely — show page immediately */
+@media (min-width: 520px) {
+  #intro-overlay { display: none !important; }
 }
 
 #intro-overlay.fade-out {
@@ -711,47 +717,46 @@ function tick() {
 tick();
 setInterval(tick, 1000);
 
-/* ── VIDEO INTRO ── */
+/* ── VIDEO INTRO — mobile only ── */
 const overlay    = document.getElementById('intro-overlay');
 const vid        = document.getElementById('intro-video');
 const introNames = document.getElementById('intro-names');
+const isMobile   = window.innerWidth < 520;
 
-// Lock scroll only on mobile (where overlay is position:fixed)
-const isMobile = window.innerWidth < 520;
-if (isMobile) document.documentElement.style.overflow = 'hidden';
+if (!isMobile) {
+  // Desktop: overlay already hidden by CSS, nothing to do
+} else {
+  // Mobile: lock scroll and run the intro
+  document.documentElement.style.overflow = 'hidden';
 
-let introEnded = false;
-function endIntro() {
-  if (introEnded) return;
-  introEnded = true;
-  overlay.classList.add('fade-out');
-  if (isMobile) document.documentElement.style.overflow = '';
-  setTimeout(() => { overlay.style.display = 'none'; }, 1300);
-}
-
-// Show names 1.5s before video ends
-vid.addEventListener('timeupdate', () => {
-  if (vid.duration && (vid.duration - vid.currentTime) <= 1.5) {
-    introNames.classList.add('show');
+  let introEnded = false;
+  function endIntro() {
+    if (introEnded) return;
+    introEnded = true;
+    overlay.classList.add('fade-out');
+    document.documentElement.style.overflow = '';
+    setTimeout(() => { overlay.style.display = 'none'; }, 1300);
   }
-});
 
-// Video ends → short pause → fade out
-vid.addEventListener('ended', () => setTimeout(endIntro, 900));
+  // Show names 1.5s before video ends
+  vid.addEventListener('timeupdate', () => {
+    if (vid.duration && (vid.duration - vid.currentTime) <= 1.5) {
+      introNames.classList.add('show');
+    }
+  });
 
-// Video error → skip immediately
-vid.addEventListener('error', () => endIntro());
+  vid.addEventListener('ended',  () => setTimeout(endIntro, 900));
+  vid.addEventListener('error',  () => endIntro());
 
-// KEY: if video hasn't started playing within 3s, skip.
-// Prevents black screen on slow connections or large files.
-const playTimeout = setTimeout(() => endIntro(), 3000);
-vid.addEventListener('playing', () => clearTimeout(playTimeout));
+  // If video hasn't started in 3s, skip
+  const playTimeout = setTimeout(() => endIntro(), 3000);
+  vid.addEventListener('playing', () => clearTimeout(playTimeout));
 
-// Autoplay blocked → skip gracefully
-vid.play().catch(() => {
-  introNames.classList.add('show');
-  setTimeout(endIntro, 1500);
-});
+  vid.play().catch(() => {
+    introNames.classList.add('show');
+    setTimeout(endIntro, 1500);
+  });
+}
 
 /* ── SCROLL REVEAL (opacity only — no transform) ── */
 const obs = new IntersectionObserver(entries => {
