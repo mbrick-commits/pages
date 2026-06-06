@@ -85,24 +85,7 @@ body {
   margin: 6px 0;
 }
 
-#skip-btn {
-  position: absolute;
-  bottom: 28px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(255,255,255,0.18);
-  color: rgba(255,255,255,0.8);
-  border: 1px solid rgba(255,255,255,0.35);
-  padding: 8px 24px;
-  border-radius: 40px;
-  font-family: 'Gulzar', serif;
-  font-size: 15px;
-  cursor: pointer;
-  backdrop-filter: blur(4px);
-  transition: background 0.2s;
-  direction: rtl;
-}
-#skip-btn:hover { background: rgba(255,255,255,0.3); }
+
 
 /* ══════════════════════════════════════
    MAIN PAGE — hidden until intro done
@@ -573,7 +556,7 @@ body {
     </div>
   </div>
 
-  <button id="skip-btn">تخطي ←</button>
+
 </div>
 
 <!-- ════════════════════════════════════
@@ -772,16 +755,18 @@ tick();
 setInterval(tick, 1000);
 
 /* ── VIDEO INTRO ── */
-const overlay   = document.getElementById('intro-overlay');
-const vid       = document.getElementById('intro-video');
+const overlay    = document.getElementById('intro-overlay');
+const vid        = document.getElementById('intro-video');
 const introNames = document.getElementById('intro-names');
-const mainPage  = document.getElementById('main-page');
-const skipBtn   = document.getElementById('skip-btn');
+const mainPage   = document.getElementById('main-page');
 
 // Prevent scroll while intro plays
 document.body.style.overflow = 'hidden';
 
+let introEnded = false;
 function endIntro() {
+  if (introEnded) return;
+  introEnded = true;
   overlay.classList.add('fade-out');
   mainPage.classList.add('visible');
   document.body.style.overflow = 'auto';
@@ -795,21 +780,18 @@ vid.addEventListener('timeupdate', () => {
   }
 });
 
-// After video ends, pause briefly then fade out
-vid.addEventListener('ended', () => {
-  setTimeout(endIntro, 900);
-});
+// After video ends, brief pause then fade out
+vid.addEventListener('ended', () => setTimeout(endIntro, 900));
 
-// Skip button
-skipBtn.addEventListener('click', endIntro);
+// If video errors, skip immediately
+vid.addEventListener('error', () => endIntro());
 
-// Fallback: if video fails to load or play, skip after 2s
-vid.addEventListener('error', () => setTimeout(endIntro, 500));
-setTimeout(() => {
-  if (!overlay.classList.contains('fade-out')) endIntro();
-}, 12000); // hard cap at 12s
+// KEY FIX: if video hasn't started playing within 3s, skip the intro.
+// This prevents a black screen on desktop when the MP4 is slow to buffer.
+const playingTimeout = setTimeout(() => endIntro(), 3000);
+vid.addEventListener('playing', () => clearTimeout(playingTimeout));
 
-// If video can't autoplay (some browsers), show names immediately and end
+// If autoplay is blocked by the browser, skip after 2s
 vid.play().catch(() => {
   introNames.classList.add('show');
   setTimeout(endIntro, 2000);
