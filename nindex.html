@@ -687,14 +687,16 @@ function closeIntro() {
 
   setTimeout(() => {
     introOverlay.style.display = 'none';
-  }, 900);
+  }, 2100);
 }
 
 if (introOverlay && introVideo) {
+  window.scrollTo(0, 0);
   document.documentElement.style.overflow = 'hidden';
   document.body.style.overflow = 'hidden';
 
   function unlockAndClose() {
+    window.scrollTo(0, 0);
     document.documentElement.style.overflow = '';
     document.body.style.overflow = '';
     closeIntro();
