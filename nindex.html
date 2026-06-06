@@ -1,1 +1,46 @@
+<section class="floral-hero">
+  <img
+    class="floral-image"
+    src="Capture d'écran 2026-06-06 153024.png"
+    alt=""
+  >
 
+  <video
+    class="floral-video"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto"
+  >
+    <source src="intro-video-2-a-H3NxSy.mp4" type="video/mp4">
+  </video>
+</section>
+
+<style>
+.floral-hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #fbfaf3;
+}
+
+.floral-image,
+.floral-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.floral-image {
+  z-index: 1;
+}
+
+.floral-video {
+  z-index: 2;
+  pointer-events: none;
+}
+</style>
