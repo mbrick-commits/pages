@@ -6,18 +6,18 @@
 <title>دعوة زفاف — أمين & يسمين</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Gulzar&display=swap" rel="stylesheet">
+
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --cream:   #f5ede2;
-  --cream2:  #fdf6ee;
-  --green:   #6b7f4a;
-  --green2:  #8a9b6c;
-  --pink:    #c87d98;
-  --pink2:   #e8a4b8;
-  --text:    #3a3228;
-  --text2:   #5c4a3a;
+  --cream:  #f5ede2;
+  --cream2: #fdf6ee;
+  --green:  #6b7f4a;
+  --pink:   #c87d98;
+  --text:   #3a3228;
+  --text2:  #5c4a3a;
+  --col:    480px;
 }
 
 html { scroll-behavior: smooth; }
@@ -25,13 +25,108 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--cream);
   color: var(--text);
-  font-family: 'Scheherazade New', serif;
+  font-family: 'Gulzar', serif;
   text-align: center;
   overflow-x: hidden;
   direction: rtl;
 }
 
-/* ─── HERO ─── */
+/* ══════════════════════════════════════
+   VIDEO INTRO OVERLAY
+══════════════════════════════════════ */
+#intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #000;
+  transition: opacity 1.2s ease;
+}
+
+#intro-overlay.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#intro-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#intro-names {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+  pointer-events: none;
+}
+
+#intro-names.show { opacity: 1; }
+
+.intro-name-text {
+  font-family: 'Gulzar', serif;
+  font-size: 80px;
+  line-height: 1.2;
+  color: #fff;
+  text-shadow: 0 2px 40px rgba(0,0,0,0.55);
+}
+
+.intro-name-text .waw {
+  font-family: 'Gulzar', serif;
+  font-size: 44px;
+  color: #f3d5be;
+  display: block;
+  margin: 6px 0;
+}
+
+#skip-btn {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.18);
+  color: rgba(255,255,255,0.8);
+  border: 1px solid rgba(255,255,255,0.35);
+  padding: 8px 24px;
+  border-radius: 40px;
+  font-family: 'Gulzar', serif;
+  font-size: 15px;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background 0.2s;
+  direction: rtl;
+}
+#skip-btn:hover { background: rgba(255,255,255,0.3); }
+
+/* ══════════════════════════════════════
+   MAIN PAGE — hidden until intro done
+══════════════════════════════════════ */
+#main-page {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+#main-page.visible { opacity: 1; }
+
+/* Desktop: narrow column so portrait PNGs look right */
+.col {
+  max-width: var(--col);
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+/* Full-bleed sections still go edge to edge */
+.full-bleed { width: 100%; }
+
+/* ══════════════════════════════════════
+   HERO
+══════════════════════════════════════ */
 .hero {
   position: relative;
   width: 100%;
@@ -43,189 +138,177 @@ body {
   background: var(--cream2);
 }
 
-.hero-bg {
+/* Constrain the hero image on desktop so it doesn't stretch */
+.hero-bg-wrap {
   position: absolute;
   inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: top;
-  z-index: 1;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
 }
 
-.hero-video {
-  position: absolute;
-  inset: 0;
-  width: 100%; height: 100%;
+.hero-bg-wrap img {
+  width: 100%;
+  max-width: var(--col);
   object-fit: cover;
-  z-index: 2;
-  pointer-events: none;
-  opacity: 0.18;
-  mix-blend-mode: multiply;
+  object-position: top center;
 }
 
 .hero-content {
   position: relative;
-  z-index: 3;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  z-index: 2;
   padding: 120px 40px 80px;
-  animation: fadeUp 1.4s ease both;
+  animation: fadeUp 1.2s ease both;
+  animation-delay: 0.3s;
+  opacity: 0;
 }
+#main-page.visible .hero-content { animation-play-state: running; }
 
 .hero-names {
-  font-family: 'Lateef', serif;
-  font-size: 62px;
+  font-family: 'Gulzar', serif;
+  font-size: 64px;
   line-height: 1.3;
   color: var(--text);
-  letter-spacing: 0.02em;
 }
 
 .hero-names .waw {
-  font-family: 'Amiri', serif;
-  font-size: 38px;
+  font-family: 'Gulzar', serif;
+  font-size: 40px;
   color: var(--green);
   display: block;
   margin: 4px 0;
 }
 
-/* ─── COUNTDOWN ─── */
+/* ══════════════════════════════════════
+   COUNTDOWN
+══════════════════════════════════════ */
 .countdown-section {
-  padding: 70px 20px;
+  padding: 60px 20px;
   background: var(--cream);
 }
 
 .countdown-frame {
-  display: inline-block;
   position: relative;
-  padding: 40px 50px 35px;
+  display: inline-block;
+  max-width: 360px;
+  width: 90%;
 }
 
 .countdown-frame-img {
-  position: absolute;
-  inset: 0;
-  width: 100%; height: 100%;
-  object-fit: fill;
+  width: 100%;
+  display: block;
 }
 
 .countdown-inner {
-  position: relative;
-  z-index: 1;
-  min-width: 280px;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 30px 30px;
 }
 
 .countdown-label {
-  font-family: 'Amiri', serif;
-  font-size: 20px;
+  font-family: 'Gulzar', serif;
+  font-size: 22px;
   color: var(--text2);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .countdown-date-display {
-  font-family: 'Amiri', serif;
-  font-size: 17px;
+  font-family: 'Gulzar', serif;
+  font-size: 16px;
   color: var(--green);
   letter-spacing: 3px;
-  margin-bottom: 22px;
+  margin-bottom: 18px;
   direction: ltr;
 }
 
 .count-row {
   display: flex;
   justify-content: center;
-  gap: 28px;
+  gap: 20px;
   direction: ltr;
 }
 
 .count-unit { text-align: center; }
 
 .count-num {
-  font-family: 'Lateef', serif;
-  font-size: 52px;
+  font-family: 'Gulzar', serif;
+  font-size: 46px;
   line-height: 1;
   color: var(--text);
-  min-width: 60px;
   display: block;
+  min-width: 52px;
 }
 
 .count-lbl {
-  font-size: 11px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 2px;
   color: var(--text2);
-  margin-top: 6px;
+  margin-top: 5px;
   display: block;
 }
 
-/* ─── FLORAL DIVIDER ─── */
+/* ══════════════════════════════════════
+   FLORAL DIVIDER — always full width
+══════════════════════════════════════ */
 .floral-divider {
-  width: 100%;
-  display: block;
   line-height: 0;
+  overflow: hidden;
 }
 
 .floral-divider img {
   width: 100%;
-  max-height: 200px;
+  max-height: 220px;
   object-fit: cover;
-  object-position: top;
+  object-position: top center;
 }
 
-/* ─── WELCOME ─── */
+/* ══════════════════════════════════════
+   WELCOME
+══════════════════════════════════════ */
 .welcome-section {
   padding: 70px 30px 60px;
-  max-width: 520px;
-  margin: auto;
-  animation: fadeUp 1s ease both;
 }
 
 .welcome-basmala {
-  font-family: 'Scheherazade New', serif;
-  font-size: 22px;
+  font-size: 20px;
   color: var(--text2);
-  line-height: 1.9;
-  margin-bottom: 18px;
-}
-
-.welcome-intro {
-  font-size: 18px;
   line-height: 2;
-  color: var(--text2);
-  margin-bottom: 24px;
-}
-
-.welcome-names {
-  font-family: 'Lateef', serif;
-  font-size: 56px;
-  line-height: 1.4;
-  color: var(--text);
   margin-bottom: 20px;
 }
 
+.welcome-names {
+  font-family: 'Gulzar', serif;
+  font-size: 58px;
+  line-height: 1.4;
+  color: var(--text);
+  margin-bottom: 18px;
+}
+
 .welcome-names .amp {
-  font-family: 'Amiri', serif;
-  font-size: 32px;
+  font-family: 'Gulzar', serif;
+  font-size: 34px;
   color: var(--pink);
   display: block;
 }
 
 .welcome-sub {
-  font-size: 16px;
+  font-size: 17px;
   color: var(--text2);
-  line-height: 2;
+  line-height: 2.1;
 }
 
-/* ─── VENUE ─── */
-.venue-section {
-  padding: 10px 20px 60px;
-  position: relative;
-}
+/* ══════════════════════════════════════
+   VENUE CARD
+══════════════════════════════════════ */
+.venue-section { padding: 0 20px 60px; }
 
 .venue-card {
   position: relative;
-  max-width: 420px;
-  margin: auto;
+  width: 100%;
 }
 
 .venue-card-img {
@@ -240,52 +323,50 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 40px 40px 120px;
-  gap: 10px;
+  padding: 12% 14% 32%;
+  gap: 8px;
 }
 
 .venue-title {
-  font-family: 'Lateef', serif;
-  font-size: 34px;
+  font-family: 'Gulzar', serif;
+  font-size: clamp(22px, 6vw, 34px);
   color: var(--text);
   line-height: 1.4;
 }
 
 .venue-sub {
-  font-family: 'Amiri', serif;
-  font-size: 18px;
+  font-family: 'Gulzar', serif;
+  font-size: clamp(14px, 4vw, 19px);
   color: var(--green);
 }
 
 .venue-details {
-  font-size: 16px;
+  font-size: clamp(12px, 3.5vw, 16px);
   color: var(--text2);
-  line-height: 1.9;
-  margin-top: 6px;
+  line-height: 2;
 }
 
 .venue-note {
-  font-size: 13px;
+  font-size: clamp(10px, 2.8vw, 13px);
   color: var(--text2);
   line-height: 1.7;
 }
 
-/* ─── PROGRAMME ─── */
-.programme-section {
-  padding: 20px 20px 60px;
-}
+/* ══════════════════════════════════════
+   PROGRAMME
+══════════════════════════════════════ */
+.programme-section { padding: 20px 20px 60px; }
 
 .programme-heading {
-  font-family: 'Lateef', serif;
-  font-size: 50px;
+  font-family: 'Gulzar', serif;
+  font-size: 52px;
   color: var(--text);
-  margin-bottom: 30px;
+  margin-bottom: 28px;
 }
 
 .programme-card {
   position: relative;
-  max-width: 380px;
-  margin: auto;
+  width: 100%;
 }
 
 .programme-card-img {
@@ -300,103 +381,56 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 14px;
-  padding: 40px 60px;
+  gap: 0;
+  padding: 18% 22% 14%;
 }
 
 .prog-item {
   text-align: center;
-  line-height: 1.5;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .prog-time {
-  font-family: 'Amiri', serif;
-  font-size: 15px;
+  font-family: 'Gulzar', serif;
+  font-size: clamp(11px, 3vw, 15px);
   color: var(--green);
-  letter-spacing: 1px;
   direction: ltr;
 }
 
 .prog-label {
-  font-family: 'Scheherazade New', serif;
-  font-size: 17px;
+  font-size: clamp(12px, 3.5vw, 16px);
   color: var(--text);
   font-weight: 600;
+  line-height: 1.3;
 }
 
-/* ─── BUTTERFLIES / RSVP SECTION ─── */
-.rsvp-section {
-  padding: 40px 20px 70px;
-  position: relative;
-}
+/* ══════════════════════════════════════
+   RSVP / ACTIONS
+══════════════════════════════════════ */
+.rsvp-section { padding: 40px 20px 70px; }
 
 .butterflies {
-  width: 260px;
-  margin: 0 auto 30px;
+  width: 240px;
+  margin: 0 auto 28px;
   display: block;
   animation: float 5s ease-in-out infinite;
 }
 
-.rsvp-frame {
-  position: relative;
-  max-width: 480px;
-  margin: auto;
-}
-
-.rsvp-frame-img {
-  width: 100%;
-  display: block;
-}
-
-.rsvp-inner {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 30px 50px;
-  gap: 16px;
-}
-
-.rsvp-title {
-  font-family: 'Lateef', serif;
-  font-size: 34px;
+.rsvp-title-big {
+  font-family: 'Gulzar', serif;
+  font-size: 46px;
   color: var(--text);
 }
 
 .rsvp-deadline {
-  font-size: 14px;
+  font-size: 15px;
   color: var(--text2);
-  letter-spacing: 2px;
-}
-
-/* ─── BOTTOM ACTIONS ─── */
-.actions-section {
-  padding: 20px 20px 60px;
-  position: relative;
-}
-
-.actions-frame {
-  position: relative;
-  max-width: 560px;
-  margin: auto;
-}
-
-.actions-frame-img {
-  width: 100%;
-  display: block;
-}
-
-.actions-inner {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 18px;
-  padding: 20px;
+  margin-top: 6px;
+  margin-bottom: 22px;
 }
 
 .btn-wa, .btn-maps {
@@ -406,40 +440,37 @@ body {
   gap: 10px;
   padding: 14px 36px;
   border-radius: 50px;
-  font-family: 'Scheherazade New', serif;
+  font-family: 'Gulzar', serif;
   font-size: 18px;
   font-weight: 600;
   text-decoration: none;
   border: none;
   cursor: pointer;
   transition: transform 0.15s, opacity 0.15s;
-  letter-spacing: 0.5px;
+  width: 260px;
 }
 
-.btn-wa {
-  background: #25d366;
-  color: #fff;
-  min-width: 220px;
-}
+.btn-wa  { background: #25d366; color: #fff; }
+.btn-maps { background: var(--green); color: #fff; }
+.btn-wa:hover, .btn-maps:hover { transform: translateY(-2px); opacity: 0.9; }
 
-.btn-maps {
-  background: var(--green);
-  color: #fff;
-  min-width: 220px;
-}
+.btn-icon { width: 22px; height: 22px; flex-shrink: 0; }
 
-.btn-wa:hover, .btn-maps:hover { transform: translateY(-2px); opacity: 0.92; }
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+.footer { padding: 50px 20px 80px; }
 
-.btn-icon { width: 22px; height: 22px; }
-
-/* ─── FOOTER ─── */
-.footer {
-  padding: 50px 20px 80px;
+.footer-flower {
+  width: 170px;
+  margin: 0 auto 26px;
+  display: block;
+  animation: float 6s ease-in-out infinite;
 }
 
 .footer-names {
-  font-family: 'Lateef', serif;
-  font-size: 52px;
+  font-family: 'Gulzar', serif;
+  font-size: 54px;
   color: var(--text);
   line-height: 1.4;
 }
@@ -448,270 +479,347 @@ body {
   font-size: 13px;
   letter-spacing: 5px;
   color: var(--text2);
-  margin-top: 12px;
+  margin-top: 10px;
   direction: ltr;
 }
 
-.footer-social {
-  margin-top: 30px;
-  display: flex;
-  justify-content: center;
-  gap: 18px;
-}
-
-.footer-social a {
-  color: var(--text2);
-  text-decoration: none;
+.footer-handle {
+  margin-top: 28px;
   font-size: 13px;
   letter-spacing: 2px;
-  opacity: 0.7;
-  transition: opacity 0.2s;
+  color: var(--text2);
+  opacity: 0.6;
 }
 
-.footer-social a:hover { opacity: 1; }
-
-/* ─── ANIMATIONS ─── */
+/* ══════════════════════════════════════
+   REVEAL & ANIMATIONS
+══════════════════════════════════════ */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
+  from { opacity: 0; transform: translateY(26px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes float {
   0%,100% { transform: translateY(0); }
-  50%      { transform: translateY(-8px); }
+  50%      { transform: translateY(-9px); }
 }
 
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transform: translateY(28px);
+  transition: opacity 0.85s ease, transform 0.85s ease;
 }
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* ─── MOBILE ─── */
-@media (max-width: 480px) {
-  .hero-names { font-size: 46px; }
-  .welcome-names { font-size: 44px; }
-  .count-num { font-size: 40px; }
-  .venue-text { padding: 28px 28px 100px; }
-  .venue-title { font-size: 26px; }
-  .programme-items { padding: 30px 40px; gap: 10px; }
-  .prog-label { font-size: 14px; }
-  .rsvp-inner { padding: 20px 35px; }
-  .btn-wa, .btn-maps { min-width: 180px; font-size: 16px; padding: 12px 24px; }
+/* ══════════════════════════════════════
+   DESKTOP ADJUSTMENTS
+   On screens wider than the column,
+   add a subtle side-canvas so the
+   cream background frames the card.
+══════════════════════════════════════ */
+@media (min-width: 520px) {
+  body { background: #e8ddd0; }
+
+  .hero, .floral-divider { background: var(--cream2); }
+
+  #main-page > *:not(.full-bleed) {
+    background: var(--cream);
+  }
+
+  /* Give the page a phone-like silhouette */
+  #main-page {
+    max-width: var(--col);
+    margin: 0 auto;
+    background: var(--cream);
+    box-shadow: 0 0 60px rgba(0,0,0,0.12);
+  }
+
+  .venue-title { font-size: 30px; }
+  .venue-sub   { font-size: 17px; }
+  .venue-details { font-size: 15px; }
+  .venue-note  { font-size: 12px; }
+}
+
+/* ══════════════════════════════════════
+   MOBILE FINE-TUNING
+══════════════════════════════════════ */
+@media (max-width: 380px) {
+  .hero-names { font-size: 50px; }
+  .welcome-names { font-size: 46px; }
+  .count-num { font-size: 36px; }
+  .intro-name-text { font-size: 60px; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- ══ HERO ══ -->
-<section class="hero">
-  <img class="hero-bg"
-       src="Capture d'écran 2026-06-06 153024.png"
-       alt="خلفية زهور">
-
-  <video class="hero-video" autoplay muted loop playsinline preload="auto">
+<!-- ════════════════════════════════════
+     VIDEO INTRO OVERLAY
+════════════════════════════════════ -->
+<div id="intro-overlay">
+  <video id="intro-video" autoplay muted playsinline preload="auto">
     <source src="intro-video-2-a-H3NxSy.mp4" type="video/mp4">
-
   </video>
 
-  <div class="hero-content">
-    <div class="hero-names">
+  <div id="intro-names">
+    <div class="intro-name-text">
       أمين
       <span class="waw">و</span>
       يسمين
     </div>
   </div>
-</section>
 
-<!-- ══ COUNTDOWN ══ -->
-<section class="countdown-section reveal">
-  <div class="countdown-frame">
-    <img class="countdown-frame-img"
-         src="Capture d'écran 2026-06-06 164046.png"
-         alt="">
-    <div class="countdown-inner">
-      <div class="countdown-label">موعد الفرح</div>
-      <div class="countdown-date-display">27 · 09 · 2026</div>
-      <div class="count-row">
-        <div class="count-unit">
-          <span class="count-num" id="cd-days">—</span>
-          <span class="count-lbl">يوم</span>
-        </div>
-        <div class="count-unit">
-          <span class="count-num" id="cd-hours">—</span>
-          <span class="count-lbl">ساعة</span>
-        </div>
-        <div class="count-unit">
-          <span class="count-num" id="cd-mins">—</span>
-          <span class="count-lbl">دقيقة</span>
-        </div>
-        <div class="count-unit">
-          <span class="count-num" id="cd-secs">—</span>
-          <span class="count-lbl">ثانية</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ FLORAL DIVIDER ══ -->
-<div class="floral-divider">
-  <img src="Capture d'écran 2026-06-06 155254.png" alt="">
+  <button id="skip-btn">تخطي ←</button>
 </div>
 
-<!-- ══ WELCOME ══ -->
-<section class="welcome-section reveal">
-  <p class="welcome-basmala">
-    بسم الله الرحمن الرحيم<br>
-    بعد أهدأكم عاطر التحية وأزكى السلام، تشرّف عائلتا
-  </p>
-  <div class="welcome-names">
-    أمين العيسري
-    <span class="amp">و</span>
-    حيفاء وجدي
-  </div>
-  <p class="welcome-sub">
-    بدعوتكم لحضور حفل زفافهما البهيج<br>
-    نسأل الله أن يبارك لهما ويبارك عليهما
-  </p>
-</section>
+<!-- ════════════════════════════════════
+     MAIN PAGE
+════════════════════════════════════ -->
+<div id="main-page">
 
-<!-- ══ VENUE ══ -->
-<section class="venue-section reveal">
-  <div class="venue-card">
-    <img class="venue-card-img"
-         src="Capture d'écran 2026-06-06 155329.png"
-         alt="قصر الأفراح">
-    <div class="venue-text">
-      <div class="venue-title">قاعة قصر الأفراح</div>
-      <div class="venue-sub">سيدي بوسعيد، تونس</div>
-      <div class="venue-details">
-        يوم الأحد 27 سبتمبر 2026<br>
-        على الساعة السادسة والنصف مساءً
-      </div>
-      <div class="venue-note">
-        اللباس الرسمي مطلوب · رجاء التأكيد قبل 10 سبتمبر 2026
+  <!-- HERO -->
+  <section class="hero full-bleed">
+    <div class="hero-bg-wrap">
+      <img src="Capture d'écran 2026-06-06 153024.png" alt="">
+    </div>
+    <div class="hero-content">
+      <div class="hero-names">
+        أمين
+        <span class="waw">و</span>
+        يسمين
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ══ PROGRAMME ══ -->
-<section class="programme-section reveal">
-  <div class="programme-heading">موعدنا مع الفرح</div>
-  <div class="programme-card">
-    <img class="programme-card-img"
-         src="Capture d'écran 2026-06-06 155629.png"
-         alt="برنامج الحفل">
-    <div class="programme-items">
-      <div class="prog-item">
-        <div class="prog-time">5:30</div>
-        <div class="prog-label">استقبال الضيوف</div>
-      </div>
-      <div class="prog-item">
-        <div class="prog-time">6:00</div>
-        <div class="prog-label">تقديم العشاء</div>
-      </div>
-      <div class="prog-item">
-        <div class="prog-time">7:00</div>
-        <div class="prog-label">الأفراح والرقص</div>
-      </div>
-      <div class="prog-item">
-        <div class="prog-time">9:00</div>
-        <div class="prog-label">توقيف وتقطيع الكعكة</div>
-      </div>
-      <div class="prog-item">
-        <div class="prog-time">حتى 1:30</div>
-        <div class="prog-label">تنزهوا معنا بلا حدود</div>
+  <!-- COUNTDOWN -->
+  <section class="countdown-section reveal">
+    <div class="col">
+      <div class="countdown-frame">
+        <img class="countdown-frame-img"
+             src="Capture d'écran 2026-06-06 164046.png" alt="">
+        <div class="countdown-inner">
+          <div class="countdown-label">موعد الفرح</div>
+          <div class="countdown-date-display">27 · 09 · 2026</div>
+          <div class="count-row">
+            <div class="count-unit">
+              <span class="count-num" id="cd-days">—</span>
+              <span class="count-lbl">يوم</span>
+            </div>
+            <div class="count-unit">
+              <span class="count-num" id="cd-hours">—</span>
+              <span class="count-lbl">ساعة</span>
+            </div>
+            <div class="count-unit">
+              <span class="count-num" id="cd-mins">—</span>
+              <span class="count-lbl">دقيقة</span>
+            </div>
+            <div class="count-unit">
+              <span class="count-num" id="cd-secs">—</span>
+              <span class="count-lbl">ثانية</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ══ RSVP / ACTIONS ══ -->
-<section class="rsvp-section reveal">
-  <img class="butterflies"
-       src="Capture d'écran 2026-06-06 155750.png"
-       alt="">
-
-  <div style="margin-bottom:14px">
-    <div style="font-family:'Lateef',serif;font-size:44px;color:var(--text)">تأكيد الحضور</div>
-    <div style="font-size:15px;color:var(--text2);margin-top:4px">يرجى التأكيد قبل 10 سبتمبر 2026</div>
+  <!-- FLORAL DIVIDER -->
+  <div class="floral-divider full-bleed">
+    <img src="Capture d'écran 2026-06-06 155254.png" alt="">
   </div>
 
-  <div style="display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:10px">
-    <a class="btn-wa"
-       href="https://wa.me/21600000000?text=أؤكد%20حضوري%20لحفل%20زفاف%20أمين%20ويسمين"
-       target="_blank">
-      <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-      </svg>
-      تأكيد عبر واتساب
-    </a>
+  <!-- WELCOME -->
+  <section class="welcome-section reveal">
+    <div class="col">
+      <p class="welcome-basmala">
+        بسم الله الرحمن الرحيم<br>
+        بعد أهدأكم عاطر التحية وأزكى السلام، تشرّف عائلتا
+      </p>
+      <div class="welcome-names">
+        أمين العيسري
+        <span class="amp">و</span>
+        حيفاء وجدي
+      </div>
+      <p class="welcome-sub">
+        بدعوتكم لحضور حفل زفافهما البهيج<br>
+        نسأل الله أن يبارك لهما ويبارك عليهما
+      </p>
+    </div>
+  </section>
 
-    <a class="btn-maps"
-       href="https://www.google.com/maps/search/قاعة+قصر+الأفراح+سيدي+بوسعيد+تونس"
-       target="_blank">
-      <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
-        <circle cx="12" cy="9" r="2.5"/>
-      </svg>
-      الموقع على الخريطة
-    </a>
-  </div>
-</section>
+  <!-- VENUE -->
+  <section class="venue-section reveal">
+    <div class="col">
+      <div class="venue-card">
+        <img class="venue-card-img"
+             src="Capture d'écran 2026-06-06 155329.png" alt="">
+        <div class="venue-text">
+          <div class="venue-title">قاعة قصر الأفراح</div>
+          <div class="venue-sub">سيدي بوسعيد، تونس</div>
+          <div class="venue-details">
+            يوم الأحد 27 سبتمبر 2026<br>
+            على الساعة السادسة والنصف مساءً
+          </div>
+          <div class="venue-note">
+            اللباس الرسمي مطلوب<br>
+            رجاء التأكيد قبل 10 سبتمبر 2026
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- ══ FOOTER ══ -->
-<footer class="footer reveal">
-  <img src="Capture d'écran 2026-06-06 155806.png"
-       alt=""
-       style="width:180px;margin:0 auto 28px;display:block;animation:float 6s ease-in-out infinite">
-  <div class="footer-names">
-    أمين<br>
-    <span style="font-family:'Amiri',serif;font-size:28px;color:var(--pink)">و</span><br>
-    يسمين
-  </div>
-  <div class="footer-date">27 · 09 · 2026</div>
-  <div class="footer-social">
-    <a href="#">@3eraria</a>
-  </div>
-</footer>
+  <!-- PROGRAMME -->
+  <section class="programme-section reveal">
+    <div class="col">
+      <div class="programme-heading">موعدنا مع الفرح</div>
+      <div class="programme-card">
+        <img class="programme-card-img"
+             src="Capture d'écran 2026-06-06 155629.png" alt="">
+        <div class="programme-items">
+          <div class="prog-item">
+            <div class="prog-time">5:30</div>
+            <div class="prog-label">استقبال الضيوف</div>
+          </div>
+          <div class="prog-item">
+            <div class="prog-time">6:00</div>
+            <div class="prog-label">تقديم العشاء</div>
+          </div>
+          <div class="prog-item">
+            <div class="prog-time">7:00</div>
+            <div class="prog-label">الأفراح والرقص</div>
+          </div>
+          <div class="prog-item">
+            <div class="prog-time">9:00</div>
+            <div class="prog-label">تقطيع الكعكة</div>
+          </div>
+          <div class="prog-item">
+            <div class="prog-time">حتى 1:30</div>
+            <div class="prog-label">تنزهوا معنا بلا حدود</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RSVP -->
+  <section class="rsvp-section reveal">
+    <div class="col">
+      <img class="butterflies"
+           src="Capture d'écran 2026-06-06 155750.png" alt="">
+      <div class="rsvp-title-big">تأكيد الحضور</div>
+      <div class="rsvp-deadline">يرجى التأكيد قبل 10 سبتمبر 2026</div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
+
+        <a class="btn-wa"
+           href="https://wa.me/21600000000?text=أؤكد%20حضوري%20لحفل%20زفاف%20أمين%20ويسمين"
+           target="_blank">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          تأكيد عبر واتساب
+        </a>
+
+        <a class="btn-maps"
+           href="https://www.google.com/maps/search/قاعة+قصر+الأفراح+سيدي+بوسعيد+تونس"
+           target="_blank">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+            <circle cx="12" cy="9" r="2.5"/>
+          </svg>
+          الموقع على الخريطة
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer reveal">
+    <div class="col">
+      <img class="footer-flower"
+           src="Capture d'écran 2026-06-06 155806.png" alt="">
+      <div class="footer-names">
+        أمين<br>
+        <span style="font-family:'Gulzar',serif;font-size:30px;color:var(--pink)">و</span><br>
+        يسمين
+      </div>
+      <div class="footer-date">27 · 09 · 2026</div>
+      <div class="footer-handle">@3eraria</div>
+    </div>
+  </footer>
+
+</div><!-- end #main-page -->
 
 <script>
-/* ── Live countdown ── */
-function updateCountdown() {
-  const target = new Date('2026-09-27T18:30:00');
-  const now = new Date();
-  const diff = target - now;
+/* ── COUNTDOWN ── */
+function tick() {
+  const diff = new Date('2026-09-27T18:30:00') - new Date();
   if (diff <= 0) {
-    document.getElementById('cd-days').textContent  = '00';
-    document.getElementById('cd-hours').textContent = '00';
-    document.getElementById('cd-mins').textContent  = '00';
-    document.getElementById('cd-secs').textContent  = '00';
+    ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => document.getElementById(id).textContent = '00');
     return;
   }
-  const d = Math.floor(diff / 86400000);
-  const h = Math.floor((diff % 86400000) / 3600000);
-  const m = Math.floor((diff % 3600000)  / 60000);
-  const s = Math.floor((diff % 60000)    / 1000);
-  document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
-  document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
-  document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
-  document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
+  document.getElementById('cd-days').textContent  = String(Math.floor(diff/86400000)).padStart(2,'0');
+  document.getElementById('cd-hours').textContent = String(Math.floor(diff%86400000/3600000)).padStart(2,'0');
+  document.getElementById('cd-mins').textContent  = String(Math.floor(diff%3600000/60000)).padStart(2,'0');
+  document.getElementById('cd-secs').textContent  = String(Math.floor(diff%60000/1000)).padStart(2,'0');
 }
-updateCountdown();
-setInterval(updateCountdown, 1000);
+tick();
+setInterval(tick, 1000);
 
-/* ── Scroll reveal ── */
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-}, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+/* ── VIDEO INTRO ── */
+const overlay   = document.getElementById('intro-overlay');
+const vid       = document.getElementById('intro-video');
+const introNames = document.getElementById('intro-names');
+const mainPage  = document.getElementById('main-page');
+const skipBtn   = document.getElementById('skip-btn');
+
+// Prevent scroll while intro plays
+document.body.style.overflow = 'hidden';
+
+function endIntro() {
+  overlay.classList.add('fade-out');
+  mainPage.classList.add('visible');
+  document.body.style.overflow = 'auto';
+  setTimeout(() => { overlay.style.display = 'none'; }, 1300);
+}
+
+// Show names 1.5s before video ends
+vid.addEventListener('timeupdate', () => {
+  if (vid.duration && (vid.duration - vid.currentTime) <= 1.5) {
+    introNames.classList.add('show');
+  }
+});
+
+// After video ends, pause briefly then fade out
+vid.addEventListener('ended', () => {
+  setTimeout(endIntro, 900);
+});
+
+// Skip button
+skipBtn.addEventListener('click', endIntro);
+
+// Fallback: if video fails to load or play, skip after 2s
+vid.addEventListener('error', () => setTimeout(endIntro, 500));
+setTimeout(() => {
+  if (!overlay.classList.contains('fade-out')) endIntro();
+}, 12000); // hard cap at 12s
+
+// If video can't autoplay (some browsers), show names immediately and end
+vid.play().catch(() => {
+  introNames.classList.add('show');
+  setTimeout(endIntro, 2000);
+});
+
+/* ── SCROLL REVEAL ── */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
 
 </body>
