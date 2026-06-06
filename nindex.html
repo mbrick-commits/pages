@@ -291,14 +291,16 @@ img {
 
 .rsvp-content {
   position: absolute;
-  inset: 0;
-  padding: 55px 35px 45px;
+  left: 50%;
+  top: 48%;
+  transform: translate(-50%, -50%);
+  width: 72%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: 14px;
+  gap: clamp(8px, 2vw, 14px);
 }
+
 
 .rsvp-title {
   font-size: 28px;
