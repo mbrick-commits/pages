@@ -1,46 +1,138 @@
-<section class="floral-hero">
-  <img
-    class="floral-image"
-    src="Capture d'écran 2026-06-06 153024.png"
-    alt=""
-  >
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bloom Invitation</title>
 
-  <video
-    class="floral-video"
-    autoplay
-    muted
-    loop
-    playsinline
-    preload="auto"
-  >
-    <source src="intro-video-2-a-H3NxSy.mp4" type="video/mp4">
-  </video>
-</section>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<style>
-.floral-hero {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  overflow: hidden;
-  background: #fbfaf3;
-}
+    body {
+      overflow-x: hidden;
+      background: #f3eadf;
+      font-family: Georgia, serif;
+    }
 
-.floral-image,
-.floral-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+    .hero {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      overflow: hidden;
+      background: #f3eadf;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
 
-.floral-image {
-  z-index: 1;
-}
+    .hero-bg,
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-.floral-video {
-  z-index: 2;
-  pointer-events: none;
-}
-</style>
+    .hero-bg {
+      z-index: 1;
+    }
+
+    .hero-video {
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .invite-card {
+      position: relative;
+      z-index: 3;
+      width: min(86%, 430px);
+      padding: 45px 28px;
+      background: rgba(255, 250, 244, 0.72);
+      border: 1px solid rgba(120, 95, 70, 0.25);
+      backdrop-filter: blur(3px);
+      color: #4b3a2d;
+    }
+
+    .small {
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: 48px;
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .date {
+      font-size: 18px;
+      margin-bottom: 24px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 24px;
+      border: 1px solid #4b3a2d;
+      text-decoration: none;
+      color: #4b3a2d;
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        min-height: 100svh;
+      }
+
+      .invite-card {
+        width: 84%;
+        padding: 36px 22px;
+      }
+
+      h1 {
+        font-size: 38px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <section class="hero">
+    <img
+      class="hero-bg"
+      src="Capture d'écran 2026-06-06 153024.png"
+      alt=""
+    />
+
+    <video
+      class="hero-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+    >
+      <source src="intro-video-2-a-H3NxSy.mp4" type="video/mp4" />
+    </video>
+
+    <div class="invite-card">
+      <div class="small">Nous célébrons</div>
+      <h1>Sarah<br>&<br>Youssef</h1>
+      <div class="date">24 Août 2026</div>
+      <a href="#" class="button">Voir l’invitation</a>
+    </div>
+  </section>
+
+</body>
+</html>
