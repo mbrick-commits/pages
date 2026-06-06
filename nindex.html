@@ -431,9 +431,11 @@ img {
   z-index: 9999;
   background: var(--bg);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  transition: opacity 0.8s ease;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 1.4s ease;
 }
 
 #intro-video-overlay.hide {
@@ -443,8 +445,11 @@ img {
 
 #intro-video {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-width: 480px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  object-position: top center;
 }
 
 #skip-intro {
